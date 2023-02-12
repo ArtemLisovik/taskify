@@ -1,0 +1,132 @@
+@import '../../../app/variables.scss';
+
+.tasks {
+    margin-top: 30px;
+    columns: 4;
+    column-gap: 25px; 
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    // gap: 25px;
+    // grid-template-rows: min-content;
+    @media(max-width: 1135px){
+        columns: 3;
+    }
+    @media (max-width: 968px) {
+        columns: 2;
+    }
+    @media(max-width: 486px) {
+        columns: 1;
+    }
+}
+
+.task {
+    &:hover{
+        box-shadow:
+        40px 20px 20px #00070348;
+        -webkit-transform: translateX(-30px) translateY(-15px);
+        transform: translateX(-15px) translateY(-15px);
+
+    }
+    min-width: 150px;
+    margin-bottom: 25px;
+    border: 2px solid $borderColor;
+    border-radius: 8px;
+    background: $cardBackground;
+    padding: 20px 15px;
+    break-inside: avoid;
+    transition: 0.5s all ease;
+    &__title {
+        font-weight: 600;
+    }
+    &__descr {
+        margin-top: 10px;
+        font-size: 14px;
+        color: $textColor;
+        line-height: 1.5;
+    }
+    &__progressbar {
+        margin-top: 20px;
+        width: 100%;
+        height: 5px;
+        background: $inputColor;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    &__progressbar-fill {
+        background: #ffd337;
+        height: 100%;
+        width: 48%;
+    }
+    &__time-remaining {
+        margin-top: 10px;
+        color: $textColor;
+        margin-bottom: 15px;
+        span {
+            font-weight: 600;
+            color: #fff
+        };  
+    }
+    &__options {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    &__users {
+        display: flex;
+        flex: 0 0 auto;
+        position: relative;
+    }
+    &___users::after {
+        position: absolute;
+        content: '';
+        right: 10px;
+        top: 50%;
+        width: 4px;
+        background: red;
+        height: 20px;
+    }
+    &__users-link {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: block;
+        overflow: hidden;
+        border: 1px solid #fff;
+    }
+    &__users-link img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-position: 50% 40%;
+    }
+    &__pin {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        flex: 1 0 auto;
+        position: relative;
+        padding-left: 10px;
+    }   
+    &__pin::before {
+        position: absolute;
+        content: '';
+        top: 50;
+        left: 0;
+        height: 20px;
+        width: 1.5px;
+        background: $borderColor;
+        border-radius: 8px;
+    }
+    &__pin-icon {
+        width: 15px;
+        height: 15px;
+        fill: $textColor;
+    }
+    &__pin-count {
+        font-size: 12px;
+        color: $textColor;
+        font-weight: 600;
+    }
+}

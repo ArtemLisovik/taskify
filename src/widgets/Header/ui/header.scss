@@ -1,0 +1,121 @@
+.header {
+
+    height: 60px;
+    background: #3d126285;
+    border-bottom: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__title {
+        font-size: 22px;
+    }
+    &__menu {
+        display: flex;
+        list-style: none;
+        height: 100%;
+        @media(max-width: 750px) {
+            display: none;
+        }
+    }
+    &__menu-item{
+        height: 100%;
+        position: relative;
+        font-size: 14px;
+    }
+    &__menu-item::after{
+        display: none;
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -1px;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.158);
+        height: 20px;
+    }
+    &__menu-item + .header__menu-item.header__menu-item::after {
+        display: block;
+    }
+    &__menu-link {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.514);
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        position: relative;
+    }
+    &__menu-link.active {
+        background: rgba(255, 255, 255, 0.158);
+        color: #fff;
+    }
+    &__menu-link.active::before {
+        width: 100%;
+    }
+    &__menu-link::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0%;
+        height: 3px;
+        background: #ff5761;
+        z-index: 100;
+        box-shadow: 0 0 5px #ff5761;
+        transition: all 0.3s ease;
+    }
+    &__menu-link:hover::before {
+        width: 100%;
+    }
+}
+
+.profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    &__photo {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: purple;
+        border: 1px solid #fff;
+    }
+    &__info {
+        text-align: left;
+       @media(max-width: 399px) {
+        display: none;
+       }
+    }
+    &__name {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    &__profession {
+        margin: 0;
+        margin-top: 5px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+    &__button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display: block;
+    }
+    &__button svg {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        stroke-width: 20px;
+    }
+}

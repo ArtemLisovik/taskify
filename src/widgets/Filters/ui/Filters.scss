@@ -1,0 +1,131 @@
+@import '../../../app/variables.scss';
+
+.filters {
+    padding-top: 45px;
+    font-size: 26px;
+    font-weight: 600;
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media(max-width: 590px) {
+            display: block;
+        }
+    }
+    &__title {
+        flex: 1 0 auto;
+        @media(max-width: 590px) {
+            margin-bottom: 15px;
+        }
+    }
+    &__decor {
+        margin-right: 30px;
+        @media(max-width: 590px) {
+            display: none;
+        }
+    }
+    &__bottom {
+        margin-top: 20px;
+        background: $inputColor;
+        font-size: 12px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        display: flex;
+        gap: 20px;
+
+        @media(max-width: 530px) {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 8px 13px;
+
+        }
+    }
+    &__bottom-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        @media(max-width: 530px) {
+            order: 3;
+        }
+    }
+    &__bottom-filters {
+        background: $inputColor;
+        border: none;
+        background: transparent;
+        color: $textColor;
+        position: relative;
+        font-family: 'Montserrat', sans-serif!important;
+    }
+    &__bottom-option {
+        background: $inputColor;
+        padding: 10px;
+        border-bottom-left-radius: 8px;
+        margin: 20px 0;
+        font-family: 'Montserrat', sans-serif!important;
+    }
+    &__bottom-input {
+        width: auto;
+        flex: 1 1 auto;
+        display: flex;
+        gap: 8px;
+        @media(max-width: 530px) {
+            order: 1;
+        }
+    }
+
+    &__bottom-input-inner {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        color: $textColor;
+        flex: 1 1 auto;
+    }
+    &__bottom-input-inner::placeholder{
+        color: $textColor;
+        font-family: 'Montserrat', sans-serif!important;
+    }
+    &__decor2 {
+        height: 20p;
+        width: 1px;
+        background: $borderColor;
+        @media(max-width: 530px) {
+            height: 1px;
+            width: 100%;
+            display: block;
+            order: 2;
+        }
+    }
+    &__icon {
+        flex: 0 0 auto;
+        width: 20px;
+        height: 20px;
+        fill: $textColor;
+    }
+    &__status {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 20px;
+        @media(max-width: 430px) {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}
+
+.options__button {
+    // margin-left: 20px;
+    &-dot {
+        display: block;
+        background:  rgba(255, 255, 255, 0.205);
+        width: 3px;
+        height: 3px;
+        border-radius: 50% ;
+    }
+    &-dot + .options__button-dot {
+        margin-top: 2px;
+
+    }
+}
