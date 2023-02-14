@@ -1,6 +1,5 @@
-import { resolve } from "path/posix";
 import { AppDispatch } from "../../../app/store/store";
-import { ITask } from "../../../entities/ui/Task/types/ITask";
+
 
 import { useHttp } from "../../../shared/api/useHttp";
 import { tasksFetching, tasksFetched } from "./TasksSlice";

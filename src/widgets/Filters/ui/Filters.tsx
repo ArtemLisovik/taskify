@@ -1,14 +1,21 @@
 import {FC} from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../../../shared/ui/NeonButton/Button'
-import { setFilter } from '../model/FIltersSLice'
+import { RootState } from '../../../app/store/store'
+import { setActiveFilter } from '../model/FIltersSLice'
 
 import './Filters.scss'
 
 export const Filters: FC = () => {
+    const filter = useSelector((state: RootState) => state.filter.activeFilter)
+    const dispatch = useDispatch()
+
+    console.log(filter)
 
     const onChangeFilter = (e: string) => {
-        setFilter(e)
+        dispatch(setActiveFilter(e))
     }
 
     return (
@@ -50,14 +57,14 @@ export const Filters: FC = () => {
                 />
                 <Button 
                     color='#ff5761' 
-                    name={'Completed'}
-                    content='completed'
+                    name='completed'
+                    content='Completed'
                     onClick={onChangeFilter}
                     />
                 <Button 
                     color='#ff5761' 
-                    name={'Failed'}
-                    content='failed'
+                    name='failed'
+                    content='Failed'
                     onClick={onChangeFilter}
                 />
                 </div>

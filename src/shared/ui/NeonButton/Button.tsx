@@ -7,14 +7,13 @@ interface PropsButton {
     color: string,
     isActive?: boolean
     onClick?: Function
-    // onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Button = ({ isActive, content, color, name, onClick }: PropsButton) => {
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const onClickInit = (e: any) => {
-        onClick? console.log(e): console.log('none')
+        onClick? onClick(e.target.name): console.log('none')
     }
     const activeClass: string = isActive ? styles.active: ''
 

@@ -1,22 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IinitialState {
-    filter: string
+    filters: string[]
+    activeFilter: string
 }
 
 const initialState: IinitialState = {
-    filter: ''
+    filters: [],
+    activeFilter: ''
 }
 
 const filter = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setFilter: (state, action) => {state.filter = action.payload}
+        fetchAllFilters: (state, action) => {state.filters = action.payload},
+        setActiveFilter: (state, action) => {state.activeFilter = action.payload}
     }
 })
 
 const {actions, reducer} = filter
 
-export const {setFilter} = actions
+export const {fetchAllFilters, setActiveFilter} = actions
 export default reducer

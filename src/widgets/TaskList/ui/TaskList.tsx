@@ -12,7 +12,6 @@ export const TaskList: FC = () => {
     const dispatch: AppDispatch = useDispatch()
     const { tasks, tasksLoadingStatus } = useSelector(stateTasks)
 
-
     useEffect(() => {
         dispatch(fetchAllTasks())
     }, [])
