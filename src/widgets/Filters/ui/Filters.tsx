@@ -9,13 +9,13 @@ export const Filters: FC = () => {
     return (
         <div className="filters">
             <div className="filters__top">
-                <h2 className="filters__title">Best tasker in the world!</h2>
+                <h2 className="filters__title">Lets realise your plans together!</h2>
                 <div className="filters__decor options__button">
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
-                <Button color='#ff5761' name={'New category'}/>
+                <Button color='#ff5761' name={'New task'}/>
             </div>
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">

@@ -2,30 +2,31 @@
 
 .tasks {
     margin-top: 30px;
-    columns: 4;
+    columns: 4 180px;
     column-gap: 25px; 
     // display: grid;
     // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     // gap: 25px;
     // grid-template-rows: min-content;
-    @media(max-width: 1135px){
-        columns: 3;
-    }
-    @media (max-width: 968px) {
-        columns: 2;
-    }
-    @media(max-width: 486px) {
-        columns: 1;
-    }
+    // @media(max-width: 1135px){
+    //     columns: 3;
+    // }
+    // @media (max-width: 968px) {
+    //     columns: 2;
+    // }
+    // @media(max-width: 486px) {
+    //     columns: 1;
+    // }
 }
 
 .task {
+    display: inline-block;
     &:hover{
-        box-shadow:
-        40px 20px 20px #00070348;
-        -webkit-transform: translateX(-30px) translateY(-15px);
-        transform: translateX(-15px) translateY(-15px);
-
+        // box-shadow:
+        // 40px 20px 20px #00070348;
+        // -webkit-transform: translateX(-30px) translateY(-15px);
+        // transform: translateX(-15px) translateY(-15px);
+        // transform: scale(1.05);
     }
     min-width: 150px;
     margin-bottom: 25px;

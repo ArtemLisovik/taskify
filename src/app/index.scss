@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@0,400;0,600;1,300&display=swap');
 
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 body {
     overflow: hidden;
     height: 100vh;
@@ -20,7 +27,6 @@ body {
 
 .wrapper {
     max-width: 1450px;
-    margin: 10vh auto;
 }
 
 .main__container {
@@ -32,8 +38,11 @@ body {
 
 main {
     background: rgba(255, 255, 255, 0.158);
-    height: 75vh;
+    height: 80vh;
     overflow-y: scroll;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+
 }
 main::-webkit-scrollbar {
     display: none;
