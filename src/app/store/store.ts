@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import tasks from "../../widgets/TaskList/model/TasksSlice";
-import filter from '../../widgets/Filters/model/FIltersSLice'
+import filters from "../../widgets/Filters/model/FIltersSlice";
 
 export const store = configureStore({
-  reducer: { tasks, filter },
+  reducer: { tasks, filters },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== "production",
 });

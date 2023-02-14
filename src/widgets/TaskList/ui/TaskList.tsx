@@ -6,18 +6,23 @@ import { AppDispatch } from "../../../app/store/store"
 import { stateTasks } from "../model/TasksSelect"
 import './TaskList.scss'
 import { Task } from "../../../entities/ui/Task/Task"
+import { selectActiveFilter } from "../../Filters/model/FilterSelect"
+import { filterStatus } from "../helpers/filterStatus"
+import React from "react"
 
 export const TaskList: FC = () => {
 
     const dispatch: AppDispatch = useDispatch()
-    const { tasks, tasksLoadingStatus } = useSelector(stateTasks)
-
+    const { tasks } = useSelector(stateTasks)
+    const filterActive = useSelector(selectActiveFilter)
 
     useEffect(() => {
         dispatch(fetchAllTasks())
-    }, [])
+    }, [dispatch])
 
-    const viewedTasks = tasks?.map(task => {
+    const visibalData = React.useMemo(() => filterStatus(filterActive, tasks), [filterActive, tasks])
+
+    const viewedTasks = visibalData?.map(task => {
         return <Task
             title={task.title}
             text={task.text}

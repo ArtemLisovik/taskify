@@ -1,6 +1,7 @@
 @import '../../../app/variables.scss';
 
 .button {
+    min-width: 100px;
     background: transparent;
     border: 3px solid $accentColor;
     color: #fff;
@@ -14,6 +15,9 @@
     &:hover {
         background: $accentColor;
     }
+    &::first-letter {
+        text-transform: uppercase;
+      }
 }
 
 .active {

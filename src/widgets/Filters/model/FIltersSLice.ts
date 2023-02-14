@@ -1,22 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IFilter, FiltersType } from "../types/IFilter";
 
 interface IinitialState {
-    filter: string
+  filters: [] | IFilter[];
+  loadingStatus: "wait" | "loading" | "error" | "success";
+  error: null | string;
+  active: FiltersType;
 }
 
 const initialState: IinitialState = {
-    filter: ''
-}
+  filters: [],
+  loadingStatus: "wait",
+  error: null,
+  active: "all",
+};
 
-const filter = createSlice({
-    name: 'filter',
-    initialState,
-    reducers: {
-        setFilter: (state, action) => {state.filter = action.payload}
-    }
-})
+const filters = createSlice({
+  name: "filters",
+  initialState,
+  reducers: {
+    filtersFetching: (state) => {
+      state.loadingStatus = "loading";
+    },
+    filtersFetchedSuccess: (state, action: PayloadAction<IFilter[]>) => {
+      state.loadingStatus = "success";
+      state.filters = action.payload;
+    },
+    filtersFetchedError: (state, action: PayloadAction<string>) => {
+      state.loadingStatus = "error";
+      state.error = action.payload;
+    },
+    activeFilter: (state, action: PayloadAction<FiltersType>) => {
+      state.active = action.payload;
+    },
+  },
+});
 
-const {actions, reducer} = filter
+const { actions, reducer } = filters;
 
-export const {setFilter} = actions
-export default reducer
+export const {
+  filtersFetching,
+  filtersFetchedSuccess,
+  filtersFetchedError,
+  activeFilter,
+} = actions;
+
+export default reducer;

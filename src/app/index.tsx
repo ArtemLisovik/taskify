@@ -18,13 +18,13 @@ function App() {
             <div className="container__content content">
 
               <Filters />
-              <TaskList/>
+              <TaskList />
 
             </div>
             <div className="container__calendar calendar">
 
               calendar
-              
+
             </div>
           </div>
         </main>
