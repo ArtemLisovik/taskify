@@ -1,10 +1,15 @@
 import {FC} from 'react'
 
 import { Button } from '../../../shared/ui/NeonButton/Button'
+import { setFilter } from '../model/FIltersSLice'
 
 import './Filters.scss'
 
 export const Filters: FC = () => {
+
+    const onChangeFilter = (e: string) => {
+        setFilter(e)
+    }
 
     return (
         <div className="filters">
@@ -15,7 +20,7 @@ export const Filters: FC = () => {
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
-                <Button color='#ff5761' name={'New task'}/>
+                <Button color='#ff5761' content='New task'/>
             </div>
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">
@@ -36,9 +41,25 @@ export const Filters: FC = () => {
             </div>
 
             <div className="filters__status">
-                <Button isActive={true} color='#ff5761' name={'Active'}/>
-                <Button color='#ff5761' name={'Completed'}/>
-                <Button color='#ff5761' name={'Failed'}/>
+                <Button 
+                    isActive={true}
+                    content='active'
+                    color='#ff5761' 
+                    name='active'
+                    onClick={onChangeFilter}
+                />
+                <Button 
+                    color='#ff5761' 
+                    name={'Completed'}
+                    content='completed'
+                    onClick={onChangeFilter}
+                    />
+                <Button 
+                    color='#ff5761' 
+                    name={'Failed'}
+                    content='failed'
+                    onClick={onChangeFilter}
+                />
                 </div>
            
         </div>
