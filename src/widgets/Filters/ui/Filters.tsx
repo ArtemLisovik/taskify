@@ -1,12 +1,19 @@
 import {FC} from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+<<<<<<< HEAD
 
 import { Button } from '../../../shared/ui/Button/Button'
 import { IinitialState, setActiveFilter } from '../model/FiltersSlice'
 import { fetchFilters } from '../model/FiltersThunk'
 import { AppDispatch, RootState } from '../../../app/store/store'
 
+=======
+
+import { Button } from '../../../shared/ui/NeonButton/Button'
+import { RootState } from '../../../app/store/store'
+import { setActiveFilter } from '../model/FIltersSLice'
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
 
 import './Filters.scss'
 import Portal from '../../../shared/ui/Portal/Portal'
@@ -15,16 +22,24 @@ import { AddTaskForm } from '../../../features'
 import FilterAddTask from './FiltersAddTask'
 
 export const Filters: FC = () => {
+<<<<<<< HEAD
     const {filters, activeFilter}: IinitialState = useSelector((state: RootState) => state.filter)
     const dispatch: AppDispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchFilters())
     }, [])
+=======
+    const filter = useSelector((state: RootState) => state.filter.activeFilter)
+    const dispatch = useDispatch()
+
+    console.log(filter)
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
 
     const onChangeFilter = (e: string) => {
         dispatch(setActiveFilter(e))
     }
+<<<<<<< HEAD
 
     const filterButtons = filters.map(filterBtn => {
         console.log(filterBtn)
@@ -39,6 +54,8 @@ export const Filters: FC = () => {
             />
         )
     })
+=======
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
 
     return (
         <div className="filters">
@@ -49,7 +66,11 @@ export const Filters: FC = () => {
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
+<<<<<<< HEAD
                 <FilterAddTask />
+=======
+                <Button color='#ff5761' content='New task'/>
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
             </div>
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">
@@ -70,8 +91,12 @@ export const Filters: FC = () => {
             </div>
 
             <div className="filters__status">
+<<<<<<< HEAD
                 {filterButtons}
                 {/* <Button 
+=======
+                <Button 
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
                     isActive={true}
                     content='active'
                     color='#ff5761' 
@@ -89,7 +114,11 @@ export const Filters: FC = () => {
                     name='failed'
                     content='Failed'
                     onClick={onChangeFilter}
+<<<<<<< HEAD
                 /> */}
+=======
+                />
+>>>>>>> 17e8c0b750e7d653a75d071e3762a1cb823a1dd0
                 </div>
            
         </div>
