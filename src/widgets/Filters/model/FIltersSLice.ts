@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface IinitialState {
+export type IinitialState = {
     filters: string[]
     activeFilter: string
 }
 
 const initialState: IinitialState = {
     filters: [],
-    activeFilter: ''
+    activeFilter: 'active'
 }
 
 const filter = createSlice({

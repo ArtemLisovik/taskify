@@ -54,6 +54,10 @@ import { useForm } from "react-hook-form";
 import Input from "./Input";
 import { Button } from "../../../shared/ui";
 
+// type Data = {
+//   fir
+// }
+
 const AddTaskForm = () => {
 
   const {
@@ -63,6 +67,9 @@ const AddTaskForm = () => {
     },
     handleSubmit
   } = useForm()
+
+
+  const onHandleChange = (data: )
 
   return (
 
