@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { SimpleButton } from '../../../shared/ui/simpleButton/SimpleButton'
+import { Button } from '../../../shared/ui/Button/Button'
 import userAvatar from './user.jpg'
 
 import './Task.scss'
@@ -21,7 +21,7 @@ export const Task: FC<PropsTask> = ({title, text, status}) => {
                     <div className="task__progressbar-fill"></div>
                 </div>
                 <p className="task__time-remaining"><span>7</span> hourse remaining</p>
-                <SimpleButton />
+                <Button content='Complete' type='simple' />
                 <div className="task__options">
                     <div className="task__users">
                         <a href="#" className="task__users-link">

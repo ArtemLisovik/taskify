@@ -55,5 +55,8 @@
             "users": ""
         }
 
+    ],
+    "filters": [
+        "active", "completed", "failed"
     ]
 }

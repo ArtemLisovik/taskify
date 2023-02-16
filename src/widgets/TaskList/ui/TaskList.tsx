@@ -1,49 +1,40 @@
 import { FC, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { useHttp } from "../../../shared/api/useHttp"
 import { fetchAllTasks } from "../model/TasksThunk"
-import { AppDispatch, RootState } from "../../../app/store/store"
-import { Task } from "../../../entities/ui/Task/Task"
-import { tasksFetching, tasksFetched, tasksFetchingError } from '../model/TasksSlice'
-
+import { RootState } from "../../../app/store/store"
+import { AppDispatch } from "../../../app/store/store"
+import { stateTasks } from "../model/TasksSelect"
 import './TaskList.scss'
+import { Task } from "../../../entities/ui/Task/Task"
+import React from "react"
 
 export const TaskList: FC = () => {
 
-    const { request } = useHttp()
     const dispatch: AppDispatch = useDispatch()
-
-    const taskList = useSelector((state: RootState) => state.tasks.tasks)
-    console.log(taskList)
+    const { tasks, tasksLoadingStatus } = useSelector(stateTasks)
+    const { activeFilter } = useSelector((state: RootState) => state.filter)
 
     useEffect(() => {
         dispatch(fetchAllTasks())
-    }, [])
+    }, []) 
 
-    // const viewedTasks = taskList?.map(task => {
-    //     <Task 
-    //         title={task.title}
-    //         text={task.text}
-    //         status={task.status}
-    //         key={task.id}
-    //     />
-    // })
+    const viewedTasks = React.useMemo(() => {
+        return tasks.filter(task => task.status === activeFilter).map(task => (
+            <Task 
+               title={task.title} 
+               text={task.text}
+               status={task.status}
+               key={task.id}
+            />
+        ))
+    }, [activeFilter, tasks])
 
-    // console.log(viewedTasks)
-
+    console.log(viewedTasks)
 
     return (
         <div className="tasks">
-            {taskList.length > 0 ? taskList?.map(task => {
-                <Task
-                    title={task.title}
-                    text={task.text}
-                    status={task.status}
-                    key={task.id}
-                />
-                }) : null
-            }
+            {viewedTasks}
         </div>
     )
 

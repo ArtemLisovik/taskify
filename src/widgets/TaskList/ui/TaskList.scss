@@ -1,8 +1,6 @@
-@import '../../../app/variables.scss';
-
 .tasks {
     margin-top: 30px;
-    columns: 4 180px;
+    columns: 4 240px;
     column-gap: 25px; 
     // display: grid;
     // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -20,19 +18,17 @@
 }
 
 .task {
-    display: inline-block;
+    // display: inline-block;
     &:hover{
         // box-shadow:
         // 40px 20px 20px #00070348;
-        // -webkit-transform: translateX(-30px) translateY(-15px);
         // transform: translateX(-15px) translateY(-15px);
-        // transform: scale(1.05);
     }
-    min-width: 150px;
-    margin-bottom: 25px;
-    border: 2px solid $borderColor;
+    min-width: 200px;
+    // margin-bottom: 25px;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    background: $cardBackground;
+    background: var(--task-background);
     padding: 20px 15px;
     break-inside: avoid;
     transition: 0.5s all ease;
@@ -42,14 +38,14 @@
     &__descr {
         margin-top: 10px;
         font-size: 14px;
-        color: $textColor;
+        color: var(--text-color);
         line-height: 1.5;
     }
     &__progressbar {
         margin-top: 20px;
         width: 100%;
         height: 5px;
-        background: $inputColor;
+        background: var(--input-color);
         border-radius: 8px;
         overflow: hidden;
     }
@@ -60,7 +56,7 @@
     }
     &__time-remaining {
         margin-top: 10px;
-        color: $textColor;
+        color: var(--text-color);
         margin-bottom: 15px;
         span {
             font-weight: 600;
@@ -117,17 +113,17 @@
         left: 0;
         height: 20px;
         width: 1.5px;
-        background: $borderColor;
+        background: var(--border-color);
         border-radius: 8px;
     }
     &__pin-icon {
         width: 15px;
         height: 15px;
-        fill: $textColor;
+        fill: var(--text-color);
     }
     &__pin-count {
         font-size: 12px;
-        color: $textColor;
+        color: var(--text-color);
         font-weight: 600;
     }
 }

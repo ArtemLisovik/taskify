@@ -1,8 +1,6 @@
 import { Header } from '../widgets/Header/ui/Header';
 import { Filters } from '../widgets/Filters/ui/Filters';
 
-// import './normalize.scss'
-import './reset.css'
 import './index.scss';
 import { TaskList } from '../widgets/TaskList/ui/TaskList';
 

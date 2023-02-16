@@ -1,0 +1,39 @@
+.button {
+    background: transparent;
+    border: 3px solid var(--color-accentColor);
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 0 10px var(--color-accentColor),
+                inset 0 0 10px var(--color-accentColor);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: var(--color-accentColor);
+    }
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+.active {
+    border: 3px solid var(--btn-activeColor)!important;
+    box-shadow: 0 0 10px var(--btn-activeColor),
+            inset 0 0 10px var(--btn-activeColor)!important;
+    background: var(--btn-activeColor)!important;
+}
+
+.simpleButton {
+    background: var(--btn-simpleColor);
+    border-radius: 7px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 7px 9px;
+    cursor: pointer;
+    transition: 0.3s ease all;
+
+}
+

@@ -1,10 +1,44 @@
 import {FC} from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Button } from '../../../shared/ui/NeonButton/Button'
+import { Button } from '../../../shared/ui/Button/Button'
+import { IinitialState, setActiveFilter } from '../model/FiltersSlice'
+import { fetchFilters } from '../model/FiltersThunk'
+import { AppDispatch, RootState } from '../../../app/store/store'
+
 
 import './Filters.scss'
+import Portal from '../../../shared/ui/Portal/Portal'
+import Modal from '../../../shared/ui/Modal/Modal'
+import { AddTaskForm } from '../../../features'
+import FilterAddTask from './FiltersAddTask'
 
 export const Filters: FC = () => {
+    const {filters, activeFilter}: IinitialState = useSelector((state: RootState) => state.filter)
+    const dispatch: AppDispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchFilters())
+    }, [])
+
+    const onChangeFilter = (e: string) => {
+        dispatch(setActiveFilter(e))
+    }
+
+    const filterButtons = filters.map(filterBtn => {
+        console.log(filterBtn)
+        return (
+            <Button 
+                type='neon'
+                isActive={filterBtn === activeFilter? true : false}
+                content={filterBtn}
+                name={filterBtn}
+                key={filterBtn}
+                onClick={onChangeFilter}
+            />
+        )
+    })
 
     return (
         <div className="filters">
@@ -15,7 +49,7 @@ export const Filters: FC = () => {
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
-                <Button color='#ff5761' name={'New task'}/>
+                <FilterAddTask />
             </div>
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">
@@ -36,9 +70,26 @@ export const Filters: FC = () => {
             </div>
 
             <div className="filters__status">
-                <Button isActive={true} color='#ff5761' name={'Active'}/>
-                <Button color='#ff5761' name={'Completed'}/>
-                <Button color='#ff5761' name={'Failed'}/>
+                {filterButtons}
+                {/* <Button 
+                    isActive={true}
+                    content='active'
+                    color='#ff5761' 
+                    name='active'
+                    onClick={onChangeFilter}
+                />
+                <Button 
+                    color='#ff5761' 
+                    name='completed'
+                    content='Completed'
+                    onClick={onChangeFilter}
+                    />
+                <Button 
+                    color='#ff5761' 
+                    name='failed'
+                    content='Failed'
+                    onClick={onChangeFilter}
+                /> */}
                 </div>
            
         </div>

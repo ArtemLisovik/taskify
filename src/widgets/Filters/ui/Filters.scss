@@ -1,5 +1,3 @@
-@import '../../../app/variables.scss';
-
 .filters {
     padding-top: 45px;
     font-size: 26px;
@@ -26,7 +24,7 @@
     }
     &__bottom {
         margin-top: 20px;
-        background: $inputColor;
+        background: var(--input-color);
         font-size: 12px;
         padding: 15px 20px;
         border-radius: 8px;
@@ -50,15 +48,15 @@
         }
     }
     &__bottom-filters {
-        background: $inputColor;
+        background: var(--input-color);
         border: none;
         background: transparent;
-        color: $textColor;
+        color: var(--text-color);
         position: relative;
         font-family: 'Montserrat', sans-serif!important;
     }
     &__bottom-option {
-        background: $inputColor;
+        background: var(--input-color);
         padding: 10px;
         border-bottom-left-radius: 8px;
         margin: 20px 0;
@@ -78,17 +76,17 @@
         background: transparent;
         box-shadow: none;
         border: none;
-        color: $textColor;
+        color: var(--text-color);
         flex: 1 1 auto;
     }
     &__bottom-input-inner::placeholder{
-        color: $textColor;
+        color: var(--text-color);
         font-family: 'Montserrat', sans-serif!important;
     }
     &__decor2 {
         height: 20p;
         width: 1px;
-        background: $borderColor;
+        background: var(--border-color);
         @media(max-width: 530px) {
             height: 1px;
             width: 100%;
@@ -100,7 +98,7 @@
         flex: 0 0 auto;
         width: 20px;
         height: 20px;
-        fill: $textColor;
+        fill: var(--text-color);
     }
     &__status {
         display: flex;
