@@ -66,7 +66,7 @@ type Data = {
 export const NewTaskModal = () => {
 
   const { formState: { errors }, handleSubmit, reset, register } = useForm<Data>()
-  const methods = useForm()
+  const methods = useForm<Data>()
 
 
   const onHandleChange: SubmitHandler<Data> = (data) => {
@@ -78,7 +78,7 @@ export const NewTaskModal = () => {
     <>
       <h3 className="task__title">Create new task</h3>
       <FormProvider {...methods}>
-        <form className='form' onSubmit={handleSubmit(onHandleChange)}>
+        <form className='form' onSubmit={methods.handleSubmit(onHandleChange)}>
 
           <Input
             placeholder="Task title"

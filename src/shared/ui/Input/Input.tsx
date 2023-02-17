@@ -11,6 +11,7 @@ interface InputProps {
 const Input = ({name, type = 'text', placeholder}: InputProps) => {
 
   const { register, formState: {errors} } = useFormContext()
+  
   return (
     <div>
       <input  
