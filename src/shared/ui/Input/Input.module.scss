@@ -1,0 +1,20 @@
+.input {
+    background: var(--input-color);
+    border-radius: 8px;
+    padding: 10px 0px;
+    text-indent: 15px;
+    color: var(--text-color);
+    width: 100%;
+    &::placeholder{
+        color: var(--text-color);
+        opacity: 0.5;
+    }
+}
+
+.input[type='date'] {
+    padding-right: 15px;
+}
+
+.input[type='time']{
+    padding-right: 15px;
+}

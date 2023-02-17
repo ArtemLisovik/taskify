@@ -6,13 +6,11 @@ import { Button } from '../../../shared/ui/Button/Button'
 import { IinitialState, setActiveFilter } from '../model/FiltersSlice'
 import { fetchFilters } from '../model/FiltersThunk'
 import { AppDispatch, RootState } from '../../../app/store/store'
+import FilterAddTask from './FiltersAddTask'
 
 
 import './Filters.scss'
-import Portal from '../../../shared/ui/Portal/Portal'
-import Modal from '../../../shared/ui/Modal/Modal'
-import { AddTaskForm } from '../../../features'
-import FilterAddTask from './FiltersAddTask'
+
 
 export const Filters: FC = () => {
     const {filters, activeFilter}: IinitialState = useSelector((state: RootState) => state.filter)
@@ -27,7 +25,6 @@ export const Filters: FC = () => {
     }
 
     const filterButtons = filters.map(filterBtn => {
-        console.log(filterBtn)
         return (
             <Button 
                 type='neon'
@@ -71,25 +68,6 @@ export const Filters: FC = () => {
 
             <div className="filters__status">
                 {filterButtons}
-                {/* <Button 
-                    isActive={true}
-                    content='active'
-                    color='#ff5761' 
-                    name='active'
-                    onClick={onChangeFilter}
-                />
-                <Button 
-                    color='#ff5761' 
-                    name='completed'
-                    content='Completed'
-                    onClick={onChangeFilter}
-                    />
-                <Button 
-                    color='#ff5761' 
-                    name='failed'
-                    content='Failed'
-                    onClick={onChangeFilter}
-                /> */}
                 </div>
            
         </div>

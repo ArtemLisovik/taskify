@@ -1,4 +1,41 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(10px);
+    z-index: 105;
+}   
+
 .modal {
-    background: blue;
-    border: 2px solid red;
+    @media(max-width: 760px) {
+        max-width: 80vw;
+    }
+    max-width: 600px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--task-background);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px 25px;
+    z-index: 110;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.close {
+    display: block;
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: end ;
 }

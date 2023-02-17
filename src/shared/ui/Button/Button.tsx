@@ -19,7 +19,7 @@ export const Button = ({ isActive, content, name, onClick, type }: PropsButton) 
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const onClickInit = (e: any) => {
-        onClick? onClick(e.target.name): console.log('none')
+        onClick ? onClick(e.target.name) : console.log(onClick)
     }
     const activeClass: string = isActive ? styles.active: ''
 

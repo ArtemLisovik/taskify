@@ -49,38 +49,63 @@
 
 // export default AddTaskForm
 
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import Input from "./Input";
-import { Button } from "../../../shared/ui";
+import { Button } from '../../shared/ui/Button/Button'
+import Input from "shared/ui/Input/Input";
+import { TextArea } from '../../shared/ui/TextArea/TextArea'
 
-// type Data = {
-//   fir
-// }
+import './NewTaskModal.scss'
 
-const AddTaskForm = () => {
+type Data = {
+  firstName: string,
+  endPointDate: string,
+  endPointTime: string
+}
 
-  const {
-    register,
-    formState: {
-      errors
-    },
-    handleSubmit
-  } = useForm()
+export const NewTaskModal = () => {
+
+  const { register, formState: { errors }, handleSubmit } = useForm<Data>()
 
 
-  const onHandleChange = (data: )
+  const onHandleChange: SubmitHandler<Data> = (data) => {
+    console.log(errors)
+  }
 
   return (
-
-    // <div>hello</div>
     <>
-      <form onSubmit={handleSubmit()}>
-        <Input name='firstName' />
+      <h3 className="task__title">Create new task</h3>
+      <form className='form' onSubmit={handleSubmit(onHandleChange)}>
+
+        {/* <Input
+          placeholder="Task title"
+          {...register('firstName', {
+            required: 'GIVE ME TEXT'
+          }
+          )}
+        /> */}
+
+        {/* <TextArea
+          placeholder="What are you planning to do?"
+        /> */}
+
+        <Input
+          type='date'
+          {...register('endPointDate', {
+            required: 'Please choose a date of deadline'
+          })}
+        />
+
+        {/* <Input
+          type='time'
+          {...register('endPointTime', {
+            required: 'Please choose a time of deadline'
+          })}
+        /> */}
+
         <Button type='neon' content="Done!" />
       </form>
     </>
+
   )
 }
-
-export default AddTaskForm;

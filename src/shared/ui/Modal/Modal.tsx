@@ -15,12 +15,13 @@ const Modal = ({ open, children, onClose }: ModalProps) => {
 
     return (
         <Portal>
+            <div className={styles.wrapper}>
+            </div>
             <div className={styles.modal}>
-                <div>Modal</div>
-                <Button type='neon' content='Close' onClick={onClose} />
-                <div>
-                    {children}
-                </div>
+                    <button className={styles.close}>&times;</button>
+                    <div className='modal__inner'>
+                        {children}
+                    </div>
             </div>
         </Portal>
     )

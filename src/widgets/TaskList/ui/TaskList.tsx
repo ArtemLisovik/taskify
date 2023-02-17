@@ -30,8 +30,6 @@ export const TaskList: FC = () => {
         ))
     }, [activeFilter, tasks])
 
-    console.log(viewedTasks)
-
     return (
         <div className="tasks">
             {viewedTasks}

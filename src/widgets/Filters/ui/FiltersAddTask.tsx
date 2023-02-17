@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddTaskForm } from '../../../features'
+import { NewTaskModal } from '../../../widgets/NewTaskModal/NewTaskModal'
 import { Button } from '../../../shared/ui'
 import Modal from '../../../shared/ui/Modal/Modal'
 
@@ -15,7 +15,7 @@ const FilterAddTask = () => {
         <>
             <Button content='New task' type='neon' onClick={handlerChange}/>
                 <Modal open={isOpen}>
-                    <AddTaskForm />
+                    <NewTaskModal />
                 </Modal>
         </>
     )
