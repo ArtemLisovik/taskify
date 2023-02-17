@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form'
+import {FC} from 'react'
 
 import styles from './Input.module.scss'
 
@@ -8,21 +9,20 @@ interface InputProps {
     placeholder?: string
 }
 
-const Input = ({name, type = 'text', placeholder}: InputProps) => {
+const Input: FC<InputProps> = ({name, type = 'text', placeholder}) => {
 
-  const { register, formState: {errors} } = useFormContext()
-  
+  const { register } = useFormContext()
+
   return (
     <div>
       <input  
         className={styles.input}
         type={type}
         placeholder={placeholder} 
-        {...register('firstName', {
-          required: 'needed'
+        {...register(`${name}`, {
+          required: 'This field is required'
         })}
         />
-        {errors.root?.message && <div>{errors.root?.message}</div>}
     </div>
   )
 }

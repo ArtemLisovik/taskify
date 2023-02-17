@@ -58,20 +58,19 @@ import { TextArea } from '../../shared/ui/TextArea/TextArea'
 import './NewTaskModal.scss'
 
 type Data = {
-  firstName: string,
+  taskTitle: string,
+  taskDescription: string,
   endPointDate: string,
   endPointTime: string
 }
 
 export const NewTaskModal = () => {
 
-  const { formState: { errors }, handleSubmit, reset, register } = useForm<Data>()
   const methods = useForm<Data>()
-
 
   const onHandleChange: SubmitHandler<Data> = (data) => {
     console.log(data)
-    reset()
+    methods.reset()
   }
 
   return (
@@ -83,25 +82,27 @@ export const NewTaskModal = () => {
           <Input
             placeholder="Task title"
             type='text'
+            name='taskTitle'
           />
-          {errors.firstName?.message && <div>{errors.firstName?.message}</div>}
-          {/* <TextArea
-  placeholder="What are you planning to do?"
-/> */}
-          {/* 
-<Input
-  type='date'
-  {...register('endPointDate', {
-    required: 'Please choose a date of deadline'
-  })}
-/> */}
+          <div className="error__module">{methods.formState.errors.taskTitle?.message}</div>
 
-          {/* <Input
-  type='time'
-  {...register('endPointTime', {
-    required: 'Please choose a time of deadline'
-  })}
-/> */}
+          <TextArea
+            placeholder="What are you planning to do?"
+            name='taskDescription'
+          />
+          <div className="error__module">{methods.formState.errors.taskDescription?.message}</div>
+
+          <Input 
+            type='date'
+            name="endPointDate"
+            />
+            <div className="error__module">{methods.formState.errors.endPointDate?.message}</div>
+
+            <Input 
+            type='time'
+            name="endPointTime"
+            />
+            <div className="error__module">{methods.formState.errors.endPointTime?.message}</div>
 
           <Button type='neon' content="Done!" />
         </form>

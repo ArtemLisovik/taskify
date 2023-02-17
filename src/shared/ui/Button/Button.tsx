@@ -11,7 +11,7 @@ interface PropsButton {
 
 const typeButton = {
     neon: styles.button,
-    simple: styles.simplButton 
+    simple: styles.simpleButton 
 }
 
 export const Button = ({ isActive, content, name, onClick, type }: PropsButton) => {
