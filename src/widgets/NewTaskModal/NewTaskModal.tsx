@@ -49,7 +49,7 @@
 
 // export default AddTaskForm
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 
 import { Button } from '../../shared/ui/Button/Button'
 import Input from "shared/ui/Input/Input";
@@ -65,46 +65,47 @@ type Data = {
 
 export const NewTaskModal = () => {
 
-  const { register, formState: { errors }, handleSubmit } = useForm<Data>()
+  const { formState: { errors }, handleSubmit, reset, register } = useForm<Data>()
+  const methods = useForm()
 
 
   const onHandleChange: SubmitHandler<Data> = (data) => {
-    console.log(errors)
+    console.log(data)
+    reset()
   }
 
   return (
     <>
       <h3 className="task__title">Create new task</h3>
-      <form className='form' onSubmit={handleSubmit(onHandleChange)}>
+      <FormProvider {...methods}>
+        <form className='form' onSubmit={handleSubmit(onHandleChange)}>
 
-        {/* <Input
-          placeholder="Task title"
-          {...register('firstName', {
-            required: 'GIVE ME TEXT'
-          }
-          )}
-        /> */}
+          <Input
+            placeholder="Task title"
+            type='text'
+          />
+          {errors.firstName?.message && <div>{errors.firstName?.message}</div>}
+          {/* <TextArea
+  placeholder="What are you planning to do?"
+/> */}
+          {/* 
+<Input
+  type='date'
+  {...register('endPointDate', {
+    required: 'Please choose a date of deadline'
+  })}
+/> */}
 
-        {/* <TextArea
-          placeholder="What are you planning to do?"
-        /> */}
+          {/* <Input
+  type='time'
+  {...register('endPointTime', {
+    required: 'Please choose a time of deadline'
+  })}
+/> */}
 
-        <Input
-          type='date'
-          {...register('endPointDate', {
-            required: 'Please choose a date of deadline'
-          })}
-        />
-
-        {/* <Input
-          type='time'
-          {...register('endPointTime', {
-            required: 'Please choose a time of deadline'
-          })}
-        /> */}
-
-        <Button type='neon' content="Done!" />
-      </form>
+          <Button type='neon' content="Done!" />
+        </form>
+      </FormProvider>
     </>
 
   )

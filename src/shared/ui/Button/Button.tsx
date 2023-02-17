@@ -1,4 +1,3 @@
-import { type } from 'os'
 import { useState } from 'react'
 import styles from './Button.module.scss'
 
@@ -19,7 +18,7 @@ export const Button = ({ isActive, content, name, onClick, type }: PropsButton) 
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const onClickInit = (e: any) => {
-        onClick ? onClick(e.target.name) : console.log(onClick)
+        onClick ? onClick(e.target.name) : console.log('')
     }
     const activeClass: string = isActive ? styles.active: ''
 

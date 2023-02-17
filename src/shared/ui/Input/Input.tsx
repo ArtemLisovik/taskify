@@ -1,31 +1,27 @@
-import { useController, useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import styles from './Input.module.scss'
 
 interface InputProps {
-    name: string
+    name?: string
     type?: 'text' | 'date' | 'time'
     placeholder?: string
 }
 
 const Input = ({name, type = 'text', placeholder}: InputProps) => {
 
-  // const { control, watch, formState: {errors} } = useFormContext()
-  // const { field } = useController({name, control})
-
-  // console.log(watch())
-
+  const { register, formState: {errors} } = useFormContext()
   return (
     <div>
       <input  
         className={styles.input}
-        name={name} 
-        // value={value} 
-        // onChange={onChange} 
-        type={type} 
+        type={type}
         placeholder={placeholder} 
+        {...register('firstName', {
+          required: 'needed'
+        })}
         />
-      <div style={{color: 'red'}}></div>
+        {errors.root?.message && <div>{errors.root?.message}</div>}
     </div>
   )
 }
