@@ -56,15 +56,11 @@ import { useDispatch } from "react-redux";
 import { Button } from '../../../shared/ui/Button/Button'
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
-import { fetchAllTasks } from "widgets/TaskList/model/TasksThunk";
-// import { addTask } from "widgets/TaskList/model/TasksThunk";
 import {addTask} from 'widgets/TaskList/model/TasksThunk'
 
 
 import './NewTaskModal.scss'
-import { api } from "shared/api/api";
-import { AppDispatch } from "app/store/store";
-import { ITask } from "entities/Task/types/ITask";
+
 
 type HandlerChangeProps = {
   handlerChange: () => void;

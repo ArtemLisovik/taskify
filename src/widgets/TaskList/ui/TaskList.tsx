@@ -19,14 +19,6 @@ export const TaskList: FC = () => {
         dispatch(fetchAllTasks())
     }, []) 
 
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //       window.location.reload();
-    //     }, 6000); // обновление каждую минуту
-    
-    //     return () => clearInterval(intervalId);
-    //   }, []);
-
     const viewedTasks = React.useMemo(() => {
         return tasks.filter(task => task.status === activeFilter).map(task => (
             <Task 
