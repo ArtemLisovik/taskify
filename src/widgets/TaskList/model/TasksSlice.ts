@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ITask } from "../../../entities/ui/Task/types/ITask";
+import { ITask } from "../../../entities/Task/types/ITask";
 
 interface IState {
   tasks: [] | ITask[];

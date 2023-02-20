@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IStatus } from "entities/Task/types/ITask";
 
 export type IinitialState = {
     filters: string[]
-    activeFilter: string
+    activeFilter: IStatus
 }
 
 const initialState: IinitialState = {

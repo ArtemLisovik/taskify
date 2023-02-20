@@ -6,7 +6,7 @@ import { RootState } from "../../../app/store/store"
 import { AppDispatch } from "../../../app/store/store"
 import { stateTasks } from "../model/TasksSelect"
 import './TaskList.scss'
-import { Task } from "../../../entities/ui/Task/Task"
+import { Task } from "../../../entities/Task/ui/Task"
 import React from "react"
 
 export const TaskList: FC = () => {
@@ -19,9 +19,18 @@ export const TaskList: FC = () => {
         dispatch(fetchAllTasks())
     }, []) 
 
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //       window.location.reload();
+    //     }, 6000); // обновление каждую минуту
+    
+    //     return () => clearInterval(intervalId);
+    //   }, []);
+
     const viewedTasks = React.useMemo(() => {
         return tasks.filter(task => task.status === activeFilter).map(task => (
             <Task 
+               id={task.id}
                title={task.title} 
                text={task.text}
                status={task.status}

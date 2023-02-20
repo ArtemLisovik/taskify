@@ -1,11 +1,24 @@
 import { AppDispatch } from "../../../app/store/store";
 
-import { useHttp } from "../../../shared/api/useHttp";
+import { ITask } from "entities/Task/types/ITask";
+import {api} from '../../../shared/api/api'
 import { tasksFetching, tasksFetched } from "./TasksSlice";
+import { modifyedTask } from "widgets/NewTaskModal/ui/NewTaskModal";
 
 export const fetchAllTasks = () => (dispatch: AppDispatch) => {
-  const { request } = useHttp();
 
     dispatch(tasksFetching());
-    request('http://localhost:3001/tasks').then(res => dispatch(tasksFetched(res)))
+    api.get('http://localhost:3001/tasks').then(res => dispatch(tasksFetched(res.data)))
+}
+
+export const updateTask = (id: number, data: ITask) => (dispatch: AppDispatch) => {
+  api.put(`/tasks/${id}`, data).then(() => dispatch(fetchAllTasks()))
+}
+
+export const deleteTask = (id: number) => (dispatch: AppDispatch) => {
+  api.delete(`/tasks/${id}`).then(() => dispatch(fetchAllTasks()))
+}
+
+export const addTask = (data: modifyedTask) => (dispatch: AppDispatch) => {
+  api.post('/tasks', data).then(() => dispatch(fetchAllTasks()))
 }

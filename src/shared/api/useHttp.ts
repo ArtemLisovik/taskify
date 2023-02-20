@@ -3,7 +3,8 @@ export const useHttp = () => {
     const request = async (
         url: string,
         method = 'GET',
-        body: string | null = null,
+        body?: any,
+        // body?: BodyInit extends T,
         headers: string = `'Content-Type': 'application/json'`
     ) => {
         try {
@@ -14,7 +15,7 @@ export const useHttp = () => {
             console.log(`Something went wrong ${error}`)
             throw error
         }
-    }
-    return { request }
+    }  
+    return request 
 }
 

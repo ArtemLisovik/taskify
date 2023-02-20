@@ -49,7 +49,7 @@
 
 // export default AddTaskForm
 
-import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from '../../shared/ui/Button/Button'
 import Input from "shared/ui/Input/Input";
@@ -58,55 +58,58 @@ import { TextArea } from '../../shared/ui/TextArea/TextArea'
 import './NewTaskModal.scss'
 
 type Data = {
-  taskTitle: string,
-  taskDescription: string,
+  firstName: string,
   endPointDate: string,
   endPointTime: string
 }
 
 export const NewTaskModal = () => {
 
-  const methods = useForm<Data>()
+  const { register, formState: { errors }, handleSubmit } = useForm<Data>({
+    mode: 'onBlur'
+  }
+  )
+
 
   const onHandleChange: SubmitHandler<Data> = (data) => {
-    console.log(data)
-    methods.reset()
+    console.log(errors)
   }
 
   return (
     <>
       <h3 className="task__title">Create new task</h3>
-      <FormProvider {...methods}>
-        <form className='form' onSubmit={methods.handleSubmit(onHandleChange)}>
+      <form className='form' onSubmit={handleSubmit(onHandleChange)}>
 
-          <Input
-            placeholder="Task title"
-            type='text'
-            name='taskTitle'
-          />
-          <div className="error__module">{methods.formState.errors.taskTitle?.message}</div>
+        <Input
+          placeholder="Task title"
+          name={register}
+          // {...register('firstName', {
+          //   required: 'GIVE ME TEXT'
+          // }
+          // )}
+        />
 
-          <TextArea
-            placeholder="What are you planning to do?"
-            name='taskDescription'
-          />
-          <div className="error__module">{methods.formState.errors.taskDescription?.message}</div>
+        {/* <TextArea
+          placeholder="What are you planning to do?"
+        /> */}
 
-          <Input 
-            type='date'
-            name="endPointDate"
-            />
-            <div className="error__module">{methods.formState.errors.endPointDate?.message}</div>
+        <Input
+          type='date'
+          name='endPointTime'
+          // {...register('endPointDate', {
+          //   required: 'Please choose a date of deadline'
+          // })}
+        />
 
-            <Input 
-            type='time'
-            name="endPointTime"
-            />
-            <div className="error__module">{methods.formState.errors.endPointTime?.message}</div>
+        {/* <Input
+          type='time'
+          {...register('endPointTime', {
+            required: 'Please choose a time of deadline'
+          })}
+        /> */}
 
-          <Button type='neon' content="Done!" />
-        </form>
-      </FormProvider>
+        <Button type='neon' content="Done!" />
+      </form>
     </>
 
   )

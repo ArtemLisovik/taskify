@@ -1,62 +1,97 @@
 {
-    "tasks": [
-        {
-            "id": 0,
-            "title": "Sign up flow",
-            "text": "Show email, company, name, full name, date of birth.",
-            "timeCreation": "13:00",
-            "status": "active",
-            "users": ""
-        },
-        {
-            "id": 1,
-            "title": "Reborn",
-            "text": "Learn typescript!",
-            "timeCreation": "12:30",
-            "status": "active",
-            "users": ""
-        },
-        {
-            "id": 2,
-            "title": "Become a jedi react development",
-            "text": " Praesentium nisi fugit iste eum, illo mollitia, nemo quidem tempora, odit aspernatur reprehenderit quos? Sapiente, facere quae perspiciatis numquam odit aspernatur totam quas! Omnis fugit nostrum, cum corporis quia perferendis? Quae quos omnis sapiente cumque saepe? Sequi nam minus excepturi architecto velit veritatis dolor fugit, quos amet accusantium temporibus earum? Dolore, deserunt reprehenderit. ",
-            "timeCreation": "19:23",
-            "status": "active",
-            "users": ""
-        },
-        {
-            "id": 3,
-            "title": "Lorem ipsen doile",
-            "text": " Praesentium nisi fugit iste eum, illo mollitia, nemo quidem tempora, odit aspernatur reprehenderit quos? Sapiente, facere quae perspiciatis numquam odit aspernatur totam quas! Omnis fugit nostrum, cum corporis quia perferendis? Quae quos omnis sapiente cumque saepe? Sequi nam minus excepturi architecto wajask oeprkt lolke dsake velit veritatis dolor fugit, quos amet accusantium temporibus earum? Dolore, deserunt reprehenderit. ",
-            "timeCreation": "19:23",
-            "status": "completed",
-            "users": ""
-        },
-        {
-            "id": 4,
-            "title": "Lorem ipsen doile",
-            "text": " Praesentium nisi fugit iste eum, illo mollitia, nemo quidem tempora, odit aspernatur reprehenderit quos? Sapiente, facere quae perspiciatis numquam odit aspernatur totam quas! Omnis fugit nostrum, cum corporis quia perferendis? Quae quos omnis sapiente cumque saepe? Sequi nam minus excepturi architecto wajask oeprkt lolke dsake velit veritatis dolor fugit, quos amet accusantium temporibus earum? Dolore, deserunt reprehenderit. ",
-            "timeCreation": "19:23",
-            "status": "completed",
-            "users": ""
-        },  {
-            "id": 5,
-            "title": "Lorem ipsen doile",
-            "text": " Praesentium nisi fugit iste eum, illo mollitia, nemo quidem tempora, odit aspernatur reprehenderit quos? Sapiente, facere quae perspiciatis numquam odit aspernatur totam quas! Omnis fugit nostrum, cum corporis quia perferendis? Quae quos omnis sapiente cumque saepe? Sequi nam minus excepturi architecto wajask oeprkt lolke dsake velit veritatis dolor fugit, quos amet accusantium temporibus earum? Dolore, deserunt reprehenderit. ",
-            "timeCreation": "19:23",
-            "status": "failed",
-            "users": ""
-        },  {
-            "id": 6,
-            "title": "Lorem ipsen doile",
-            "text": " Praesentium nisi fugit iste eum, illo mollitia, nemo quidem tempora, odit aspernatur reprehenderit quos? Sapiente, facere quae perspiciatis numquam odit aspernatur totam quas! Omnis fugit nostrum, cum corporis quia perferendis? Quae quos omnis sapiente cumque saepe? Sequi nam minus excepturi architecto wajask oeprkt lolke dsake velit veritatis dolor fugit, quos amet accusantium temporibus earum? Dolore, deserunt reprehenderit. ",
-            "timeCreation": "19:23",
-            "status": "failed",
-            "users": ""
-        }
-
-    ],
-    "filters": [
-        "active", "completed", "failed"
-    ]
+  "tasks": [
+    {
+      "deadline": "2023-02-24T09:11:00.000Z",
+      "timeCreation": "2023-02-19T13:23:42.982Z",
+      "status": "completed",
+      "title": "Darth Vader",
+      "text": "DARK SIDE",
+      "id": 1
+    },
+    {
+      "deadline": "2023-02-24T09:11:00.000Z",
+      "timeCreation": "2023-02-19T13:23:42.982Z",
+      "status": "completed",
+      "title": "Darth Vader",
+      "text": "DARK SIDE",
+      "id": 2
+    },
+    {
+      "deadline": "2023-02-24T09:11:00.000Z",
+      "timeCreation": "2023-02-19T13:23:42.982Z",
+      "status": "completed",
+      "title": "Darth Vader",
+      "text": "DARK SIDE",
+      "id": 3
+    },
+    {
+      "deadline": "2023-02-24T09:11:00.000Z",
+      "timeCreation": "2023-02-19T13:23:42.982Z",
+      "status": "completed",
+      "title": "Darth Vader",
+      "text": "DARK SIDE",
+      "id": 4
+    },
+    {
+      "deadline": "2023-02-24T09:11:00.000Z",
+      "timeCreation": "2023-02-19T13:23:42.982Z",
+      "status": "completed",
+      "title": "Darth Vader",
+      "text": "DARK SIDE",
+      "id": 5
+    },
+    {
+      "deadline": "2023-02-22T23:32:00.000Z",
+      "timeCreation": "2023-02-19T13:28:59.884Z",
+      "status": "active",
+      "title": "dsadsa",
+      "text": "dadas",
+      "id": 6
+    },
+    {
+      "deadline": "2023-02-19T15:10:00.000Z",
+      "timeCreation": "2023-02-19T14:39:44.776Z",
+      "status": "active",
+      "title": "sdadsad",
+      "text": "dsafdsfs",
+      "id": 7
+    },
+    {
+      "deadline": "2023-02-20T15:10:00.000Z",
+      "timeCreation": "2023-02-19T14:39:59.769Z",
+      "status": "active",
+      "title": "dsadsa",
+      "text": "dsadsa",
+      "id": 8
+    },
+    {
+      "deadline": "2023-02-19T15:45:00.000Z",
+      "timeCreation": "2023-02-19T15:41:22.966Z",
+      "status": "active",
+      "title": "test",
+      "text": "test",
+      "id": 9
+    },
+    {
+      "deadline": "2023-02-19T15:52:00.000Z",
+      "timeCreation": "2023-02-19T15:51:04.361Z",
+      "status": "active",
+      "title": "colors",
+      "text": "colors",
+      "id": 10
+    },
+    {
+      "deadline": "2023-02-19T16:09:00.000Z",
+      "timeCreation": "2023-02-19T16:07:10.887Z",
+      "status": "active",
+      "title": "test",
+      "text": "test",
+      "id": 11
+    }
+  ],
+  "filters": [
+    "active",
+    "completed",
+    "failed"
+  ]
 }
