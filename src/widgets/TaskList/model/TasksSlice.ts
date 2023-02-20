@@ -21,6 +21,7 @@ const tasksSlice = createSlice({
     },
     tasksFetched: (state, action: PayloadAction<ITask[]>) => {
       state.tasksLoadingStatus = "idle";
+
       state.tasks = action.payload;
     },
     tasksFetchingError: (state) => {

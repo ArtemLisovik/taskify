@@ -5,11 +5,9 @@ import { RootState } from 'app/store/store'
 import { Button } from '../../../shared/ui/Button/Button'
 import userAvatar from '../user.jpg'
 import { updateTask, deleteTask } from '../../../widgets/TaskList/model/TasksThunk'
-import { ITask } from '../types/ITask'
 import TaskDeadline from './TaskDeadline'
 
 import './Task.scss'
-import { api } from 'shared/api/api'
 import { AppDispatch } from 'app/store/store'
 
 interface PropsTask {
@@ -20,6 +18,7 @@ interface PropsTask {
 }
 
 export const Task: FC<PropsTask> = ({ title, text, status, id}) => {
+    
     const dispatch: AppDispatch = useDispatch()
     const allTasks = useSelector((state: RootState) => state.tasks.tasks)
 
@@ -29,7 +28,6 @@ export const Task: FC<PropsTask> = ({ title, text, status, id}) => {
 
     const onStatusChange = () => {
         const task = allTasks?.find(task => task.id === id)
-        console.log(task)
         if (task) {
             dispatch(updateTask(id, {...task, status: 'completed'}))
             

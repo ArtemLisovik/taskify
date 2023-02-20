@@ -8,7 +8,7 @@ export const deadLineBar = (startPoint: string, endPoint: string) => {
     const now = new Date()
     const start = new Date(startPoint)
     const deadline = new Date(endPoint)
-    const timeRemainig = +deadline - +start
+    const timeRemainig = +deadline - +now
                 
     const progress = (((+now - +start)/timeRemainig) * 100)
     let colors;
@@ -26,5 +26,5 @@ export const deadLineBar = (startPoint: string, endPoint: string) => {
 
 
 
-    return {days, hours, minutes, progress, colors}
+    return {days, hours, minutes, progress, colors, timeRemainig}
 }
