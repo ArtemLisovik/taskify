@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/store/store'
 
@@ -18,9 +18,17 @@ interface PropsTask {
 }
 
 export const Task: FC<PropsTask> = ({ title, text, status, id}) => {
-    
+    const [iterator, setIterator] = useState(0)
+
     const dispatch: AppDispatch = useDispatch()
     const allTasks = useSelector((state: RootState) => state.tasks.tasks)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIterator(state => state + 1)
+        }, 10);
+        return () => clearInterval(interval);
+      }, []);
 
     const onDeleteTask = (id: number) => {
         dispatch(deleteTask(id))
@@ -44,11 +52,11 @@ export const Task: FC<PropsTask> = ({ title, text, status, id}) => {
             break;
         }
         case 'completed': {
-            content = <p style={{ color: 'green' }}>This task has been completed</p>
+            content = <p style={{ color: 'green', marginTop: '8px' }}>This task has been completed</p>
             break;
         }
         case 'failed': {
-            content = <p style={{ color: 'red' }}>This task has been failed!</p>
+            content = <p style={{ color: 'red', marginTop: '8px' }}>This task has been failed!</p>
             break;
         }
     }

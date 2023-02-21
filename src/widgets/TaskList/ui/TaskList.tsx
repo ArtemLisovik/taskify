@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { fetchAllTasks, updateTask } from "../model/TasksThunk"
@@ -14,15 +14,27 @@ import { ITask } from "entities/Task/types/ITask"
 export const TaskList: FC = () => {
 
     const dispatch: AppDispatch = useDispatch()
+    const [iterator, setIterator] = useState(0)
     const { tasks, tasksLoadingStatus } = useSelector(stateTasks)
     const { activeFilter } = useSelector((state: RootState) => state.filter)
 
+    // const iterator = () => {
+    //     setInterval()
+    // }
+    // const interator = setInterval(() => {
+    //     setIterator(state => state + 1) 
+    // }, 2000)
+    // interator
+
     useEffect(() => {
         dispatch(fetchAllTasks())
-    }, []) 
+        // clearInterval(interator)
+    }, [iterator]) 
+
     // useEffect(() => {
     //     TaskStatusCheck()
     // }, [])
+
 
     // const TaskStatusCheck = useCallback(() => {
     //     tasks.forEach(task => {
