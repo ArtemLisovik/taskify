@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'app/store/store'
@@ -88,7 +88,6 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
                                 <img src={userAvatar} alt="user avatar" className="task__users-image" />
                             </a>
                         </div>
-                        {/* <img src="#" alt="" className="task__pin-icon" /> */}
                         <div className="task__pin">
                             <svg className="task__pin-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 width="408.318px" height="408.318px" viewBox="0 0 408.318 408.318"

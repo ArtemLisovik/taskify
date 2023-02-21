@@ -1,15 +1,5 @@
 import * as yup from 'yup'
 
-export interface INewTask {
-    title: string,
-    text: string,
-    timeCreation: Object,
-    endPointDate: string,
-    endPointTime: string,
-    status: string,
-    users: string
-  }
-
   export const schema = yup.object().shape({
     title: yup.string()
             .required()

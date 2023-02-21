@@ -104,21 +104,12 @@ import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
 import { addTask } from 'widgets/TaskList/model/TasksThunk'
-import { INewTask } from '../helpers/FormValidation'
 import { schema } from '../helpers/FormValidation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ITask } from "entities/Task/types/ITask";
 
 
 import './TaskModal.scss'
-
-// export type modifyedTask = {
-//   deadline: Date;
-//   timeCreation: Date;
-//   status: string;
-//   title: string;
-//   text: string;
-// }
 
 interface TaskModalProps {
   isOpen: boolean,
@@ -135,7 +126,7 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
     defaultValues: {
       title: `${task ? task.title : ''}`,
       text: `${task ? task.text : ''}`
-      // endPointDate: `${task ? new Date(task.deadline) : ''}`
+   
     }
   })
 
