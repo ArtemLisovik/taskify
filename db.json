@@ -1,57 +1,8 @@
 {
   "tasks": [
     {
-      "deadline": "2023-02-24T09:11:00.000Z",
-      "timeCreation": "2023-02-19T13:23:42.982Z",
-      "status": "completed",
-      "title": "Darth Vader",
-      "text": "DARK SIDE",
-      "id": 1
-    },
-    {
-      "deadline": "2023-02-24T09:11:00.000Z",
-      "timeCreation": "2023-02-19T13:23:42.982Z",
-      "status": "completed",
-      "title": "Darth Vader",
-      "text": "DARK SIDE",
-      "id": 2
-    },
-    {
-      "deadline": "2023-02-24T09:11:00.000Z",
-      "timeCreation": "2023-02-19T13:23:42.982Z",
-      "status": "completed",
-      "title": "Darth Vader",
-      "text": "DARK SIDE",
-      "id": 3
-    },
-    {
-      "deadline": "2023-02-24T09:11:00.000Z",
-      "timeCreation": "2023-02-19T13:23:42.982Z",
-      "status": "completed",
-      "title": "Darth Vader",
-      "text": "DARK SIDE",
-      "id": 4
-    },
-    {
-      "deadline": "2023-02-24T09:11:00.000Z",
-      "timeCreation": "2023-02-19T13:23:42.982Z",
-      "status": "completed",
-      "title": "Darth Vader",
-      "text": "DARK SIDE",
-      "id": 5
-    },
-    {
-      "deadline": "2023-02-22T23:32:00.000Z",
-      "timeCreation": "2023-02-19T13:28:59.884Z",
-      "status": "completed",
-      "title": "dsadsa",
-      "text": "dadas",
-      "id": 6
-    },
-    {
       "deadline": "2023-02-20T17:39:00.000Z",
       "timeCreation": "2023-02-20T17:38:34.189Z",
-      "status": "failed",
       "title": "test",
       "text": "dsffsd",
       "id": 7
@@ -59,7 +10,6 @@
     {
       "deadline": "2023-02-19T17:42:00.000Z",
       "timeCreation": "2023-02-20T17:39:27.153Z",
-      "status": "failed",
       "title": "test",
       "text": "bkjhjk",
       "id": 8
@@ -67,58 +17,103 @@
     {
       "deadline": "2023-02-20T17:42:00.000Z",
       "timeCreation": "2023-02-20T17:41:44.313Z",
-      "status": "failed",
       "title": "dsfdsf",
       "text": "sdgdfgdf",
       "id": 10
     },
     {
-      "deadline": "2023-02-20T21:02:00.000Z",
-      "timeCreation": "2023-02-20T21:01:09.118Z",
-      "status": "completed",
-      "title": "test interval",
-      "text": "da",
-      "id": 16
-    },
-    {
-      "deadline": "2023-02-20T21:47:00.000Z",
-      "timeCreation": "2023-02-20T21:46:17.810Z",
-      "status": "active",
-      "title": "dsadsa",
-      "text": "Dada",
-      "id": 17
-    },
-    {
-      "deadline": "2023-02-20T21:48:00.000Z",
-      "timeCreation": "2023-02-20T21:47:23.620Z",
-      "status": "active",
-      "title": "dsadas",
-      "text": "sdadsa",
-      "id": 18
-    },
-    {
-      "deadline": "2023-02-20T21:49:00.000Z",
-      "timeCreation": "2023-02-20T21:49:56.217Z",
-      "status": "active",
-      "title": "dasdsa",
-      "text": "dsadsa",
+      "deadline": "2023-02-21T07:42:00.000Z",
+      "timeCreation": "2023-02-21T07:41:09.272Z",
+      "status": "",
+      "title": "zxfcxzf",
+      "text": "gffgfdfd",
       "id": 19
     },
     {
-      "deadline": "2023-02-20T21:51:00.000Z",
-      "timeCreation": "2023-02-20T21:50:10.134Z",
-      "status": "active",
-      "title": "dsadsa",
-      "text": "isa",
-      "id": 20
+      "deadline": "2023-02-21T07:55:00.000Z",
+      "timeCreation": "2023-02-21T07:53:47.763Z",
+      "status": "",
+      "title": "complet test",
+      "text": "fdgfd",
+      "id": 21
     },
     {
-      "deadline": "2023-02-20T21:52:00.000Z",
-      "timeCreation": "2023-02-20T21:51:03.347Z",
+      "deadline": "2023-02-22T13:54:00.000Z",
+      "timeCreation": "2023-02-21T07:54:29.172Z",
+      "status": "",
+      "title": "COMPLETE",
+      "text": "dfsfdsf",
+      "id": 22
+    },
+    {
+      "deadline": "2023-02-21T08:06:00.000Z",
+      "timeCreation": "2023-02-21T08:02:21.602Z",
+      "status": "",
+      "title": "xzccxvcxvcxvcx",
+      "text": "xcvxcvxcvxcvcxvxcv",
+      "id": 24
+    },
+    {
+      "deadline": "2023-02-21T09:49:00.000Z",
+      "timeCreation": "2023-02-21T09:43:02.283Z",
+      "status": "failed",
+      "title": "vsdf",
+      "text": "dsfds",
+      "id": 27
+    },
+    {
+      "title": "NEW TEST",
+      "text": "NEW TEST",
+      "endPointDate": "2023-02-21",
+      "endPointTime": "19:32",
+      "timeCreation": "2023-02-21T17:30:04.815Z",
+      "status": "failed",
+      "id": 48
+    },
+    {
+      "title": "Test completed",
+      "text": "dfsdfsd",
+      "endPointDate": "2023-02-21",
+      "endPointTime": "19:34",
+      "timeCreation": "2023-02-21T17:32:33.660Z",
+      "status": "completed",
+      "id": 49
+    },
+    {
+      "title": "dfds",
+      "text": "dfgfd",
+      "endPointDate": "2023-02-22",
+      "endPointTime": "19:41",
+      "timeCreation": "2023-02-21T17:36:59.558Z",
       "status": "active",
-      "title": "fdsfds",
-      "text": "fdsfs",
-      "id": 21
+      "id": 50
+    },
+    {
+      "title": "cxvcx",
+      "text": "cvxvxc",
+      "endPointDate": "2023-02-22",
+      "endPointTime": "19:42",
+      "timeCreation": "2023-02-21T17:37:16.629Z",
+      "status": "active",
+      "id": 51
+    },
+    {
+      "title": "dsad",
+      "text": "dsada",
+      "endPointDate": "2023-02-23",
+      "endPointTime": "20:08",
+      "timeCreation": "2023-02-21T18:02:09.934Z",
+      "status": "active",
+      "id": 52
+    },
+    {
+      "title": "sdadas",
+      "text": "dsada",
+      "endPointDate": "2023-02-22",
+      "endPointTime": "20:04",
+      "timeCreation": "2023-02-21T18:02:16.775Z",
+      "status": "active",
+      "id": 53
     }
   ],
   "filters": [

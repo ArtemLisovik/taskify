@@ -1,31 +1,38 @@
+import React, { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import {FC} from 'react'
 
 import styles from './Input.module.scss'
 
 interface InputProps {
-    ref?: any
     name: string
-    type?: 'text' | 'date' | 'time'
+    type?: 'text' | 'date' | 'time' | 'number'
     placeholder?: string
+    value?: string | null
 }
 
-const Input = ({ref, name, type = 'text', placeholder}: InputProps) => {
+const Input = ({name, type = 'text', placeholder, value}: InputProps) => {
+  const [inputValue, setInputValue] = useState('')
 
-  const { register } = useFormContext()
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setInputValue(value ? value : '')
+  }, [])
+
+
+  const methods = useFormContext()
 
   return (
     <div>
-      <input  
+      <input 
+        {...methods.register(`${name}`)}
         className={styles.input}
-        // name={ref} 
-        // value={value} 
-        // onChange={onChange} 
         type={type} 
-        placeholder={placeholder} 
-        {...register(`${name}`, {
-          required: 'This field is required'
-        })}
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={e => onValueChange(e)}
         />
     </div>
   )

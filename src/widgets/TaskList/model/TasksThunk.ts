@@ -3,7 +3,7 @@ import { AppDispatch } from "../../../app/store/store";
 import { ITask } from "entities/Task/types/ITask";
 import {api} from '../../../shared/api/api'
 import { tasksFetching, tasksFetched } from "./TasksSlice";
-import { modifyedTask } from "widgets/NewTaskModal/ui/NewTaskModal";
+// import { modifyedTask } from "widgets/TaskModal/ui/TaskModal";
 import { useAppDispatch } from "shared/hooks/useRedux";
 
 export const fetchAllTasks = () => (dispatch: AppDispatch) => {
@@ -20,6 +20,6 @@ export const deleteTask = (id: number) => (dispatch: AppDispatch) => {
   api.delete(`/tasks/${id}`).then(() => dispatch(fetchAllTasks()))
 }
 
-export const addTask = (data: modifyedTask) => (dispatch: AppDispatch) => {
+export const addTask = (data: ITask) => (dispatch: AppDispatch) => {
   api.post('/tasks', data).then(() => dispatch(fetchAllTasks()))
 }

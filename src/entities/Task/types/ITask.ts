@@ -5,7 +5,8 @@ export type ITask = {
     title: string,
     text: string,
     timeCreation: Object,
-    deadline: Object,
+    endPointTime: string
+    endPointDate: string
     status: IStatus,
     users: string
 }

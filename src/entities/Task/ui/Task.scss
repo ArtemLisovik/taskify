@@ -3,60 +3,48 @@
     border-radius: 8px;
     background: var(--task-background);
     padding: 20px 15px;
-
     &__wrapper {
         padding-bottom: 20px;
         word-break: break-word;
         -webkit-column-break-inside: avoid;
         min-width: 200px;
     }
-
     &:hover {
         // box-shadow:
         // 40px 20px 20px #00070348;
         // transform: translateX(-15px) translateY(-15px);
     }
-
     &__title {
         font-weight: 600;
     }
-
     &__descr {
         margin-top: 10px;
         font-size: 14px;
         color: var(--text-color);
         line-height: 1.5;
     }
-
     &__progressbar {
         margin-top: 20px;
         width: 100%;
         height: 5px;
         background: var(--input-color);
         border-radius: 8px;
-        overflow: hidden;
     }
-
     &__progressbar-fill {
-        background: #ffd337;
+        border-radius: 8px;
         height: 100%;
         width: 48%;
         transition: all 0.3s ease;
     }
-
     &__time-remaining {
         margin-top: 10px;
         color: var(--text-color);
         margin-bottom: 15px;
-
         span {
             font-weight: 600;
             color: #fff
         }
-
-        ;
     }
-
     &__options {
         margin-top: 20px;
         display: flex;
@@ -64,13 +52,11 @@
         align-items: center;
         gap: 20px;
     }
-
     &__users {
         display: flex;
         flex: 0 0 auto;
         position: relative;
     }
-
     &___users::after {
         position: absolute;
         content: '';
@@ -80,7 +66,6 @@
         background: red;
         height: 20px;
     }
-
     &__users-link {
         border-radius: 50%;
         width: 25px;
@@ -89,14 +74,12 @@
         overflow: hidden;
         border: 1px solid #fff;
     }
-
     &__users-link img {
         object-fit: cover;
         width: 100%;
         height: 100%;
         object-position: 50% 40%;
     }
-
     &__pin {
         display: flex;
         align-items: center;
@@ -105,7 +88,6 @@
         position: relative;
         padding-left: 10px;
     }
-
     &__pin::before {
         position: absolute;
         content: '';
@@ -116,7 +98,6 @@
         background: var(--border-color);
         border-radius: 8px;
     }
-
     &__pin-icon {
         width: 15px;
         height: 15px;
@@ -141,11 +122,13 @@
         cursor: pointer;
     }
     &-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
         position: absolute;
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
-        // display: none;
         padding: 10px 10px;
         background: var(--input-color);
         border: 2px solid var(--border-color);
@@ -160,9 +143,10 @@
     button {
         color: #fff;
         cursor: pointer;
+        transition: all 0.3s ease;
     }
     button:hover {
         color: var(--color-accentColor);
-        text-shadow: 0 0 10px var(--color-accentColor);
+        text-shadow: 0 0 3px var(--color-accentColor);
     }
 }

@@ -1,7 +1,8 @@
 import React, { MouseEventHandler } from 'react'
-import { NewTaskModal } from '../../NewTaskModal/ui/NewTaskModal'
+
+import { TaskModal } from 'widgets/TaskModal/ui/TaskModal'
 import { Button } from '../../../shared/ui'
-import Modal from '../../../shared/ui/Modal/Modal'
+
 
 
 const FilterAddTask = () => {
@@ -14,12 +15,7 @@ const FilterAddTask = () => {
     return (
         <>
             <Button content='New task' type='neon' onClick={handlerChange}/>
-                <Modal 
-                    open={isOpen}
-                    handlerChange={handlerChange}
-                >
-                    <NewTaskModal handlerChange={handlerChange}/>
-                </Modal>
+            {isOpen ? <TaskModal isOpen={isOpen} modalSwitcher={handlerChange}/> : null }
         </>
     )
 }

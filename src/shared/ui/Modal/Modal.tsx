@@ -6,15 +6,13 @@ import styles from './Modal.module.scss'
 type ModalProps = {
     open: boolean
     children?: React.ReactNode
-    handlerChange?: () => MouseEventHandler<HTMLButtonElement>
+    modalSwitcher?: () => void
+
 }
 
-const Modal = ({ open, children, handlerChange }: ModalProps) => {
+const Modal = ({ open, children, modalSwitcher }: ModalProps) => {
     if (!open) return null
 
-    // const handler: MouseEventHandler<HTMLButtonElement> = () => {
-    //     handlerChange ? handlerChange() : console.log('null')
-    // }
     return (
         <Portal>
             <div className={styles.wrapper}>
@@ -22,7 +20,7 @@ const Modal = ({ open, children, handlerChange }: ModalProps) => {
             <div className={styles.modal}>
                     <button 
                         className={styles.close}
-                        onClick={handlerChange}
+                        onClick={modalSwitcher}
                         >&times;</button>
                     <div className='modal__inner'>
                         {children}
