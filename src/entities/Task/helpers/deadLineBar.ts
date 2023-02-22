@@ -26,8 +26,5 @@ export const deadLineBar = (startPoint: string, endPointTime: string, endPointDa
     const hours = Math.floor(timeRemainig / (1000 * 60 * 60) % 24)
     const minutes = Math.ceil(timeRemainig / (1000 * 60) % 60)
 
-    console.log(days)
-
-
     return { days, hours, minutes, progress, progressBarColor, timeRemainig }
 }

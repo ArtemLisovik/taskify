@@ -103,7 +103,7 @@ import { Button } from '../../../shared/ui/Button/Button'
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
-import { addTask } from 'widgets/TaskList/model/TasksThunk'
+import { addTask, updateTask } from 'widgets/TaskList/model/TasksThunk'
 import { schema } from '../helpers/FormValidation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ITask } from "entities/Task/types/ITask";
@@ -125,7 +125,9 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
     reValidateMode: 'onChange',
     defaultValues: {
       title: `${task ? task.title : ''}`,
-      text: `${task ? task.text : ''}`
+      text: `${task ? task.text : ''}`,
+      endPointDate: `${task ? task.endPointDate : ``}`,
+      endPointTime: `${task ? task.endPointTime : ``}`,
    
     }
   })
@@ -133,12 +135,13 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
   const { handleSubmit, formState: { errors }, reset } = methods
 
   const onHandleChange: SubmitHandler<ITask> = (data) => {
-    const timeCreation = new Date()
+    const timeCreation = task ? task.timeCreation : new Date()
     console.log(data)
     const newTask: ITask = {...data, timeCreation, status: 'active'}
     modalSwitcher()
     reset()
-    dispatch(addTask(newTask))
+    task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
+    // dispatch(addTask(newTask))
   }
 
   return (
@@ -147,7 +150,7 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
         open={isOpen}
         modalSwitcher={modalSwitcher}
       >
-        <h3 className="task__title">Create new task</h3>
+        <h3 className="task__title">{task ? `Edit task` : `Create new task`}</h3>
         <FormProvider {...methods}>
           <form className='form' onSubmit={handleSubmit(onHandleChange)}>
 
