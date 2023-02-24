@@ -1,34 +1,17 @@
-import { Header } from '../widgets/Header/ui/Header';
-import { Filters } from '../widgets/Filters/ui/Filters';
+import MainPage from 'pages/MainPage';
+import LoginPage from 'pages/LoginPage';
+import {Routes, Route} from 'react-router-dom'
 
 import './index.scss';
-import { TaskList } from '../widgets/TaskList/ui/TaskList';
 
 function App() {
   return (
-    <div className="wrapper">
-      <div className="main__container">
+    <Routes>
+      <Route path='/' element={<MainPage/>}/>
+      <Route path='/login' element={<LoginPage/>}/>
+    </Routes>
 
-        <Header />
 
-        <main className="main">
-          <div className="container flex__container">
-            <div className="container__content content">
-
-              <Filters />
-              <TaskList/>
-
-            </div>
-            <div className="container__calendar calendar">
-
-              calendar
-              
-            </div>
-          </div>
-        </main>
-
-      </div>
-    </div>
   );
 }
 

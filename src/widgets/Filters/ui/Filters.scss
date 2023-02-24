@@ -6,19 +6,19 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        @media(max-width: 590px) {
+        @media(max-width: 685px) {
             display: block;
         }
     }
     &__title {
         flex: 1 0 auto;
-        @media(max-width: 590px) {
+        @media(max-width: 685px) {
             margin-bottom: 15px;
         }
     }
     &__decor {
         margin-right: 30px;
-        @media(max-width: 590px) {
+        @media(max-width: 685px) {
             display: none;
         }
     }

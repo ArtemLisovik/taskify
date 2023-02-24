@@ -40,7 +40,9 @@ body {
     margin: 0 25px;
     border: 2px solid rgba(255, 255, 255, 0.205);
     border-radius: 15px;
-
+    @media(max-width: 374px) {
+        margin: 5px;
+    }
 }
 
 main {
@@ -49,6 +51,10 @@ main {
     overflow-y: scroll;
     border-bottom-left-radius: 13px;
     border-bottom-right-radius: 13px;
+    @media(max-width: 374px){
+        height: 90vh;
+    }
+
 
 }
 main::-webkit-scrollbar {

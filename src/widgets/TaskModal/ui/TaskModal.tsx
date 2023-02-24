@@ -141,7 +141,6 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
     modalSwitcher()
     reset()
     task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
-    // dispatch(addTask(newTask))
   }
 
   return (

@@ -3,25 +3,31 @@
     border-radius: 8px;
     background: var(--task-background);
     padding: 20px 15px;
+    transition: all 0.3s ease;
     &__wrapper {
-        padding-bottom: 20px;
-        word-break: break-word;
-        -webkit-column-break-inside: avoid;
-        min-width: 200px;
+        flex: 1 1 240px;
+        min-width: 240px;
+        max-width: 450px;
     }
     &:hover {
-        // box-shadow:
-        // 40px 20px 20px #00070348;
-        // transform: translateX(-15px) translateY(-15px);
+        box-shadow:
+        40px 20px 20px #00070348;
+        transform: translateX(-15px) translateY(-15px);
     }
     &__title {
         font-weight: 600;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        // max-width: 65vw;
     }
     &__descr {
         margin-top: 10px;
         font-size: 14px;
         color: var(--text-color);
         line-height: 1.5;
+        word-wrap: break-word;
+        box-sizing: border-box;
+        max-width: 65vw;
     }
     &__progressbar {
         margin-top: 20px;

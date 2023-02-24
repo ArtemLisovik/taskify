@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../../../shared/ui/Button/Button'
-import { IinitialState, setActiveFilter } from '../model/FiltersSlice'
+import { IinitialState, setActiveFilter, onSearch} from '../model/FiltersSlice'
 import { fetchFilters } from '../model/FiltersThunk'
 import { AppDispatch, RootState } from '../../../app/store/store'
 import FilterAddTask from './FiltersAddTask'
@@ -13,8 +13,12 @@ import './Filters.scss'
 
 
 export const Filters: FC = () => {
-    const {filters, activeFilter}: IinitialState = useSelector((state: RootState) => state.filter)
+    const {filters, activeFilter, search}: IinitialState = useSelector((state: RootState) => state.filter)
     const dispatch: AppDispatch = useDispatch()
+
+    const setSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(onSearch(e.target.value))
+    }
 
     useEffect(() => {
         dispatch(fetchFilters())
@@ -60,7 +64,13 @@ export const Filters: FC = () => {
                 <span className="filters__decor2"></span>
                 <div className="filters__bottom-input">
                     <svg className="filters__icon" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px"><path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"/></svg>
-                    <input className='filters__bottom-input-inner' placeholder='Search' type="text" />
+
+                    <input 
+                        className='filters__bottom-input-inner' 
+                        placeholder='Search' 
+                        type="text" 
+                        onChange={e => setSearchValue(e)}
+                    />
                 </div>
                 
             </div>
