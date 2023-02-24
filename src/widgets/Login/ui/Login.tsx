@@ -5,18 +5,18 @@ import { Button } from "shared/ui"
 import { schema } from '../helpers/schema'
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
-import {ILogin} from '../model/loginInterface'
+import { ILogin } from '../types/loginInterface'
 
 import './Login.scss'
 
 export const Login = () => {
-    
+
     const methods = useForm<ILogin>({
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
     })
 
-    const {handleSubmit, reset, formState: {errors}} = methods
+    const { handleSubmit, reset, formState: { errors } } = methods
 
     const onHandleSubmit: SubmitHandler<ILogin> = (data) => {
         console.log(data)
@@ -29,11 +29,11 @@ export const Login = () => {
                 Login to your account
             </h3>
             <FormProvider {...methods}>
-                <form 
-                    onSubmit={handleSubmit(onHandleSubmit)} 
-                    name='login' 
+                <form
+                    onSubmit={handleSubmit(onHandleSubmit)}
+                    name='login'
                     className="login__form">
-                    
+
                     <Input
                         name='email'
                         type='email'
@@ -48,12 +48,12 @@ export const Login = () => {
                     />
                     <div className="error__module">{errors.password?.message}</div>
                     <div className="login__buttons">
-                    <Link to='back'>
-                        <Button content="Create account" type="neon" />
-                    </Link>
-                    <Button content="Confirm" type="neon" />
+                        <Link to='/auth/register'>
+                            <Button content="Create account" type="neon" />
+                        </Link>
+                        <Button content="Confirm" type="neon" />
                     </div>
-                    
+
                 </form>
             </FormProvider>
         </div>

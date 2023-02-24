@@ -1,7 +1,6 @@
 import { Header } from "widgets/Header/ui/Header"
 import { Filters } from "widgets/Filters/ui/Filters"
 import { TaskList } from "widgets/TaskList/ui/TaskList"
-import { redirect } from "react-router-dom"
 
 const MainPage = () => {
 
