@@ -48,7 +48,7 @@ export const Login = () => {
                     />
                     <div className="error__module">{errors.password?.message}</div>
                     <div className="login__buttons">
-                    <Link to='back'>
+                    <Link to='/auth/registration'>
                         <Button content="Create account" type="neon" />
                     </Link>
                     <Button content="Confirm" type="neon" />

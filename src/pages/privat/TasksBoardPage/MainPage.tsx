@@ -3,7 +3,7 @@ import { Filters } from "widgets/Filters/ui/Filters"
 import { TaskList } from "widgets/TaskList/ui/TaskList"
 import { redirect } from "react-router-dom"
 
-const MainPage = () => {
+export const MainPage = () => {
 
     // const user = false
     // if(!user) {
@@ -36,5 +36,3 @@ const MainPage = () => {
         </div>
     )
 }
-
-export default MainPage

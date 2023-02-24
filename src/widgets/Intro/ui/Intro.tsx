@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 
 import './Intro.scss'
 
-const Intro = () => {
+export const Intro = () => {
     return (
         <div className="intro">
             <h2 className="intro__title">Welcome to <span>Taskify</span>!</h2>
@@ -13,5 +13,3 @@ const Intro = () => {
         </div>
     )
 }
-
-export {Intro}
