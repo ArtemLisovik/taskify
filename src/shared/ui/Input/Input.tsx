@@ -5,22 +5,16 @@ import styles from './Input.module.scss'
 
 interface InputProps {
     name: string
-    type?: 'text' | 'date' | 'time' | 'number'
+    type?: 'text' | 'date' | 'time' | 'number' | 'email' | 'password'
     placeholder?: string
-    value?: string | null
 }
 
-const Input = ({name, type = 'text', placeholder, value}: InputProps) => {
+const Input = ({name, type = 'text', placeholder}: InputProps) => {
   const [inputValue, setInputValue] = useState('')
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
-
-  useEffect(() => {
-    setInputValue(value ? value : '')
-  }, [])
-
 
   const methods = useFormContext()
 
