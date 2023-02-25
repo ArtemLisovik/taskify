@@ -1,6 +1,7 @@
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Link } from "react-router-dom"
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
@@ -15,11 +16,12 @@ export const Registration = () => {
         resolver: yupResolver(schema),
         reValidateMode: 'onChange'
     })
-
     const { handleSubmit, formState: { errors } } = methods
 
     const onSubmit: SubmitHandler<IRegistration> = (data) => {
-        console.log(data)
+        const auth = getAuth()
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+            .then(() => console.log())
     }
 
     return (
@@ -37,19 +39,19 @@ export const Registration = () => {
                     />
                     <div className="error__module">{errors.email?.message}</div>
 
-                    <Input
+                    {/* <Input
                         name='name'
                         type='text'
                         placeholder="Enter your nickname"
                     />
-                    <div className="error__module">{errors.name?.message}</div>
+                    <div className="error__module">{errors.name?.message}</div> */}
 
-                    <Input
+                    {/* <Input
                         name='profession'
                         type='text'
                         placeholder="What is your profession?"
                     />
-                    <div className="error__module">{errors.profession?.message}</div>
+                    <div className="error__module">{errors.profession?.message}</div> */}
 
                     <Input
                         name='password'
@@ -59,7 +61,7 @@ export const Registration = () => {
                     <div className="error__module">{errors.password?.message}</div>
 
                     <div className="login__buttons">
-                        <Link to='login'>
+                        <Link to='/auth/login'>
                             <Button content="I have account" type="neon" />
                         </Link>
                         <Button content="Create account" type="neon" />

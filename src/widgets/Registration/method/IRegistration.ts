@@ -1,6 +1,6 @@
 export interface IRegistration {
-    name: string
-    profession: string
+    // name: string
+    // profession: string
     password: string
     email: string
 }

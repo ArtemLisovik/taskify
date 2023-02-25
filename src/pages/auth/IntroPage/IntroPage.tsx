@@ -1,6 +1,6 @@
 import {Outlet} from 'react-router-dom'
 
-export const AuthPage = () => {
+export const IntroPage = () => {
   return (
       <Outlet/>
   )

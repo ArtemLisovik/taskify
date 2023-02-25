@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
@@ -20,6 +21,9 @@ export const Login = () => {
 
     const onHandleSubmit: SubmitHandler<ILogin> = (data) => {
         console.log(data)
+        const auth = getAuth()
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then(data => console.log(data))
         reset()
     }
 
