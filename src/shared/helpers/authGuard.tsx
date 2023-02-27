@@ -6,10 +6,5 @@ export const AuthGuard = () => {
     const loggedUser = useAppSelector(state => state.auth.user)
     console.log(loggedUser)
 
-    const view = loggedUser ? <Outlet /> : <Navigate to='/auth' />
-    return (
-        <>
-            {view}
-        </>
-    )
+    return loggedUser ? <Outlet /> : <Navigate to='/auth' />
 }

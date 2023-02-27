@@ -18,8 +18,8 @@ function App() {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      console.log(user)
-      dispatch(authActions.setUser(user))
+      console.log(user.email)
+      dispatch(authActions.setUser(user.email))
     } else {
       dispatch(authActions.setUser(null))
       console.log('You are not authorized!')
