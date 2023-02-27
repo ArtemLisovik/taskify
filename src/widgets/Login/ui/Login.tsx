@@ -1,30 +1,56 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import { useEffect } from "react"
 
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
 import { schema } from '../helpers/schema'
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
-import {ILogin} from '../model/loginInterface'
+import {ILogin} from '../types/loginInterface'
+import { authActions } from 'widgets/Auth/model/AuthSlice'
+// import {setLoggedUser} from 'widgets/Auth/model/AuthThunk'
 
 import './Login.scss'
+import { toast } from "react-toastify"
+import { useAppDispatch } from "shared/hooks/useRedux"
+import { auth } from "shared/config/firebase"
+import { useSelector } from "react-redux"
+import { RootState } from "app/store/store"
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
     
     const methods = useForm<ILogin>({
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
     })
 
-    const {handleSubmit, reset, formState: {errors}} = methods
+    const {handleSubmit, reset, formState: { errors }} = methods
 
-    const onHandleSubmit: SubmitHandler<ILogin> = (data) => {
-        console.log(data)
-        const auth = getAuth()
-        signInWithEmailAndPassword(auth, data.email, data.password)
-            .then(data => console.log(data))
-        reset()
+    const onHandleSubmit: SubmitHandler<ILogin> = async (data) => {
+        await signInWithEmailAndPassword(auth, data.email, data.password)
+        // auth.onAuthStateChanged((user) => {
+        //     if (user) {
+        //         console.log(user)
+        //         dispatch(authActions.setUser(user))
+        //     //   console.log(user)
+        //     } else {
+        //      console.log('no user online')
+        //     }
+        //   });
+        
+
+            // .then((data:any) => {
+            //     console.log(data)
+            //     toast.success("Super!")
+            //     // dispatch(authActions.login(data?.user?.uid))
+            //     navigate('/')
+            // })
+            // .catch(() =>  toast.error("Error!"))
+        // reset()
     }
 
     return (

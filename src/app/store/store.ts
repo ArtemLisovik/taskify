@@ -2,9 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import tasks from "../../widgets/TaskList/model/TasksSlice";
 import filter from '../../widgets/Filters/model/FiltersSlice'
+import { auth } from 'widgets/Auth/model/AuthSlice'
 
 export const store = configureStore({
-  reducer: { tasks, filter },
+  reducer: { tasks, filter, auth },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== "production",
 });

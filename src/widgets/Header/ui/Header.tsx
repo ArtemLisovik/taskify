@@ -1,8 +1,18 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/useRedux'
+// import { getUser } from 'widgets/Auth/model/AuthThunk'
 
 import './header.scss'
 
 export const Header: FC = () => {
+
+    const {user} = useAppSelector(state => state.auth)
+    console.log(user)
+    const dispatch = useAppDispatch()
+
+    // React.useEffect(() => {
+    //     dispatch(getUser())
+    // }, []) 
 
     return (
         <header className="header">
@@ -27,8 +37,8 @@ export const Header: FC = () => {
                         <img src="" alt="" className="profile__avatar" />
                     </div>
                     <div className="profile__info">
-                        <p className="profile__name">Artem Lisovik</p>
-                        <p className="profile__profession">Front-end developer</p>
+                        <p className="profile__name">{user?.name}</p>
+                        <p className="profile__profession">{user?.profession}</p>
                     </div>
                     <button className="profile__button">
                         <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 407.437 407.437" xmlSpace="preserve" stroke="#ffffff">

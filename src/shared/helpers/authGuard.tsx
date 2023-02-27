@@ -1,7 +1,15 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export const AuthGuard = ({children}: {children: React.ReactElement}):React.ReactElement => {
-    const isAuthorized = true;
-    return isAuthorized ? children : <Navigate to="/auth"/>
+import { useAppSelector } from "shared/hooks/useRedux";
+
+export const AuthGuard = () => {
+    const loggedUser = useAppSelector(state => state.auth.user)
+    console.log(loggedUser)
+
+    const view = loggedUser ? <Outlet /> : <Navigate to='/auth' />
+    return (
+        <>
+            {view}
+        </>
+    )
 }
