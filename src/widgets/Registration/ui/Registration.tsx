@@ -19,28 +19,8 @@ import { useAppDispatch } from "shared/hooks/useRedux"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "app/store/store"
-// import {setLoggedUser} from 'widgets/Auth/model/AuthThunk'
 
 export const Registration = () => {
-
-    const useronline = useSelector<RootState>(state => state.auth.user)
-    console.log(useronline)
-    // const [currentUser, setCurrentUser] = useState<any>(null)
-    // auth.signOut()
-
-
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             setCurrentUser(user)
-    //         } else {
-    //             setCurrentUser('no user')
-    //         }
-    //     });
-    // }, [])
-
-    // auth.signOut()
-
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 

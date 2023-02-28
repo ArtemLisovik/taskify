@@ -6,7 +6,7 @@ import './header.scss'
 
 export const Header: FC = () => {
 
-    const {user} = useAppSelector(state => state.auth)
+    const user = useAppSelector(state => state.auth.isAuth)
     console.log(user)
     const dispatch = useAppDispatch()
 
@@ -37,8 +37,8 @@ export const Header: FC = () => {
                         <img src="" alt="" className="profile__avatar" />
                     </div>
                     <div className="profile__info">
-                        <p className="profile__name">{user?.name}</p>
-                        <p className="profile__profession">{user?.profession}</p>
+                        <p className="profile__name"></p>
+                        <p className="profile__profession"></p>
                     </div>
                     <button className="profile__button">
                         <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 407.437 407.437" xmlSpace="preserve" stroke="#ffffff">

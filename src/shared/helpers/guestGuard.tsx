@@ -6,8 +6,8 @@ import { RootState } from "app/store/store";
 import { useEffect } from "react";
 
 
-export const AuthGuard = () => {
+export const GuestGuard = () => {
     const {isAuth} = useAppSelector(state => state.auth)
 
-    return isAuth ? <Outlet /> : <Navigate to='/auth' />
+    return isAuth ? <Navigate to='/' /> : <Outlet />
 }

@@ -32,6 +32,8 @@ export const Login = () => {
 
     const onHandleSubmit: SubmitHandler<ILogin> = async (data) => {
         await signInWithEmailAndPassword(auth, data.email, data.password)
+        // navigate('/')
+
         // auth.onAuthStateChanged((user) => {
         //     if (user) {
         //         console.log(user)

@@ -5,6 +5,12 @@ import { auth } from "shared/config/firebase";
 import { authActions } from "./AuthSlice";
 
 
+// export const getUser = (id) => (dispatch: AppDispatch) => {
+
+// }
+
+
+
 // export const getUser = () => async (dispatch: AppDispatch) => {
 //     const usersCollection = connectToCollection('users')
 //     const data = await getDocs(usersCollection)
