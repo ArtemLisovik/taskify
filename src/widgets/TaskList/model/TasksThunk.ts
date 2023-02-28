@@ -3,11 +3,8 @@ import { AppDispatch } from "../../../app/store/store";
 import { ITask } from "entities/Task/types/ITask";
 import {api} from '../../../shared/api/api'
 import { tasksFetching, tasksFetched } from "./TasksSlice";
-// import { modifyedTask } from "widgets/TaskModal/ui/TaskModal";
-import { useAppDispatch } from "shared/hooks/useRedux";
 
 export const fetchAllTasks = () => (dispatch: AppDispatch) => {
-
     dispatch(tasksFetching());
     api.get('/tasks').then(res => dispatch(tasksFetched(res.data)))
 }

@@ -1,15 +1,17 @@
 import { MainPage } from 'pages/privat/TasksBoardPage/MainPage';
-import { IntroPage } from 'pages/auth/IntroPage/IntroPage';
+
 import { Routes, Route } from 'react-router-dom'
 import { Intro } from 'widgets/Intro/ui/Intro';
 import { Login } from 'widgets/Login/ui/Login';
 import { Registration } from 'widgets/Registration/ui/Registration';
 import { auth } from 'shared/config/firebase'
-import { authActions } from 'widgets/Auth/model/AuthSlice';
+import { authActions } from 'app/model/AuthSlice';
+import { database } from 'shared/config/firebase';
 
 import { useAppSelector } from 'shared/hooks/useRedux';
 import { GuestGuard } from 'shared/helpers/guestGuard';
 import Loader from 'shared/ui/Loader/Loader';
+import {createUserWithEmailAndPassword} from 'firebase/auth'
 
 
 import './index.scss';
@@ -17,15 +19,23 @@ import { AuthGuard } from 'shared/helpers/authGuard';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './store/store';
 import { useEffect } from 'react';
+import { getDoc, doc } from 'firebase/firestore';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>()
-  // auth.signOut()
 
   useEffect(() => {
-    const sub = auth.onAuthStateChanged((user) => {
+    const sub = auth.onAuthStateChanged( async (user) => {
       if (user) {
-        dispatch(authActions.setUser(user.uid))
+        const loggedUser = await getDoc(doc(database, "users", user.uid));
+        if (loggedUser.exists()) {
+          dispatch(authActions.setUser(loggedUser.data()))
+          // console.log("Document data:", loggedUser.data());
+        } else {
+          dispatch(authActions.setUser(null))
+          // doc.data() will be undefined in this case
+          // console.log("No such document!");
+        }
       } else {
         dispatch(authActions.setUser(null))
         console.log('You are not authorized!')

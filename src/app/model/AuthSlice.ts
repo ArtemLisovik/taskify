@@ -1,35 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import {auth} from 'shared/config/firebase'
-
-type Profile = {
-    id?: string
-    name: string
-    profession: string
-    tasks: []
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { ITask } from "entities/Task/types/ITask";
 
 type IState = {
-    isAuth: null | string
     loader: boolean
+    userUid: null | string
     profile: null | Profile
-
+    tasks: null | ITask[]
 }
+type Profile = {
+    name: string
+    profession: string
+}
+
 
 const initialState: IState = {
     loader: true,
-    isAuth: null,
-    profile: null
-    
+    userUid: null,
+    profile: null,
+    tasks: null
 }
+
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
         setUser(state, action) {
-            state.isAuth = action.payload
+            state.profile = action.payload
             state.loader = false
-
         }
     }
 })

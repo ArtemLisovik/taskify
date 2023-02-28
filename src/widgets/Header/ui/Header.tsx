@@ -1,19 +1,22 @@
-import React, { FC } from 'react'
-import { useAppDispatch, useAppSelector } from 'shared/hooks/useRedux'
-// import { getUser } from 'widgets/Auth/model/AuthThunk'
+import { FC, useState } from 'react'
+import { getDocs, collection } from 'firebase/firestore'
+import { database } from 'shared/config/firebase'
+
+import {auth} from 'shared/config/firebase'
 
 import './header.scss'
 
 export const Header: FC = () => {
+    const [submenu, setSubmenu] = useState(false)
 
-    const user = useAppSelector(state => state.auth.isAuth)
-    console.log(user)
-    const dispatch = useAppDispatch()
-
-    // React.useEffect(() => {
-    //     dispatch(getUser())
-    // }, []) 
-
+    // const seeRef = async () => {
+    //     const docRef = await getDocs(collection(database, "users"))
+    //     // docRef.forEach(item => console.log(item.data()))
+    //     // console.log(docRef)
+    // }
+    // seeRef()
+    
+    const isActive = submenu? `active` : ''
     return (
         <header className="header">
             <div className="header__container container">
@@ -40,7 +43,7 @@ export const Header: FC = () => {
                         <p className="profile__name"></p>
                         <p className="profile__profession"></p>
                     </div>
-                    <button className="profile__button">
+                    <button onClick={() => setSubmenu(submenu => !submenu)}className="profile__button">
                         <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 407.437 407.437" xmlSpace="preserve" stroke="#ffffff">
 
                             <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -51,6 +54,9 @@ export const Header: FC = () => {
 
                         </svg>
                     </button>
+                    <div className={`profile__submenu ${isActive}`}>
+                        <button onClick={() => auth.signOut()} className='profile__submenu-button'>Sign out</button>
+                    </div>
                 </div>
             </div>
         </header>

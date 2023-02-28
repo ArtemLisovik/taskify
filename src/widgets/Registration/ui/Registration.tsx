@@ -1,28 +1,17 @@
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Link, useNavigate } from "react-router-dom"
-import {signOut} from 'firebase/auth'
-import { createUserWithEmailAndPassword, onAuthStateChanged, reauthenticateWithCredential } from 'firebase/auth'
-import { auth } from "shared/config/firebase"
-import { addDoc, collection, getDocs } from "firebase/firestore"
-import { toast } from "react-toastify"
+import { Link } from "react-router-dom"
 
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
 import { schema } from '../helpers/regValidation'
 import { IRegistration } from "../types/IRegistration"
+import { registrationUser } from '../model/registrationUserThunk'
 
 import 'widgets/Login/ui/Login.scss'
-import { authActions } from "widgets/Auth/model/AuthSlice"
-import { connectToCollection } from "shared/helpers/connectToCollection"
-import { useAppDispatch } from "shared/hooks/useRedux"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "app/store/store"
+
 
 export const Registration = () => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
 
     const methods = useForm<IRegistration>({
         resolver: yupResolver(schema),
@@ -31,25 +20,10 @@ export const Registration = () => {
     const { handleSubmit, formState: { errors } } = methods
 
     const onSubmit: SubmitHandler<IRegistration> = async (data) => {
-        try {
-            const response: any = await createUserWithEmailAndPassword(auth, data.email, data.password)
-            // const user = response.user
-            // setLoggedUser()
-            // console.log(user.currentUser)
-            // // dispatch(authActions.login(response.user))
-            // // console.log(response)
-            // // await addDoc(connectToCollection('users'), { 
-            // //     name: data.name, 
-            // //     profession: data.profession, 
-            // //     id: response.user.uid 
-            // // })
-            toast.success('Success!')
-            navigate('/')
-        } catch (error) {
-            toast.error((error as Error).message)
-        }
+        registrationUser(data)
     }
 
+    
     return (
         <div className="login">
             <h3 className="login__title">
@@ -98,8 +72,4 @@ export const Registration = () => {
 
         </div>
     )
-}
-
-function promptForCredentials() {
-    throw new Error("Function not implemented.")
 }
