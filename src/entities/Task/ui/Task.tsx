@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'app/store/store'
 import { Button } from '../../../shared/ui/Button/Button'
 import userAvatar from '../user.jpg'
-import { updateTask, deleteTask } from '../../../widgets/TaskList/model/TasksThunk'
+// import { updateTask, deleteTask } from '../../../widgets/TaskList/model/TasksThunk'
 import TaskDeadline from './TaskDeadline'
 import { IStatus, ITask } from 'entities/Task/types/ITask'
 import { AppDispatch } from 'app/store/store'
@@ -26,13 +26,13 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
     const allTasks = useSelector((state: RootState) => state.tasks.tasks)
 
     const onDeleteTask = (id: number) => {
-        dispatch(deleteTask(id))
+        // dispatch(deleteTask(id))
     }
 
     const onStatusChange = (status: IStatus) => {
         const task = allTasks?.find(task => task.id === id)
         if (task) {
-            dispatch(updateTask(id, { ...task, status: status }))
+            // dispatch(updateTask(id, { ...task, status: status }))
         }
     }
 

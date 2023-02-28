@@ -29,15 +29,16 @@ function App() {
       if (user) {
         const loggedUser = await getDoc(doc(database, "users", user.uid));
         if (loggedUser.exists()) {
-          dispatch(authActions.setUser(loggedUser.data()))
+          dispatch(authActions.authUser(loggedUser.data()))
+          dispatch(authActions.authUserUid(user.uid))
           // console.log("Document data:", loggedUser.data());
         } else {
-          dispatch(authActions.setUser(null))
+          dispatch(authActions.authUser(null))
           // doc.data() will be undefined in this case
           // console.log("No such document!");
         }
       } else {
-        dispatch(authActions.setUser(null))
+        dispatch(authActions.authUser(null))
         console.log('You are not authorized!')
       }
     });

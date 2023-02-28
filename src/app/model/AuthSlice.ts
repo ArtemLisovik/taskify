@@ -5,7 +5,6 @@ type IState = {
     loader: boolean
     userUid: null | string
     profile: null | Profile
-    tasks: null | ITask[]
 }
 type Profile = {
     name: string
@@ -16,8 +15,7 @@ type Profile = {
 const initialState: IState = {
     loader: true,
     userUid: null,
-    profile: null,
-    tasks: null
+    profile: null
 }
 
 
@@ -25,9 +23,12 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUser(state, action) {
+        authUser: (state, action) => {
             state.profile = action.payload
             state.loader = false
+        },
+        authUserUid: (state, action) => {
+            state.userUid = action.payload
         }
     }
 })
