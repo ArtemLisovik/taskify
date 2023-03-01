@@ -9,4 +9,5 @@ export type ITask = {
     endPointDate: string
     status: IStatus,
     users: string
+    authorId: string | null
 }

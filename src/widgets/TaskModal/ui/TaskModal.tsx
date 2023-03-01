@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {updateDoc, setDoc, doc, arrayUnion} from 'firebase/firestore'
 
 import { Button } from '../../../shared/ui/Button/Button'
-import { fetchTasks, updateTask } from "widgets/TaskList/model/TasksThunk";
+import { fetchTasks, updateTask, addTask } from "widgets/TaskList/model/TasksThunk";
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
@@ -46,28 +46,17 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
 
   const onHandleChange: SubmitHandler<ITask> = async (data) => {
     const timeCreation = task ? task.timeCreation : (new Date()).toString()
+    const authorId = idUser
     const id = uuidv4()
-    const newTask: ITask = { ...data, timeCreation, status: 'active', id }
-    modalSwitcher()
-    reset()
+    const newTask: ITask = { ...data, timeCreation, status: 'active', id, authorId}
+    // modalSwitcher()
     // task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
 
-    task
-      ?
-      await updateDoc(doc(database, "tasks", idUser as string), {
-        tasks: { ...data, timeCreation: new Date(), status: 'active', id: new Date() }
-      })
+    task ?
+      dispatch(updateTask(data, idUser as string, task.id))
       :
-      await setDoc(doc(database, "tasks", idUser as string),
-        {
-          userTasks: arrayUnion(
-            { ...newTask }
-          ),
-        },
-        { merge: true }
-      )
-      dispatch(fetchTasks(idUser as string))
-
+      dispatch(addTask(newTask, idUser as string))
+    modalSwitcher()
   }
 
   return (
