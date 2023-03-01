@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'app/store/store'
+import {deleteTask} from 'widgets/TaskList/model/TasksThunk'
 import { Button } from '../../../shared/ui/Button/Button'
 import userAvatar from '../user.jpg'
 // import { updateTask, deleteTask } from '../../../widgets/TaskList/model/TasksThunk'
@@ -24,10 +25,6 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const dispatch: AppDispatch = useDispatch()
     const allTasks = useSelector((state: RootState) => state.tasks.tasks)
-
-    const onDeleteTask = (id: string) => {
-        // dispatch(deleteTask(id))
-    }
 
     const onStatusChange = (status: IStatus) => {
         const task = allTasks?.find(task => task.id === id)
@@ -146,7 +143,7 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
                                 >Edit</button>
                                 <button
                                     className="options__dropdown-menu-item"
-                                    onClick={() => onDeleteTask(id)}>
+                                    onClick={() => dispatch(deleteTask(id))}>
                                     Delete</button>
                             </div>
                         </div>

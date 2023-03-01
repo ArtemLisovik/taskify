@@ -1,5 +1,5 @@
 import { AppDispatch } from "../../../app/store/store";
-import { setDoc, doc, arrayUnion, getDoc, updateDoc, collection, query, where,getDocs } from 'firebase/firestore'
+import { setDoc, doc, arrayUnion, getDoc, updateDoc, collection, query, where,getDocs, deleteDoc } from 'firebase/firestore'
 
 import { ITask } from "entities/Task/types/ITask";
 import { api } from '../../../shared/api/api'
@@ -26,17 +26,6 @@ export const fetchTasks = (userId: string) => async (dispatch: AppDispatch) => {
     console.log(error)
     throw new Error(`${error}`)
   }
- 
-  // try {
-  //   dispatch(tasksFetching())
-  //   const {userTasks}: any = (await getDoc(doc(database, 'tasks', userId))).data()
-  //   // console.log(userTasks)
-  //   dispatch(tasksFetched(userTasks))
-  // } 
-  // catch(error) {
-  //   dispatch(tasksFetchingError())
-  //   console.log(error)
-  // }
 }
 
 export const addTask = (task: ITask, idUser: string) => async (dispatch: AppDispatch) => {
@@ -82,11 +71,6 @@ export const updateTask = (modifiedTask: Object, userId: string, id: string) => 
 
 }
 
-// export const deleteTask = (id: number) => (dispatch: AppDispatch) => {
-//   api.delete(`/tasks/${id}`).then(() => dispatch(fetchAllTasks()))
-// }
-
-// export const addTask = (data: ITask) => (dispatch: AppDispatch) => {
-//   api.post('/tasks', data).then(() => dispatch(fetchAllTasks()))
-// }
-
+export const deleteTask = (taskId: string) => async (dispatch: AppDispatch) => {
+  await deleteDoc(doc(database, "tasks", taskId));
+}
