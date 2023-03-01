@@ -1,7 +1,7 @@
 export type IStatus = 'active' | 'completed' | 'failed'
 
 export type ITask = {
-    id: number
+    id: string
     title: string,
     text: string,
     timeCreation: Object,

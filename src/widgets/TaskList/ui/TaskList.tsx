@@ -15,6 +15,7 @@ import './TaskList.scss'
 
 export const TaskList: FC = () => {
     const userId = useAppSelector(state => state.auth.userUid)
+    const tasks = useAppSelector(state => state.tasks.tasks)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -30,27 +31,27 @@ export const TaskList: FC = () => {
     // console.log(tasks)
     const { activeFilter, search } = useSelector((state: RootState) => state.filter)
 
-    // const viewedTasks = React.useMemo(() => {
-    //     return tasks?.filter(task => task.status === activeFilter)
-    //         .filter(task =>
-    //         (task.title.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)
-    //             || task.text.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)))
-    //         .map(task => (
-    //             <Task
-    //                 task={task}
-    //                 id={task.id}
-    //                 title={task.title}
-    //                 text={task.text}
-    //                 status={task.status}
-    //                 key={task.id}
-    //             />
-    //         ))
-    // }, [activeFilter, tasks, search])
+    const viewedTasks = React.useMemo(() => {
+        return tasks?.filter(task => task.status === activeFilter)
+            .filter(task =>
+            (task.title.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)
+                || task.text.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)))
+            .map(task => (
+                <Task
+                    task={task}
+                    id={task.id}
+                    title={task.title}
+                    text={task.text}
+                    status={task.status}
+                    key={task.id}
+                />
+            ))
+    }, [activeFilter, tasks, search])
 
 
     return (
         <div className="tasks">
-            {/* {viewedTasks} */}
+            {viewedTasks}
         </div>
     )
 

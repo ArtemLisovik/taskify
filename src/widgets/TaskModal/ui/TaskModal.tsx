@@ -1,7 +1,9 @@
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '../../../shared/ui/Button/Button'
+import { fetchTasks, updateTask } from "widgets/TaskList/model/TasksThunk";
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
@@ -45,24 +47,29 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
   const { handleSubmit, formState: { errors }, reset } = methods
 
   const onHandleChange: SubmitHandler<ITask> = async (data) => {
-    const timeCreation = task ? task.timeCreation : new Date()
-    const newTask: ITask = { ...data, timeCreation, status: 'active' }
+    const timeCreation = task ? task.timeCreation : (new Date()).toString()
+    const id = uuidv4()
+    const newTask: ITask = { ...data, timeCreation, status: 'active', id }
     modalSwitcher()
     reset()
     // task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
 
-    task ?
+    task
+      ?
       await updateDoc(doc(database, "tasks", idUser as string), {
         tasks: { ...data, timeCreation: new Date(), status: 'active', id: new Date() }
-      }) :
+      })
+      :
       await setDoc(doc(database, "tasks", idUser as string),
-    {
-        userTasks: arrayUnion(
-          {...data, timeCreation: new Date(), status: 'active', id: new Date()}
-        ),
-      },
-      {merge: true}
+        {
+          userTasks: arrayUnion(
+            { ...newTask }
+          ),
+        },
+        { merge: true }
       )
+      dispatch(fetchTasks(idUser as string))
+
   }
 
   return (

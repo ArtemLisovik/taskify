@@ -5,9 +5,12 @@ import { database } from 'shared/config/firebase'
 import {auth} from 'shared/config/firebase'
 
 import './header.scss'
+import { useAppSelector } from 'shared/hooks/useRedux'
 
 export const Header: FC = () => {
     const [submenu, setSubmenu] = useState(false)
+    const name = useAppSelector(state => state.auth?.profile?.name)
+    const profession = useAppSelector(state => state.auth?.profile?.profession)
 
     // const seeRef = async () => {
     //     const docRef = await getDocs(collection(database, "users"))
@@ -40,8 +43,8 @@ export const Header: FC = () => {
                         <img src="" alt="" className="profile__avatar" />
                     </div>
                     <div className="profile__info">
-                        <p className="profile__name"></p>
-                        <p className="profile__profession"></p>
+                        <p className="profile__name">{name}</p>
+                        <p className="profile__profession">{profession}</p>
                     </div>
                     <button onClick={() => setSubmenu(submenu => !submenu)}className="profile__button">
                         <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 407.437 407.437" xmlSpace="preserve" stroke="#ffffff">
