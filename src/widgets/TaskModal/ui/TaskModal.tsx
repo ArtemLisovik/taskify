@@ -1,25 +1,22 @@
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
+import { yupResolver } from "@hookform/resolvers/yup";
+import {updateDoc, setDoc, doc, arrayUnion} from 'firebase/firestore'
 
 import { Button } from '../../../shared/ui/Button/Button'
 import { fetchTasks, updateTask } from "widgets/TaskList/model/TasksThunk";
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
-// import { addTask, updateTask } from 'widgets/TaskList/model/TasksThunk'
 import { schema } from '../helpers/FormValidation'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { ITask } from "entities/Task/types/ITask";
-import { doc, getDoc, setDoc, addDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, database } from "shared/config/firebase";
-
-
-
-import './TaskModal.scss'
-import { useAppSelector } from "shared/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "shared/hooks/useRedux";
 import { authActions } from "app/model/AuthSlice";
 import { AppDispatch } from "app/store/store";
+
+import './TaskModal.scss'
 
 interface TaskModalProps {
   isOpen: boolean,
@@ -28,9 +25,10 @@ interface TaskModalProps {
 }
 
 export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
-  const dispatch = useDispatch<AppDispatch>()
   const idUser = useAppSelector(state => state.auth.userUid)
   const tasks = useAppSelector(state => state.tasks)
+
+  const dispatch = useAppDispatch()
 
   const methods = useForm<ITask>({
     resolver: yupResolver(schema),

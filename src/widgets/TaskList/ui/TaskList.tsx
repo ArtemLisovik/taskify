@@ -1,12 +1,9 @@
-import { FC, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { FC, useEffect } from "react"
+import { useSelector } from "react-redux"
 
-// import { fetchAllTasks, updateTask } from "../model/TasksThunk"
 import {fetchTasks} from '../model/TasksThunk'
 import { useAppDispatch, useAppSelector } from "shared/hooks/useRedux"
 import { RootState } from "../../../app/store/store"
-import { AppDispatch } from "../../../app/store/store"
-// import { stateTasks } from "../model/TasksSelect"
 import { Task } from "../../../entities/Task/ui/Task"
 import React from "react"
 
@@ -25,10 +22,7 @@ export const TaskList: FC = () => {
             console.log('no tasks')
         }
     }, [])
-    // const dispatch: AppDispatch = useDispatch()
 
-    // const tasks = useAppSelector(state => state.auth.tasks)
-    // console.log(tasks)
     const { activeFilter, search } = useSelector((state: RootState) => state.filter)
 
     const viewedTasks = React.useMemo(() => {
