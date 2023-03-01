@@ -1,23 +1,21 @@
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid'
+import { doc, getDoc, setDoc, addDoc, updateDoc, arrayUnion } from "firebase/firestore"
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button } from '../../../shared/ui/Button/Button'
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
-// import { addTask, updateTask } from 'widgets/TaskList/model/TasksThunk'
 import { schema } from '../helpers/FormValidation'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { ITask } from "entities/Task/types/ITask";
-import { doc, getDoc, setDoc, addDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, database } from "shared/config/firebase";
-
-
-
-import './TaskModal.scss'
-import { useAppSelector } from "shared/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "shared/hooks/useRedux";
 import { authActions } from "app/model/AuthSlice";
 import { AppDispatch } from "app/store/store";
+
+import './TaskModal.scss'
 
 interface TaskModalProps {
   isOpen: boolean,
@@ -26,9 +24,10 @@ interface TaskModalProps {
 }
 
 export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
-  const dispatch = useDispatch<AppDispatch>()
   const idUser = useAppSelector(state => state.auth.userUid)
   const tasks = useAppSelector(state => state.tasks)
+
+  const dispatch = useAppDispatch()
 
   const methods = useForm<ITask>({
     resolver: yupResolver(schema),
@@ -45,24 +44,25 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
   const { handleSubmit, formState: { errors }, reset } = methods
 
   const onHandleChange: SubmitHandler<ITask> = async (data) => {
-    const timeCreation = task ? task.timeCreation : new Date()
-    const newTask: ITask = { ...data, timeCreation, status: 'active' }
+    const timeCreation = task ? task.timeCreation : new Date().toString()
+    const id: string = uuidv4()
+    const newTask: ITask = { ...data, timeCreation, status: 'active', id }
     modalSwitcher()
     reset()
     // task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
 
     task ?
       await updateDoc(doc(database, "tasks", idUser as string), {
-        tasks: { ...data, timeCreation: new Date(), status: 'active', id: new Date() }
+        // tasks: { ...data, timeCreation: new Date(), status: 'active', id: new Date() }
       }) :
       await setDoc(doc(database, "tasks", idUser as string),
-    {
-        userTasks: arrayUnion(
-          {...data, timeCreation: new Date(), status: 'active', id: new Date()}
-        ),
-      },
-      {merge: true}
-      )
+        {
+          userTasks: arrayUnion({ ...newTask }),
+        },
+        { 
+          merge: true
+        })
+        dispatch(fetchTasks(userId))
   }
 
   return (

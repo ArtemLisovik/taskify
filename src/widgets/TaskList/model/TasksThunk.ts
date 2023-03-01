@@ -15,14 +15,8 @@ export const fetchTasks = (userId: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(tasksFetching())
     const {userTasks}: any = (await getDoc(doc(database, 'tasks', userId))).data()
-    dispatch(tasksFetched(userTasks))
-    // userTasks.map.values()
-    console.log(userTasks.map.values())
-    // const newTasks = taskList?.userTasks.map((task: any) => console.log(task))
-    // userTasks.forEach((task:any) => {
-    //   console.log(task)
-    // })
-    // console.log(Object.values(taskList?.userTasks))
+    const userTaskList: ITask[] = [...userTasks]
+    dispatch(tasksFetched(userTaskList))
   } 
   catch(error) {
     dispatch(tasksFetchingError())

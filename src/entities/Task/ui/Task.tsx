@@ -13,7 +13,7 @@ import { TaskModal } from 'widgets/TaskModal/ui/TaskModal'
 import './Task.scss'
 
 interface PropsTask {
-    id: number,
+    id: string,
     title: string,
     text: string,
     status: IStatus
@@ -25,7 +25,7 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
     const dispatch: AppDispatch = useDispatch()
     const allTasks = useSelector((state: RootState) => state.tasks.tasks)
 
-    const onDeleteTask = (id: number) => {
+    const onDeleteTask = (id: string) => {
         // dispatch(deleteTask(id))
     }
 

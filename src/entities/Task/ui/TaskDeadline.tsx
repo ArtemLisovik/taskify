@@ -6,7 +6,7 @@ import {deadLineBar} from '../helpers/deadLineBar'
 
 
 interface TaskDeadLineProps {
-    id: number
+    id: string
     onStatusChange: Function
     status: IStatus
 }
