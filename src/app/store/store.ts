@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import tasks from "../../widgets/TaskList/model/TasksSlice";
 import filter from '../../widgets/Filters/model/FiltersSlice'
-import { auth } from 'app/model/AuthSlice'
+import { auth } from 'app/store/AuthSlice'
 
 export const store = configureStore({
   reducer: { tasks, filter, auth },

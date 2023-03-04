@@ -4,11 +4,9 @@
     background: var(--task-background);
     padding: 20px 15px;
     transition: all 0.3s ease;
-    &__wrapper {
-        flex: 1 1 240px;
-        min-width: 240px;
-        max-width: 450px;
-    }
+    flex: 1 1 240px;
+    min-width: 240px;
+    max-width: 450px;
     &:hover {
         box-shadow:
         40px 20px 20px #00070348;
@@ -18,7 +16,6 @@
         font-weight: 600;
         box-sizing: border-box;
         word-wrap: break-word;
-        // max-width: 65vw;
     }
     &__descr {
         margin-top: 10px;

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ITask } from "entities/Task/types/ITask";
+import { ITask } from "features/Task/types/ITask";
 
 type IState = {
     loader: boolean

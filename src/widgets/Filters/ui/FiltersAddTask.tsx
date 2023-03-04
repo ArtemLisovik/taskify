@@ -1,9 +1,7 @@
 import React, { MouseEventHandler } from 'react'
 
-import { TaskModal } from 'widgets/TaskModal/ui/TaskModal'
+import { TaskModal } from 'features/TaskModal/ui/TaskModal'
 import { Button } from '../../../shared/ui'
-
-
 
 const FilterAddTask = () => {
     const [isOpen, setIsOpen] = React.useState(false)

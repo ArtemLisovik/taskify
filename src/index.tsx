@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import App from './app';
 import { store } from './app/store/store'
 import { BrowserRouter } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './shared/config/firebase'
+import { AnimatePresence } from 'framer-motion';
 
 
 
@@ -17,12 +18,14 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
-  <ToastContainer />
+    <BrowserRouter>
+      <AnimatePresence>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </AnimatePresence>
+    </BrowserRouter>
+    <ToastContainer />
   </>
-  
+
 );

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IStatus } from "entities/Task/types/ITask";
+import { IStatus } from "features/Task/types/ITask";
 
 export type IinitialState = {
     filters: string[]
@@ -20,6 +20,9 @@ const filter = createSlice({
         fetchAllFilters: (state, action) => {state.filters = action.payload},
         setActiveFilter: (state, action) => {state.activeFilter = action.payload},
         onSearch: (state, action) => {state.search = action.payload}
+    },
+    extraReducers: {
+        
     }
 })
 

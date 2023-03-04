@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useAppSelector } from "shared/hooks/useRedux"
-import { IStatus } from 'entities/Task/types/ITask'
+import { IStatus } from 'features/Task/types/ITask'
 import {deadLineBar} from '../helpers/deadLineBar'
 
 

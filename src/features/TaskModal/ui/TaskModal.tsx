@@ -1,20 +1,15 @@
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from "@hookform/resolvers/yup";
-import {updateDoc, setDoc, doc, arrayUnion} from 'firebase/firestore'
 
 import { Button } from '../../../shared/ui/Button/Button'
-import { fetchTasks, updateTask, addTask } from "widgets/TaskList/model/TasksThunk";
+import { updateTask, addTask } from "widgets/TaskList/model/TasksThunk";
 import Modal from 'shared/ui/Modal/Modal';
 import Input from "shared/ui/Input/Input";
 import { TextArea } from '../../../shared/ui/TextArea/TextArea'
 import { schema } from '../helpers/FormValidation'
-import { ITask } from "entities/Task/types/ITask";
-import { auth, database } from "shared/config/firebase";
+import { ITask } from "features/Task/types/ITask";
 import { useAppDispatch, useAppSelector } from "shared/hooks/useRedux";
-import { authActions } from "app/model/AuthSlice";
-import { AppDispatch } from "app/store/store";
 
 import './TaskModal.scss'
 
@@ -26,7 +21,6 @@ interface TaskModalProps {
 
 export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
   const idUser = useAppSelector(state => state.auth.userUid)
-  const tasks = useAppSelector(state => state.tasks)
 
   const dispatch = useAppDispatch()
 
@@ -38,24 +32,21 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
       text: `${task ? task.text : ''}`,
       endPointDate: `${task ? task.endPointDate : ``}`,
       endPointTime: `${task ? task.endPointTime : ``}`,
-
     }
   })
 
-  const { handleSubmit, formState: { errors }, reset } = methods
+  const { handleSubmit, formState: { errors } } = methods
 
   const onHandleChange: SubmitHandler<ITask> = async (data) => {
     const timeCreation = task ? task.timeCreation : (new Date()).toString()
     const authorId = idUser
     const id = uuidv4()
     const newTask: ITask = { ...data, timeCreation, status: 'active', id, authorId}
-    // modalSwitcher()
-    // task ? dispatch(updateTask(task.id, newTask)) : dispatch(addTask(newTask))
 
     task ?
-      dispatch(updateTask(data, idUser as string, task.id))
+      dispatch(updateTask([data, task.id]))
       :
-      dispatch(addTask(newTask, idUser as string))
+      dispatch(addTask([newTask, newTask.id]))
     modalSwitcher()
   }
 
