@@ -140,17 +140,21 @@
     }
 
     &__submenu {
+        overflow: hidden;
         position: absolute;
         top: 47px;
         left: 0;
         background: var(--input-color);
-        max-height: 0;
+        // max-height: 0;
         overflow: hidden;
         width: 100%;
         padding: 0;
         border: 0;
         border-radius: 8px;
         transition: all 0.4s ease;
+        // max-height: 100%;
+        // padding: 10px;
+        border: 2px solid var(--border-color);
         button {
             cursor: pointer;
             color: #fff;

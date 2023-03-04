@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ITask } from "../../../features/Task/types/ITask";
 import { fetchTasks, deleteTask, updateTask, addTask } from "./TasksThunk";
 
-interface IState {
+type IState = {
   tasks: [] | ITask[];
   tasksLoadingStatus: string;
 }
@@ -21,6 +21,7 @@ const initialState: IState = {
   tasks: [],
   tasksLoadingStatus: "idle",
 };
+
 
 const tasksSlice = createSlice({
   name: "tasks",
@@ -55,7 +56,7 @@ const tasksSlice = createSlice({
       })
 
 
-      .addCase(deleteTask.pending, () => { })
+      .addCase(deleteTask.pending, () => {})
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.tasks = state.tasks.filter(task => task.id !== action.payload)
       })

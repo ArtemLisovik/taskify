@@ -14,11 +14,17 @@ const Modal = ({ open, children, modalSwitcher }: ModalProps) => {
     if (!open) return null
 
     return (
+        <AnimatePresence>
             <Portal>
-                <div className={styles.wrapper}>
-                </div>
                 <motion.div
-                    key={styles.modal}
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  exit={{opacity: 0}}
+                  transition={{ duration: 0.5, ease: [0.165, 0.840, 0.440, 1.000] }}
+                    className={styles.wrapper}>
+                </motion.div>
+                <motion.div
+                    key='modal'
                     className={styles.modal}
                     initial={{ x: `-50%`, y: `100%` }}
                     animate={{ y: `-50%` }}
@@ -34,6 +40,8 @@ const Modal = ({ open, children, modalSwitcher }: ModalProps) => {
                     </div>
                 </motion.div>
             </Portal>
+        </AnimatePresence>
+
     )
 }
 

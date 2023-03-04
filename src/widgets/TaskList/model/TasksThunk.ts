@@ -1,14 +1,10 @@
-import { AppDispatch, RootState } from "../../../app/store/store";
-import { setDoc, doc, onSnapshot, updateDoc, collection, query, where,getDocs, deleteDoc } from 'firebase/firestore'
+import { setDoc, doc, updateDoc, collection, query, where,getDocs, deleteDoc } from 'firebase/firestore'
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import taskActions from '../model/TasksSlice'
 import { ITask } from "features/Task/types/ITask";
-import { api } from '../../../shared/api/api'
-// import { tasksFetching, tasksFetched, tasksFetchingError } from "./TasksSlice";
+import { RootState } from "../../../app/store/store";
 import { database } from "shared/config/firebase";
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authActions } from "app/store/AuthSlice";
 
 export const fetchTasks = createAsyncThunk('fetchTasks', async (_, {getState, rejectWithValue}) => {
   const userId = (getState() as RootState).auth.userUid
@@ -24,11 +20,6 @@ export const fetchTasks = createAsyncThunk('fetchTasks', async (_, {getState, re
   }
 })
 
-
-// export const addTask = (task: ITask, idUser: string) => async (dispatch: AppDispatch) => {
-//   await setDoc(doc(database, "tasks", task.id), task)
-//   dispatch(fetchTasks())
-// }
 
 export const addTask = createAsyncThunk('tasks/addTask', async ([task, taskId]: [ITask, string]) => {
   try{
@@ -49,6 +40,7 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async ([modified,
   })
   return {modified, taskId}
 })
+
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async (taskId: string) => {
   try {

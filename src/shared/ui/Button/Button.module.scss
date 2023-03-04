@@ -11,9 +11,9 @@
                 inset 0 0 10px var(--color-accentColor);
     cursor: pointer;
     transition: all 0.3s ease;
-    &:hover {
-        background: var(--color-accentColor);
-    }
+    // &:hover {
+    //     background: var(--color-accentColor);
+    // }
     &::first-letter {
         text-transform: uppercase;
     }

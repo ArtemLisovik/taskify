@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from "react"
 import { useSelector } from "react-redux"
-import {AnimatePresence, easeIn, motion} from 'framer-motion'
+import { AnimatePresence, easeIn, motion } from 'framer-motion'
 
-import {fetchTasks} from '../model/TasksThunk'
+import { fetchTasks } from '../model/TasksThunk'
 import { useAppDispatch, useAppSelector } from "shared/hooks/useRedux"
 import { RootState } from "../../../app/store/store"
 import { Task } from "../../../features/Task/ui/Task"
@@ -12,20 +12,11 @@ import './TaskList.scss'
 
 export const TaskList: FC = () => {
     const userId = useAppSelector(state => state.auth.userUid)
-    const {tasks, tasksLoadingStatus} = useAppSelector(state => state.tasks)
+    const { tasks, tasksLoadingStatus } = useAppSelector(state => state.tasks)
     const dispatch = useAppDispatch()
 
-    const animateOptions = {
-        visible: (i:any) => ({
-            opacity: 1,
-            transition: {delay: i * 0.5},
-            y: 0,
-            x: 0
-        }),
-        hidden: {opacity: 0, y: -100, x: -50}
-    }
-
     useEffect(() => {
+        console.log('rerender')
         if (userId) {
             dispatch(fetchTasks())
         } else {
@@ -40,13 +31,14 @@ export const TaskList: FC = () => {
             .filter(task =>
             (task.title.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)
                 || task.text.toLocaleLowerCase().includes(`${search.toLocaleLowerCase()}`)))
-            .map((task,id) => (
+            .map((task, id) => (
                 <motion.div
-                    initial={{opacity: 0, x: -10, y: -40}}
-                    animate={{opacity: 1, x: 0, y: 0}}
-                    transition={{duration: 0.3, delay: id/6}}
+                    initial={{ y: 50, x: 50, opacity: 0, scale: 0.5 }}
+                    animate={{y: 0, x: 0, opacity: 1, scale: 1}}
+                    transition={{ duration: 0.3, delay: id/6 }}
+                    // exit={{ y: 50, x: 50, opacity: 0, scale: 0.5}}
                     key={task.id}
-                    >
+                >
                     <Task
                         task={task}
                         id={task.id}
@@ -59,14 +51,14 @@ export const TaskList: FC = () => {
     }, [activeFilter, tasks, search])
 
     if (tasksLoadingStatus === 'loading') {
-        return <Loader/>
+        return <Loader />
     }
     return (
-        <div className="tasks">
-            <AnimatePresence mode="wait">
-                {viewedTasks}
-            </AnimatePresence>
-        </div>
+            <div className="tasks">
+                <AnimatePresence mode="popLayout">
+                    {viewedTasks}
+                </AnimatePresence>
+            </div>
     )
 
 }

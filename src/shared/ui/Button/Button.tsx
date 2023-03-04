@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {motion} from 'framer-motion'
 import styles from './Button.module.scss'
 
 interface PropsButton {
@@ -15,7 +15,6 @@ const typeButton = {
 }
 
 export const Button = ({ isActive, content, name, onClick, type }: PropsButton) => {
-    const [isHover, setIsHover] = useState<boolean>(false)
 
     const onClickInit = (e: any) => {
         onClick ? onClick(e.target.name) : console.log('')
@@ -23,14 +22,16 @@ export const Button = ({ isActive, content, name, onClick, type }: PropsButton) 
     const activeClass: string = isActive ? styles.active: ''
 
     return (
-        <button 
+        <motion.button 
+            initial={ type === 'neon' ? {background: 'transparent'}: {background: '#3ba1ff'}}
+            whileHover={type === 'neon' ? {background: '#ff5761'}: {background: '#4ba8ff'}}
+            whileTap={type === 'neon' ? {background: '#fa4d59'} : {background: '#108bfd'}}
+            transition={{duration: 0.1}}
             name={name}
             onClick={e => onClickInit(e)}
-            onMouseOver={() => setIsHover(true)} 
-            onMouseOut={() => setIsHover(false)} 
             className={`${typeButton[type]} ${activeClass}`}
             >
             {content}
-        </button>
+        </motion.button>
     )
 }

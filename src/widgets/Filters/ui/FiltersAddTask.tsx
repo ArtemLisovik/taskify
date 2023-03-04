@@ -12,8 +12,8 @@ const FilterAddTask = () => {
 
     return (
         <>
-            <Button content='New task' type='neon' onClick={handlerChange}/>
-            {isOpen ? <TaskModal isOpen={isOpen} modalSwitcher={handlerChange}/> : null }
+            <Button content='New task' type='neon' onClick={handlerChange} />
+            {isOpen && <TaskModal isOpen={isOpen} modalSwitcher={handlerChange} />}
         </>
     )
 }

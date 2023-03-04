@@ -7,10 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './shared/config/firebase'
-import { AnimatePresence } from 'framer-motion';
-
-
-
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,11 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <BrowserRouter>
-      <AnimatePresence>
         <Provider store={store}>
           <App />
         </Provider>
-      </AnimatePresence>
     </BrowserRouter>
     <ToastContainer />
   </>
