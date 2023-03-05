@@ -5,7 +5,7 @@ import styles from './Input.module.scss'
 
 interface InputProps {
     name: string
-    type?: 'text' | 'date' | 'time' | 'number' | 'email' | 'password'
+    type?: 'text' | 'date' | 'time' | 'number' | 'email' | 'password' | 'file'
     placeholder?: string
 }
 

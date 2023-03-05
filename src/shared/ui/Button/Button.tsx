@@ -1,4 +1,5 @@
 import {motion} from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import styles from './Button.module.scss'
 
 interface PropsButton {
@@ -7,6 +8,7 @@ interface PropsButton {
     isActive?: boolean
     onClick?: Function
     type: 'simple' | 'neon'
+    id?: string
 }
 
 const typeButton = {
@@ -14,7 +16,12 @@ const typeButton = {
     simple: styles.simpleButton 
 }
 
-export const Button = ({ isActive, content, name, onClick, type }: PropsButton) => {
+export const Button = ({ isActive, content, name, onClick, type, id }: PropsButton) => {
+    // useEffect(() => {
+    //     console.log(coordinates?.current?.getBoundingClientRect())
+    // })
+
+    // const coordinates = useRef<HTMLButtonElement | null>(null)
 
     const onClickInit = (e: any) => {
         onClick ? onClick(e.target.name) : console.log('')
@@ -23,7 +30,8 @@ export const Button = ({ isActive, content, name, onClick, type }: PropsButton) 
 
     return (
         <motion.button 
-            initial={ type === 'neon' ? {background: 'transparent'}: {background: '#3ba1ff'}}
+            // ref={id === 'modalTrigger' ? coordinates : null}
+            initial={ type === 'neon' ? {background: 'none'}: {background: '#3ba1ff'}}
             whileHover={type === 'neon' ? {background: '#ff5761'}: {background: '#4ba8ff'}}
             whileTap={type === 'neon' ? {background: '#fa4d59'} : {background: '#108bfd'}}
             transition={{duration: 0.1}}

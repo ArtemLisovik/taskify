@@ -11,7 +11,7 @@ import Loader from 'shared/ui/Loader/Loader'
 import './TaskList.scss'
 
 export const TaskList: FC = () => {
-    const userId = useAppSelector(state => state.auth.userUid)
+    const userId = useAppSelector(state => state.auth.profile.userUid)
     const { tasks, tasksLoadingStatus } = useAppSelector(state => state.tasks)
     const dispatch = useAppDispatch()
 
@@ -55,7 +55,7 @@ export const TaskList: FC = () => {
     }
     return (
             <div className="tasks">
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence mode="popLayout" onExitComplete={() => null}>
                     {viewedTasks}
                 </AnimatePresence>
             </div>

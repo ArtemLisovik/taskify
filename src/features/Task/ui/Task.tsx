@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import {AnimatePresence} from 'framer-motion'
 
 import { RootState } from 'app/store/store'
 import {deleteTask, updateTask} from 'widgets/TaskList/model/TasksThunk'
@@ -65,7 +66,9 @@ export const Task = ({ title, text, status, id, task }:PropsTask) => {
 
     return (
         <>
+        <AnimatePresence mode='wait'>
             {modalView}
+        </AnimatePresence>
                   <div className="tasks__item task">
                       <h3 className="task__title">{title}</h3>
                       <p className="task__descr">{text}</p>

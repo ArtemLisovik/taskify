@@ -3,4 +3,5 @@ export interface IRegistration {
     profession: string
     password: string
     email: string
+    avatar: any
 }

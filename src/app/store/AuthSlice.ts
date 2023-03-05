@@ -1,21 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ITask } from "features/Task/types/ITask";
+import {getUserUid} from './AuthThunk'
 
 type IState = {
     loader: boolean
-    userUid: null | string
-    profile: null | Profile
+    profile: Profile
 }
 type Profile = {
-    name: string
-    profession: string
+    userUid: null | string
+    name: null | string
+    profession: null | string
+    avatar: null | string
 }
 
 
 const initialState: IState = {
     loader: true,
-    userUid: null,
-    profile: null
+    profile: {
+        userUid: null,
+        name: null,
+        profession: null,
+        avatar: null
+    }
 }
 
 
@@ -23,14 +29,16 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        authUser: (state, action) => {
-            state.profile = action.payload
+        // authUser: (state, action) => {
+        //     state.profile = action.payload
+        //     state.loader = false
+        // },
+        authUserUid: (state, action: PayloadAction<string | null>) => {
+            state.profile.userUid = action.payload
             state.loader = false
-        },
-        authUserUid: (state, action) => {
-            state.userUid = action.payload
         }
-    }
+    },
 })
 
 export const { reducer: auth, actions: authActions } = authSlice
+// export const authUserUid = authSlice.actions

@@ -6,7 +6,7 @@ import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
 import { schema } from '../helpers/regValidation'
 import { IRegistration } from "../types/IRegistration"
-import { registrationUser } from '../model/registrationUserThunk'
+import { registrationUser } from '../helpers/registrationUserThunk'
 
 import 'widgets/Login/ui/Login.scss'
 
@@ -59,6 +59,13 @@ export const Registration = () => {
                         placeholder="Enter your password"
                     />
                     <div className="error__module">{errors.password?.message}</div>
+
+                    <Input
+                        name='avatar'
+                        type='file'
+                        placeholder="Choose your avatar"
+                    />
+                    <div className="error__module"></div>
 
                     <div className="login__buttons">
                         <Link to='/auth/login'>

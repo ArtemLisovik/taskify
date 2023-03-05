@@ -7,7 +7,7 @@ import { database } from "shared/config/firebase";
 
 
 export const fetchTasks = createAsyncThunk('fetchTasks', async (_, {getState, rejectWithValue}) => {
-  const userId = (getState() as RootState).auth.userUid
+  const userId = (getState() as RootState).auth.profile.userUid
   try {
     let filteredTasks: Array<any> = []
     const tasksFilterSetup = query(collection(database, "tasks"), where("authorId", "==", userId));

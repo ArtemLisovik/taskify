@@ -20,7 +20,7 @@ interface TaskModalProps {
 }
 
 export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
-  const idUser = useAppSelector(state => state.auth.userUid)
+  const idUser = useAppSelector(state => state.auth.profile.userUid)
 
   const dispatch = useAppDispatch()
 
