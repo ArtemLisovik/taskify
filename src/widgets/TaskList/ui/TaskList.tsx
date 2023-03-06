@@ -11,12 +11,11 @@ import Loader from 'shared/ui/Loader/Loader'
 import './TaskList.scss'
 
 export const TaskList: FC = () => {
-    const userId = useAppSelector(state => state.auth.profile.userUid)
+    const userId = useAppSelector(state => state.auth.profile?.userUid)
     const { tasks, tasksLoadingStatus } = useAppSelector(state => state.tasks)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        console.log('rerender')
         if (userId) {
             dispatch(fetchTasks())
         } else {

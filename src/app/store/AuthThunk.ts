@@ -1,27 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ref, getDownloadURL } from 'firebase/storage'
 
-import {getDoc, doc} from 'firebase/firestore'
-import { database,auth } from "shared/config/firebase";
-import {authActions} from './AuthSlice'
+import { getDoc, doc } from 'firebase/firestore'
+import { database, auth, storage } from "shared/config/firebase";
+import { Profile, setUserProfile } from './AuthSlice'
 
-export const getUserUid = createAsyncThunk('userUID', (_, {dispatch}) => {
-    auth.onAuthStateChanged((user) => {
+export const getUserProfile = createAsyncThunk('userUID', (_, { dispatch }) => {
+    auth.onAuthStateChanged(async (user) => {
         if (user) {
-            dispatch(authActions.authUserUid(user.uid))
-          // const loggedUser = await getDoc(doc(database, "users", user.uid));
-          //   dispatch(authActions.authUser(loggedUser?.data()))
-            // dispatch(authActions.authUserUid(user.uid))
+            try {
+                const loggedUser = (await getDoc(doc(database, "users", user.uid))).data();
+
+                const avatarRef = ref(storage, `avatars/${user.uid}`)
+                const avatarURL = await getDownloadURL(avatarRef)
+
+                const profile: Profile = { name: loggedUser?.name, profession: loggedUser?.profession, userUid: user.uid as string, avatar: avatarURL as string }
+                dispatch(setUserProfile(profile))
+            }
+            catch (error) {
+                console.log(error)
+                // window.location.reload()
+            }
         } else {
-          return dispatch(authActions.authUserUid(null))
-        //   dispatch(authActions.authUserUid(null))
+            dispatch(setUserProfile(null))
         }
-      });
-    //   return result
-    })
-
-
-
-    // const loggedUser = userUid
-    // console.log(loggedUser)
-    // // dispatch(authActions.authUser(loggedUser?.data()))
-    // // dispatch(authActions.authUserUid(user.uid))
+    });
+})

@@ -20,7 +20,7 @@ interface TaskModalProps {
 }
 
 export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
-  const idUser = useAppSelector(state => state.auth.profile.userUid)
+  const idUser = useAppSelector(state => state.auth.profile?.userUid)
 
   const dispatch = useAppDispatch()
 
@@ -39,7 +39,7 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
 
   const onHandleChange: SubmitHandler<ITask> = async (data) => {
     const timeCreation = task ? task.timeCreation : (new Date()).toString()
-    const authorId = idUser
+    const authorId = idUser ? idUser : null
     const id = uuidv4()
     const newTask: ITask = { ...data, timeCreation, status: 'active', id, authorId}
 

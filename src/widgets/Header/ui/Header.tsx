@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import {Link} from 'react-router-dom'
 
 import { auth } from 'shared/config/firebase'
 
@@ -8,19 +9,14 @@ import { useAppSelector } from 'shared/hooks/useRedux'
 
 export const Header: FC = () => {
     const [submenu, setSubmenu] = useState(false)
-    const name = useAppSelector(state => state.auth?.profile?.name)
-    const profession = useAppSelector(state => state.auth?.profile?.profession)
-
-    // const subMenuItems = {
-    //     start: { x: 100, opacity: 0 },
-    //     active: { x: 0, opacity: 1, transition: {} },
-    //     exit: { opacity: 0 }
-    // }
+    const userProfile = useAppSelector(state => state.auth?.profile)
+    // const profession = useAppSelector(state => state.auth?.profile?.profession)
+    const {name, profession, avatar}: any = userProfile
 
     return (
         <header className="header">
             <div className="header__container container">
-                <h1 className="header__title">Taskify</h1>
+                <Link to='/' className="header__title">Taskify</Link>
                 <ul className="header__menu">
                     <li className="header__menu-item">
                         <a href="#" className="header__menu-link active">Board</a>
@@ -37,7 +33,7 @@ export const Header: FC = () => {
                 </ul>
                 <div className="header__profile profile">
                     <div className="profile__photo">
-                        <img src="" alt="" className="profile__avatar" />
+                        <img src={avatar} alt="avatar" className="profile__avatar" />
                     </div>
                     <div className="profile__info">
                         <p className="profile__name">{name}</p>
@@ -61,16 +57,16 @@ export const Header: FC = () => {
                             key='submenu'
                             className='profile__submenu'
                             initial={{ height: 0 }}
-                            animate={{ height: '100px' }}
+                            animate={{ height: '30px' }}
                             exit={{ height: 0 }}
-                            transition={{ duration: 0.4, ease: 'easeIn' }}>
+                            transition={{ duration: 0.2, ease: 'easeIn' }}>
                             <motion.button
                                 whileHover={{color: `#ff5761`, transition: {delay: 0, duration: 0.2}}}
                                 key='submenuItem'
                                 onClick={() => auth.signOut()}
                                 initial={{ x: 100, opacity: 0}}
-                                animate={{ x: 0, opacity: 1, transition: {delay: 0.3, duration: 0.2} }}
-                                exit={{ opacity: 0 }}
+                                animate={{ x: 0, opacity: 1, transition: {delay: 0.15, duration: 0.2} }}
+                                exit={{ opacity: 0, transition: {duration: 0.1, delay: 0}}}
                                 className='profile__submenu-button'>
                                     Sign out 
                             </motion.button>

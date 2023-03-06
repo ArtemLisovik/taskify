@@ -9,6 +9,7 @@ import BoardPage from 'pages/privat/BoardPage';
 import IntroPage from 'pages/auth/IntroPage';
 import LoginPage from 'pages/auth/LoginPage';
 import RegisterPage from 'pages/auth/RegisterPage';
+import {auth} from 'shared/config/firebase'
 
 
 import './index.scss';

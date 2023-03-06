@@ -10,7 +10,6 @@ import { storage } from 'shared/config/firebase'
 export const registrationUser = async (data: IRegistration) => {
     try {
         const response: any = await createUserWithEmailAndPassword(auth, data.email, data.password)
-        console.log(data.avatar)
         
         await setDoc(doc(database, "users", response.user.uid,), {
             name: data.name,
