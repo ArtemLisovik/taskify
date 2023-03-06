@@ -61,6 +61,7 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
           <form className='form' onSubmit={handleSubmit(onHandleChange)}>
 
             <Input
+              isContext={true}
               name="title"
               placeholder="Task title"
               type='text'
@@ -74,12 +75,14 @@ export const TaskModal = ({ isOpen, modalSwitcher, task }: TaskModalProps) => {
             <div className="error__module">{errors.text?.message}</div>
 
             <Input
+              isContext={true}
               type='date'
               name="endPointDate"
             />
             <div className="error__module">{errors.endPointDate?.message}</div>
 
             <Input
+              isContext={true}
               type='time'
               name="endPointTime"
             />

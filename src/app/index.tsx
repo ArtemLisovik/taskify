@@ -4,19 +4,21 @@ import Loader from 'shared/ui/Loader/Loader';
 import { GuestGuard } from 'shared/helpers/guestGuard';
 import { AuthGuard } from 'shared/helpers/authGuard';
 import useInitializing from '../shared/hooks/useInitializing';
+import {WishListPage} from 'pages/privat/WishListPage'
 
 import BoardPage from 'pages/privat/BoardPage';
 import IntroPage from 'pages/auth/IntroPage';
 import LoginPage from 'pages/auth/LoginPage';
 import RegisterPage from 'pages/auth/RegisterPage';
-import {auth} from 'shared/config/firebase'
 
 
 import './index.scss';
+import { useAppSelector } from 'shared/hooks/useRedux';
 
 const App = () => {
   const loader = useInitializing()
-
+  const auth = useAppSelector(state => state.auth)
+  console.log(auth)
   if (loader) {
     return <Loader />
   }
@@ -27,6 +29,7 @@ return (
     {/* PRIVATE ROUTES */}
     <Route path='/' element={<AuthGuard />}>
       <Route index element={<BoardPage />} />
+      <Route path='wishlist/' element={<WishListPage/>}/>
     </Route>
 
     {/* AUTH ROUTES */}

@@ -36,6 +36,7 @@ export const Login = () => {
                     className="login__form">
                     
                     <Input
+                        isContext={true}
                         name='email'
                         type='email'
                         placeholder="Enter your e-mail"
@@ -43,6 +44,7 @@ export const Login = () => {
                     <div className="error__module">{errors.email?.message}</div>
 
                     <Input
+                        isContext={true}
                         name='password'
                         type='password'
                         placeholder="Enter your password"

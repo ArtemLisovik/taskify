@@ -1,5 +1,6 @@
 import {FC, useEffect, useState} from 'react'
 import { useFormContext } from 'react-hook-form'
+import {motion} from 'framer-motion'
 
 import styles from './TextArea.module.scss'
 
@@ -21,12 +22,17 @@ export const TextArea: FC<PropsData> = ({placeholder, name, value}) => {
 
     const {register} = useFormContext()
     return(
-        <textarea
+        <motion.textarea
+            whileFocus={{
+            borderColor: `#1e9dfc`,
+            boxShadow: '0 0 5px #1e9dfc, inset 0 0 9px #1e9dfc',
+            transition: {duration: 0.2}
+            }}
             className={styles.textarea}
             placeholder={placeholder}
             {...register(`${name}`)}
             onChange={e => onInputChange(e)}
       
-        ></textarea>
+        ></motion.textarea>
     )
 }

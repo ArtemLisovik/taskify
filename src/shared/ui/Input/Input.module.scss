@@ -1,10 +1,10 @@
 .input {
     background: var(--input-color);
     border-radius: 8px;
-    padding: 10px 0px;
-    text-indent: 15px;
+    padding: 10px 15px;
     color: var(--text-color);
     width: 100%;
+    border: 1px solid transparent;
     &::placeholder{
         color: var(--text-color);
         opacity: 0.5;
@@ -20,36 +20,50 @@
 }
 
 .input[type='file'] {
-    background: transparent;
+    // display: flex;
+    // align-items: center;
+    // visibility: hidden;
     padding: 0;
-    margin-left: -30px;
+}
+.input[type='file']::before {
+    margin-right: 10px;
+    padding: 10px 15px;
+    content: 'Select avatar';
+    display: inline-block;
+    width: min-content;
+    background: var(--btn-simpleColor);
+    border-radius: 8px;
+    outline: none;
+    white-space: nowrap;
+    // -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+.input[type='file']:hover::before{
+    background: #5cadf8
+}
+.input[type='file']:active::before{
+    background: #3097f7
 }
 
 .input[type='file']::file-selector-button {
-    // display: none;
-    margin-right: 20px;
-    border: none;
-    background: var(--btn-simpleColor);
-    padding: 10px 15px;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    font-size: 16px;
-    // width: 10px;
-    // height: 20px;
+    display: none;
 }
   
 .input[type=file]::file-selector-button:hover {
     background: #52abff;
   }
+.input[type=file]::file-selector-button:active {
+    background: #2990f0;
+}
 
 .label {
     margin-bottom: 8px;
-    color: var(--text-color);
-    text-align: center;
+    color: rgba($color: #ffffff, $alpha: 0.3);
+    text-align: start;
+    margin-left: 15px;
 }
-
-// .info {
-//     max-width: 100px;
-// }

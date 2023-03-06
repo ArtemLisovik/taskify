@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from 'widgets/Header/ui/Header'
 import './RootLayout'
 
-const Layout = ({children}: { children: React.ReactNode }) => {
+const RootLayout = ({children}: { children: React.ReactNode }) => {
   return (
     <div className="wrapper">
             <div className="main__container">
@@ -26,4 +26,4 @@ const Layout = ({children}: { children: React.ReactNode }) => {
   )
 }
 
-export default Layout
+export default RootLayout

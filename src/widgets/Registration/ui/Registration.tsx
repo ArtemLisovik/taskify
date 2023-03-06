@@ -1,6 +1,6 @@
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Link } from "react-router-dom"
+import { Link, redirect } from "react-router-dom"
 
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
@@ -21,6 +21,7 @@ export const Registration = () => {
 
     const onSubmit: SubmitHandler<IRegistration> = async (data) => {
         registrationUser(data)
+        redirect('/')
     }
 
     
@@ -33,6 +34,7 @@ export const Registration = () => {
                 <form onSubmit={handleSubmit(onSubmit)} name='registration' className="login__form">
 
                     <Input
+                        isContext={true}
                         name='email'
                         type='email'
                         placeholder="Enter your e-mail"
@@ -40,6 +42,7 @@ export const Registration = () => {
                     <div className="error__module">{errors.email?.message}</div>
 
                     <Input
+                        isContext={true}
                         name='name'
                         type='text'
                         placeholder="Enter your nickname"
@@ -47,6 +50,7 @@ export const Registration = () => {
                     <div className="error__module">{errors.name?.message}</div>
 
                     <Input
+                        isContext={true}
                         name='profession'
                         type='text'
                         placeholder="What is your profession?"
@@ -54,6 +58,7 @@ export const Registration = () => {
                     <div className="error__module">{errors.profession?.message}</div>
 
                     <Input
+                        isContext={true}
                         name='password'
                         type='password'
                         placeholder="Enter your password"
@@ -61,6 +66,7 @@ export const Registration = () => {
                     <div className="error__module">{errors.password?.message}</div>
 
                     <Input
+                        isContext={true}
                         name='avatar'
                         type='file'
                         placeholder="Choose your avatar"
