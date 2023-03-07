@@ -9,9 +9,11 @@ import { useAppSelector } from 'shared/hooks/useRedux'
 
 export const Header: FC = () => {
     const [submenu, setSubmenu] = useState(false)
+
     const userProfile = useAppSelector(state => state.auth?.profile)
-    // const profession = useAppSelector(state => state.auth?.profile?.profession)
     const { name, profession, avatar }: any = userProfile
+
+    const isActiveClass = ({isActive}:any) => isActive ? "header__menu-link active" : "header__menu-link"
 
     return (
         <header className="header">
@@ -21,8 +23,7 @@ export const Header: FC = () => {
                     <li className="header__menu-item">
                         <NavLink
                             to='/'
-                            className="header__menu-link"
-                            activeClassName="active">
+                            className={isActiveClass}>
                                 Board
                         </NavLink>
                 </li>
