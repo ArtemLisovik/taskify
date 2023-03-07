@@ -5,7 +5,10 @@ import { TaskList } from 'widgets/TaskList/ui/TaskList'
 const BoardPage = () => {
   return (
       <RootLayout>
-        <Filters />
+        <Filters 
+          title='Lets realise your plans together!' 
+          eventName='task'
+          filterButtonsName={['active', 'completed', 'failed']}/>
         <TaskList />
     </RootLayout>    
   )

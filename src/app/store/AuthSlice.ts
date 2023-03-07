@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// import { getFirestoreData, getAuth, getStorageData } from './AuthThunk'
-import {getAuth} from './AuthThunk'
-
 type IState = {
     loader: boolean
     profile: Profile
@@ -30,16 +27,12 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // setUserUid: (state, action) => {
-        //     state.profile.userUid = action.payload
-        // },
-        // setLoadingComplete: (state) => {
-        //     state.loader = false
-        // }
         getUser: (state, action) => {
-            // state.loader = true
             state.profile = action.payload
             state.loader = false
+        },
+        setLoading: (state) => {
+            state.loader = true
         }
     },
     // extraReducers: (builder) => {
@@ -65,4 +58,4 @@ export const authSlice = createSlice({
 })
 
 export const { reducer: auth, actions: authActions } = authSlice
-export const {getUser} = authActions
+export const {getUser, setLoading} = authActions

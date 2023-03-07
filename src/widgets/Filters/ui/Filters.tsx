@@ -1,4 +1,3 @@
-import {FC} from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,13 +6,19 @@ import Input from 'shared/ui/Input/Input'
 import { IinitialState, setActiveFilter, onSearch} from '../model/FiltersSlice'
 import { fetchFilters } from '../model/FiltersThunk'
 import { AppDispatch, RootState } from '../../../app/store/store'
-import FilterAddTask from './FiltersAddTask'
+import AddNewEventTrigger from '../../../features/AddNewEventTrigger/ui/AddNewEventTrigger'
 
 
 import './Filters.scss'
 
+type FiltersProps = {
+    title: string,
+    eventName: string,
+    filterButtonsName: string[]
 
-export const Filters: FC = () => {
+}
+
+export const Filters = ({title, eventName, filterButtonsName}:FiltersProps) => {
     const {filters, activeFilter, search}: IinitialState = useSelector((state: RootState) => state.filter)
     const dispatch: AppDispatch = useDispatch()
 
@@ -29,7 +34,7 @@ export const Filters: FC = () => {
         dispatch(setActiveFilter(e))
     }
 
-    const filterButtons = filters.map(filterBtn => {
+    const filterButtons = filterButtonsName.map(filterBtn => {
         return (
             <Button 
                 type='neon'
@@ -45,13 +50,16 @@ export const Filters: FC = () => {
     return (
         <div className="filters">
             <div className="filters__top">
-                <h2 className="filters__title">Lets realise your plans together!</h2>
+                {/* <h2 className="filters__title">Lets realise your plans together!</h2> */}
+                <h2 className="filters__title">{title}</h2>
                 <div className="filters__decor options__button">
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
-                <FilterAddTask />
+                {/* <AddNewEventTrigger /> */}
+                <AddNewEventTrigger eventName={eventName}/>
+
             </div>
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">

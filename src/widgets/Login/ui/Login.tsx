@@ -4,15 +4,19 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 
 import { auth } from "shared/config/firebase"
+import {setLoading} from 'app/store/AuthSlice'
 import Input from "shared/ui/Input/Input"
 import { Button } from "shared/ui"
 import { schema } from '../helpers/schema'
 import {ILogin} from '../types/loginInterface'
 
 import './Login.scss'
+import { useDispatch } from "react-redux"
+import { AppDispatch } from "app/store/store"
 
 
 export const Login = () => {
+    const dispatch = useDispatch<AppDispatch>()
     const methods = useForm<ILogin>({
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
@@ -21,6 +25,7 @@ export const Login = () => {
     const {handleSubmit, formState: { errors }} = methods
 
     const onHandleSubmit: SubmitHandler<ILogin> = async (data) => {
+        dispatch(setLoading())
         await signInWithEmailAndPassword(auth, data.email, data.password)
     }
 

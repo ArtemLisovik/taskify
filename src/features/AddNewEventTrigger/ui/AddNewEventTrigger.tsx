@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { TaskModal } from 'features/TaskModal/ui/TaskModal'
 import { Button } from '../../../shared/ui'
 
-const FilterAddTask = () => {
+const AddNewEventTrigger = ({eventName}: {eventName: string}) => {
     const [isOpen, setIsOpen] = React.useState(false)
 
     const handlerChange: any = () => {
@@ -12,7 +12,7 @@ const FilterAddTask = () => {
     }
     return (
         <>
-            <Button id='modalTrigger' content='New task' type='neon' onClick={handlerChange} />
+            <Button id='modalTrigger' content={`New ${eventName}`} type='neon' onClick={handlerChange} />
             <AnimatePresence mode='wait' onExitComplete={() => null}>
                 {isOpen && <TaskModal isOpen={isOpen} modalSwitcher={handlerChange} />}
             </AnimatePresence>
@@ -20,4 +20,4 @@ const FilterAddTask = () => {
     )
 }
 
-export default FilterAddTask
+export default AddNewEventTrigger

@@ -1,0 +1,126 @@
+.wishItem {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--task-background);
+    padding: 20px 15px;
+    transition: all 0.3s ease;
+    flex: 1 1 240px;
+    &:hover {
+        box-shadow:
+        40px 20px 20px #00070348;
+        transform: translateX(-15px) translateY(-15px);
+    }
+    &__title {
+        font-weight: 600;
+        box-sizing: border-box;
+        word-wrap: break-word;
+    }
+    &__descr {
+        margin-top: 10px;
+        font-size: 14px;
+        color: var(--text-color);
+        line-height: 1.5;
+        word-wrap: break-word;
+        box-sizing: border-box;
+        max-width: 65vw;
+    }
+    &__image{
+        margin-top: 15px;
+        width: 100%;
+        max-height: 250px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    &__image-item{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+    }
+    &__progressbar {
+        margin-top: 20px;
+        width: 100%;
+        height: 5px;
+        background: var(--input-color);
+        border-radius: 8px;
+    }
+    &__progressbar-fill {
+        border-radius: 8px;
+        height: 100%;
+        width: 48%;
+        transition: all 0.3s ease;
+    }
+    &__time-remaining {
+        margin-top: 10px;
+        color: var(--text-color);
+        margin-bottom: 15px;
+        span {
+            font-weight: 600;
+            color: #fff
+        }
+    }
+    &__options {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    &__users {
+        display: flex;
+        flex: 0 0 auto;
+        position: relative;
+    }
+    &___users::after {
+        position: absolute;
+        content: '';
+        right: 10px;
+        top: 50%;
+        width: 4px;
+        background: red;
+        height: 20px;
+    }
+    &__users-link {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: block;
+        overflow: hidden;
+        border: 1px solid #fff;
+    }
+    &__users-link img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-position: 50% 40%;
+    }
+    &__pin {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        flex: 1 0 auto;
+        position: relative;
+        padding-left: 10px;
+    }
+    &__pin::before {
+        position: absolute;
+        content: '';
+        top: 50;
+        left: 0;
+        height: 20px;
+        width: 1.5px;
+        background: var(--border-color);
+        border-radius: 8px;
+    }
+    &__pin-icon {
+        width: 15px;
+        height: 15px;
+        fill: var(--text-color);
+    }
+
+    &__pin-count {
+        font-size: 12px;
+        color: var(--text-color);
+        font-weight: 600;
+    }
+}

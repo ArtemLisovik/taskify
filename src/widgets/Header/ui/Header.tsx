@@ -28,10 +28,10 @@ export const Header: FC = () => {
                         </NavLink>
                 </li>
                 <li className="header__menu-item">
-                    <Link to='/wishlist' className="header__menu-link">Wish List</Link>
+                    <NavLink to='/wishlist' className={isActiveClass}>Wish List</NavLink>
                 </li>
                 <li className="header__menu-item">
-                    <Link to='/profile' className="header__menu-link">Profile</Link>
+                    <NavLink to='/profile' className={isActiveClass}>Profile</NavLink>
                 </li>
             </ul>
             <div className="header__profile profile">
