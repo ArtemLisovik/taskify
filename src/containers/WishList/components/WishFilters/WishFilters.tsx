@@ -3,23 +3,22 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Input } from 'ui'
 import { AppDispatch, RootState } from 'store'
-import { fetchTaskFilters } from '../../store/TasksThunk'
-import { onSearch, setActiveFilter } from '../../store/TasksSlice'
-import { TaskModal } from '../TaskModal/TaskModal'
+import {fetchWishFilters} from '../../store/WishThunk'
+import {setWishFilter, setWishSearch} from '../../store/WishSlice'
 
 import { AnimatePresence } from 'framer-motion'
 
-export const Filters = () => {
-    const { activeFilter, search, taskFilters } = useSelector((state: RootState) => state.tasks)
+export const WishFilters = () => {
+    const { wishActiveFilter, wishFilters, wishList, wishSearch} = useSelector((state: RootState) => state.wishReducer)
     const [ModalActive, setModalActive] = useState(false)
     const dispatch: AppDispatch = useDispatch()
 
     const setSearchValue = (value: string) => {
-        dispatch(onSearch(value))
+        dispatch(setWishSearch(value))
     }
 
     useEffect(() => {
-        dispatch(fetchTaskFilters())
+        dispatch(fetchWishFilters())
     }, [])
 
     const ModalHandler = () => {
@@ -27,14 +26,15 @@ export const Filters = () => {
     }
 
     const onChangeFilter = (e: string) => {
-        dispatch(setActiveFilter(e))
+        console.log(e)
+        dispatch(setWishFilter(e))
     }
 
-    const filterButtons = taskFilters.map(filterBtn => {
+    const filterButtons = wishFilters.map(filterBtn => {
         return (
             <Button
                 type='neon'
-                isActive={filterBtn === activeFilter ? true : false}
+                isActive={filterBtn === wishActiveFilter ? true : false}
                 content={filterBtn}
                 name={filterBtn}
                 key={filterBtn}
@@ -46,22 +46,22 @@ export const Filters = () => {
     return (
         <div className="filters">
             <div className="filters__top">
-                <h2 className="filters__title">Lets realise your plans together!</h2>
+                <h2 className="filters__title">Visualize your goals and make it real!</h2>
                 <div className="filters__decor options__button">
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                     <span className="filters__decor-dot options__button-dot"></span>
                 </div>
                 <Button
-                    content='new task'
+                    content='new wish'
                     type='neon'
                     onClick={ModalHandler}
                 />
 
                 <AnimatePresence>
-                    {ModalActive &&
+                    {/* {ModalActive &&
                         <TaskModal modalSwitcher={ModalHandler} />
-                    }
+                    } */}
                 </AnimatePresence>
 
             </div>

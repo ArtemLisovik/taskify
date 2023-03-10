@@ -1,10 +1,10 @@
 import RootLayout from '../../layouts/RootLayout/RootLayout'
-import { WishList, Filters } from 'containers'
+import { WishFilters, WishList } from 'containers'
 
 export const WishListPage = () => {
     return (
         <RootLayout>
-            <Filters />
+            <WishFilters/>
             <WishList />
         </RootLayout>
     )
