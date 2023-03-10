@@ -5,52 +5,50 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Modal, Input, TextArea } from 'ui'
 // import { updateTask, addTask } from "../../store/TasksThunk";
 import { schema } from '../../helpers/schema'
-import { ITask } from "../../../../types/ITask";
 import { useAppDispatch, useAppSelector } from "hooks";
+import { IWish } from "containers/WishList/types/IWish";
 
 interface WishModalProps {
-  modalSwitcher: any
-  task?: ITask
+  modalHandler: any
+  wish?: IWish
 }
 
-export const TaskModal = ({ modalSwitcher, wish }: WishModalProps) => {
+export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
   const idUser = useAppSelector(state => state.auth.profile?.userUid)
 
   const dispatch = useAppDispatch()
 
-  const methods = useForm<ITask>({
+  const methods = useForm<IWish>({
     resolver: yupResolver(schema),
     reValidateMode: 'onChange',
     defaultValues: {
       title: `${wish ? wish.title : ''}`,
       text: `${wish ? wish.text : ''}`,
-      endPointDate: `${wish ? wish.endPointDate : ``}`,
-      endPointTime: `${wish ? wish.endPointTime : ``}`,
+      image: `${wish ? wish.image: ''}`
+
     }
   })
 
   const { handleSubmit, formState: { errors } } = methods
 
-  const onHandleChange: SubmitHandler<ITask> = async (data) => {
-    const timeCreation = wish ? wish.timeCreation : (new Date()).toString()
+  const onHandleChange: SubmitHandler<IWish> = async (data) => {
     const authorId = idUser ? idUser : null
     const id = uuidv4()
-    const newTask: ITask = { ...data, timeCreation, status: 'active', id, authorId}
+    const newWish: IWish = { ...data, authorId}
 
-    wish ?
-      dispatch(updateTask([data, wish.id]))
-      :
-      dispatch(addTask([newTask, newTask.id]))
-    modalSwitcher()
+    // wish ?
+    //   dispatch(updateTask([data, wish.id]))
+    //   :
+    //   dispatch(addTask([newTask, newTask.id]))
+    modalHandler()
   }
 
   return (
     <>
       <Modal
-        // open={isOpen}
-        modalSwitcher={modalSwitcher}
+        modalSwitcher={modalHandler}
       >
-        <h3 className="task__title">{wish ? `Edit task` : `Create new task`}</h3>
+        <h3 className="task__title">{wish ? `Edit your wish` : `Create your new wish`}</h3>
         <FormProvider {...methods}>
           <form className='form' onSubmit={handleSubmit(onHandleChange)}>
 
@@ -68,20 +66,11 @@ export const TaskModal = ({ modalSwitcher, wish }: WishModalProps) => {
             />
             <div className="error__module">{errors.text?.message}</div>
 
-            <Input
+            <Input 
+              name='image'
+              type='file'
               isContext={true}
-              type='date'
-              name="endPointDate"
             />
-            <div className="error__module">{errors.endPointDate?.message}</div>
-
-            <Input
-              isContext={true}
-              type='time'
-              name="endPointTime"
-            />
-            <div className="error__module">{errors.endPointTime?.message}</div>
-
 
             <Button type='neon' content="Done!" />
           </form>
