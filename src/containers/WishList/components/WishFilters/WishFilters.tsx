@@ -5,6 +5,7 @@ import { Button, Input } from 'ui'
 import { AppDispatch, RootState } from 'store'
 import {fetchWishFilters} from '../../store/WishThunk'
 import {setWishFilter, setWishSearch} from '../../store/WishSlice'
+import {WishModal} from '../WishModal/WishModal'
 
 import { AnimatePresence } from 'framer-motion'
 
@@ -59,9 +60,9 @@ export const WishFilters = () => {
                 />
 
                 <AnimatePresence>
-                    {/* {ModalActive &&
-                        <TaskModal modalSwitcher={ModalHandler} />
-                    } */}
+                    {ModalActive &&
+                        <WishModal modalHandler={ModalHandler} />
+                    }
                 </AnimatePresence>
 
             </div>

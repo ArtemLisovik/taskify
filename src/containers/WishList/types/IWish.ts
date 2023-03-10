@@ -1,6 +1,6 @@
 export type IWish = {
     title: string
     text: string
-    image: any
+    image: string
     authorId: string | null
 }

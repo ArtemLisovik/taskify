@@ -241,3 +241,28 @@ main::-webkit-scrollbar {
 
     }
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+    align-items: end;
+}
+
+.task__title {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 26px;
+}
+
+.error__module {
+    font-size: 14px;
+    font-weight: 600;
+    color: red;
+    height: 15px;
+    margin-top: -7px;
+    &::first-letter{
+        text-transform: uppercase;
+    }
+}

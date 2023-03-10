@@ -7,5 +7,9 @@ import * as yup from 'yup'
     text: yup.string()
         .required()
         .min(5,'Desription should be more then 5 letters'),
-    image: yup.mixed().required('Need upload image to visuaize wish')
+    image: yup
+    .mixed()
+    .test("file", "Файл не выбран", (value: any) => {
+      return value && value.length > 0;
+    }),
   })

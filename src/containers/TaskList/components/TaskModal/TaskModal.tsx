@@ -8,8 +8,6 @@ import { schema } from '../../helpers/FormValidation'
 import { ITask } from "../../../../types/ITask";
 import { useAppDispatch, useAppSelector } from "hooks";
 
-import './TaskModal.scss'
-
 interface TaskModalProps {
   modalSwitcher: any
   task?: ITask
@@ -49,7 +47,6 @@ export const TaskModal = ({ modalSwitcher, task }: TaskModalProps) => {
   return (
     <>
       <Modal
-        // open={isOpen}
         modalSwitcher={modalSwitcher}
       >
         <h3 className="task__title">{task ? `Edit task` : `Create new task`}</h3>

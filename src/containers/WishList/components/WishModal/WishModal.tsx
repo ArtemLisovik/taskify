@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button, Modal, Input, TextArea } from 'ui'
-// import { updateTask, addTask } from "../../store/TasksThunk";
 import { schema } from '../../helpers/schema'
 import { useAppDispatch, useAppSelector } from "hooks";
 import { IWish } from "containers/WishList/types/IWish";
@@ -25,7 +24,6 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
       title: `${wish ? wish.title : ''}`,
       text: `${wish ? wish.text : ''}`,
       image: `${wish ? wish.image: ''}`
-
     }
   })
 
@@ -34,8 +32,8 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
   const onHandleChange: SubmitHandler<IWish> = async (data) => {
     const authorId = idUser ? idUser : null
     const id = uuidv4()
-    const newWish: IWish = { ...data, authorId}
-
+    const newWish: IWish = { ...data, authorId, image: data.image[0]}
+    console.log(newWish)
     // wish ?
     //   dispatch(updateTask([data, wish.id]))
     //   :
@@ -71,6 +69,7 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
               type='file'
               isContext={true}
             />
+            <div className="error__module">{errors.image?.message}</div>
 
             <Button type='neon' content="Done!" />
           </form>
