@@ -1,0 +1,61 @@
+import { setDoc, doc, updateDoc, collection, query, where,getDocs,getDoc, deleteDoc } from 'firebase/firestore'
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { ITask } from "../../../types/ITask";
+import { RootState } from "store";
+import { database } from "config/firebase";
+
+
+export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (_, {getState, rejectWithValue}) => {
+  const userId = (getState() as RootState).auth.profile?.userUid
+  try {
+    let filteredTasks: Array<any> = []
+    const tasksFilterSetup = query(collection(database, "tasks"), where("authorId", "==", userId));
+    const tasksList = await getDocs(tasksFilterSetup);
+    tasksList.forEach((task) => filteredTasks.push(task.data()))
+    return filteredTasks
+  }
+  catch(error) {
+    return rejectWithValue((error as Error).message)
+  }
+})
+
+export const addTask = createAsyncThunk('tasks/addTask', async ([task, taskId]: [ITask, string]) => {
+  try{
+    await setDoc(doc(database, 'tasks', taskId), task)
+    return task
+  }
+  catch(error) {
+    throw new Error('error')
+  }
+})
+
+type updateDto = {} & Partial<ITask>
+export const updateTask = createAsyncThunk('tasks/updateTask', async ([modified, taskId]: [updateDto,string]) => {
+  console.log(taskId)
+  await updateDoc(doc(database, 'tasks', taskId), {
+    ...modified
+  })
+  return {modified, taskId}
+})
+
+export const deleteTask = createAsyncThunk('tasks/deleteTask', async (taskId: string) => {
+  try {
+    await deleteDoc(doc(database, "tasks", taskId));
+    return taskId
+  }
+  catch(error){
+    console.log('error')
+    throw new Error(`${console.log(error)}`)
+  }
+})
+
+export const fetchTaskFilters = createAsyncThunk('tasks/fetchFilters', async (_, {dispatch}) => {
+  const taskFiletrsRef = doc(database, 'filters', 'taskFilters')
+  const filters = (await getDoc(taskFiletrsRef)).data()
+  let filtersArray: string[] = []
+  for (let key in filters) {
+    filtersArray.push(filters[key])
+  }
+  return filtersArray.sort()
+})
