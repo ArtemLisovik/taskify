@@ -1,15 +1,12 @@
 .wishItem {
+    display: flex;
+    flex-direction: column;
     border: 2px solid var(--border-color);
     border-radius: 8px;
     background: var(--task-background);
     padding: 20px 15px;
-    transition: all 0.3s ease;
-    flex: 1 1 240px;
-    &:hover {
-        box-shadow:
-        40px 20px 20px #00070348;
-        transform: translateX(-15px) translateY(-15px);
-    }
+    max-width: 300px;
+    flex: 1 1 240px; 
     &__title {
         font-weight: 600;
         box-sizing: border-box;
@@ -25,6 +22,7 @@
         max-width: 65vw;
     }
     &__image{
+        flex: 1 1 auto;
         margin-top: 15px;
         width: 100%;
         max-height: 250px;

@@ -12,8 +12,11 @@ export const schema = yup.object().shape({
       if (!value) return false
       return true
     })
-    .test('fileSize', 'Image size cannot be bigger then 10Mb', (value: any) => {
-      return /^image\/(jpe?g|png|gif)$/i.test(value[0].type);
+    .test('fileSize', 'Image size cannot be bigger then 6Mb', (value: any) => {
+       return value[0].size <= 6291456;
+    })
+    .test('fileType', 'Image must be "jpeg, jpg, png, webp" extension', (value: any) => {
+      return /^image\/(jpe?g|png|webp)$/i.test(value[0].type);
     })
 
 })

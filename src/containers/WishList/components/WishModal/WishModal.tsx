@@ -6,6 +6,9 @@ import { Button, Modal, Input, TextArea } from 'ui'
 import { schema } from '../../helpers/schema'
 import { useAppDispatch, useAppSelector } from "hooks";
 import { IWish } from "containers/WishList/types/IWish";
+import {createNewWish} from '../../store/WishThunk'
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store";
 
 interface WishModalProps {
   modalHandler: any
@@ -15,7 +18,7 @@ interface WishModalProps {
 export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
   const idUser = useAppSelector(state => state.auth.profile?.userUid)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const methods = useForm<IWish>({
     resolver: yupResolver(schema),
@@ -23,21 +26,21 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
     defaultValues: {
       title: `${wish ? wish.title : ''}`,
       text: `${wish ? wish.text : ''}`,
-      image: `${wish ? wish.image: ''}`
+      // image: `${wish ? wish.image: ''}`
     }
   })
 
   const { handleSubmit, formState: { errors } } = methods
 
-  const onHandleChange: SubmitHandler<IWish> = async (data) => {
+  const onHandleChange: SubmitHandler<any> = async (data) => {
     const authorId = idUser ? idUser : null
-    const id = uuidv4()
-    const newWish: IWish = { ...data, authorId, image: data.image[0]}
-    console.log(newWish)
-    // wish ?
-    //   dispatch(updateTask([data, wish.id]))
-    //   :
-    //   dispatch(addTask([newTask, newTask.id]))
+    const wishId = uuidv4()
+    const newWish: IWish = { title: data.title, text: data.text, image: '', authorId, id: wishId}
+    wish ?
+      // dispatch(updateTask([data, wish.id]))
+      console.log('edit')
+      :
+      dispatch(createNewWish([newWish, wishId, data.image[0]]))
     modalHandler()
   }
 

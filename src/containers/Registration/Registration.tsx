@@ -5,7 +5,7 @@ import { Link, redirect } from "react-router-dom"
 import { Button, Input } from "ui"
 import { schema } from './helpers/schema'
 import { IRegistration } from "./types/IRegistration"
-import { registrationUser } from './model/registrationUserThunk'
+import { registrationUser } from './store/registrationUserThunk'
 
 // import 'widgets/Login/ui/Login.scss'
 

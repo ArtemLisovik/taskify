@@ -1,9 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-import {fetchWishFilters} from './WishThunk'
+import { IWish } from '../types/IWish'
+import {fetchWishFilters, createNewWish, fetchAllWishes, deleteWish, updateWish} from './WishThunk'
 
 type initialStateType = {
-    wishList: string[]
+    wishList: IWish[]
     wishFilters: string[]
     wishActiveFilter: string
     wishSearch: string,
@@ -37,6 +38,36 @@ const wishSlice = createSlice({
                 state.wishFilters = action.payload
             })
             .addCase(fetchWishFilters.rejected, (state) => {state.wishStatus = 'error'})
+
+
+            .addCase(createNewWish.pending, (state) => {state.wishStatus = 'loading'})
+            .addCase(createNewWish.fulfilled, (state, action) => {
+                state.wishStatus = 'idle'
+                state.wishList = [...state.wishList, action.payload]
+        })
+            .addCase(createNewWish.rejected, (state) => {state.wishStatus = 'error'})
+
+
+            .addCase(fetchAllWishes.pending, (state) => {state.wishStatus = 'loading'})
+            .addCase(fetchAllWishes.fulfilled, (state, action) => {
+                state.wishStatus = 'idle'
+                state.wishList = action.payload
+            })
+            .addCase(fetchAllWishes.rejected, (state) => {state.wishStatus = 'error'})
+
+
+            .addCase(deleteWish.pending, () => {})
+            .addCase(deleteWish.fulfilled, (state, action) => {
+                state.wishList = state.wishList.filter(wish => wish.id !== action.payload)
+            })
+            .addCase(deleteWish.rejected, () => {})
+
+
+            .addCase(updateWish.pending, () => {})
+            .addCase(updateWish.fulfilled, (state, action) => {
+                console.log(action)
+            })
+            .addCase(updateWish.rejected, () => {})
     }
 })
 

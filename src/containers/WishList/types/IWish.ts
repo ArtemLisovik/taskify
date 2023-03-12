@@ -3,4 +3,5 @@ export type IWish = {
     text: string
     image: string
     authorId: string | null
+    id: string
 }

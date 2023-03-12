@@ -1,40 +1,13 @@
-// html,
-// body {
-//   margin: 0 auto;
-//   height: 100%;
-//   width: 100%;
-//   overflow: hidden;
-//   background: #0d1019;
-//   /* Old browsers */
-//   background: -moz-linear-gradient(-45deg, #0d1019 0%, #161b29 100%);
-//   /* FF3.6-15 */
-//   background: -webkit-linear-gradient(-45deg, #0d1019 0%, #161b29 100%);
-//   /* Chrome10-25,Safari5.1-6 */
-//   background: linear-gradient(135deg, #0d1019 0%, #161b29 100%);
-//   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-//   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#0d1019', endColorstr='#161b29', GradientType=1);
-//   /* IE6-9 fallback on horizontal gradient */
-// }
-
-// .container {
-//   width: 20vw;
-//   height: 20vw;
-//   position: absolute;
-//   left: 0;
-//   right: 0;
-//   top: 0;
-//   bottom: 0;
-//   margin: auto;
-//   overflow: hidden;
-// }
-
 /* Compressing bars style */
 
 .loader {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &__wrapper{
+    position: absolute;
+    left: 50%;
+    width: 190px;
+    height: 190px;
+    transform: scale(0.8) translateX(-65%);
+  }
 }
 
 .bars-common {

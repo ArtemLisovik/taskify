@@ -1,24 +1,39 @@
-import { useAppDispatch } from 'hooks'
-import {WishItem} from '../WishItem/WishItem'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
-import {fetchWishFilters} from '../../store/WishThunk'
+import { fetchWishFilters, fetchAllWishes } from '../../store/WishThunk'
+import { WishItem } from '../WishItem/WishItem'
+import { Loader } from 'ui'
 
 import './WishList.scss'
-import { useEffect } from 'react'
 
 export const WishList = () => {
+    const { wishList, wishStatus } = useAppSelector(state => state.wishReducer)
+
+    useEffect(() => {
+        console.log(wishStatus)
+    }, [wishStatus])
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        console.log('hh')
         dispatch(fetchWishFilters())
+        dispatch(fetchAllWishes())
     }, [])
 
-    return(
+    const viewWishes = wishList.map((wish, index) => {
+        return (
+            <WishItem key={wish.id} {...wish} index={index} />
+        )
+    })
+
+    return (
         <div className="wishList">
-            <WishItem/>
-            <WishItem/>
-            <WishItem/>
+            <AnimatePresence>
+                {wishStatus === 'loading' ? <Loader/> : viewWishes}
+                {/* {viewWishes} */}
+            </AnimatePresence>
         </div>
     )
 }

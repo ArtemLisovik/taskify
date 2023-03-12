@@ -1,14 +1,45 @@
+import {AnimatePresence, motion} from 'framer-motion'
+import {useState} from 'react'
+
+import { IWish } from 'containers/WishList/types/IWish'
+import {deleteWish} from '../../store/WishThunk'
+import { WishModal } from '../WishModal/WishModal'
+import { useAppDispatch } from 'hooks'
+
 import './WishItem.scss'
 
-import honda from './civic.webp'
 
-export const WishItem = () => {
+type WishItemProps = {
+    index: number
+} & IWish
+
+export const WishItem = ({title, text, image, id, index}: WishItemProps) => {
+    const [editModalOpen, setEditModalOpen] = useState(false)
+    const dispatch = useAppDispatch()
+
+    const modalHandler = () => {
+        setEditModalOpen(state => !state)
+    }
+
     return(
-        <div className="wishItem">
-                      <h3 className="wishItem__title">Honda Accord 2016 Sport</h3>
-                      <p className="wishItem__descr">Buy this car</p>
+        <>
+        <AnimatePresence>
+            <WishModal modalHandler={modalHandler}/>
+        </AnimatePresence>
+        <motion.div 
+            className="wishItem"
+            initial={{ y: '50%', x: '50%', opacity: 0, scale: 0.5 }}
+            animate={{y: 0, x: 0, opacity: 1, scale: 1, transition: { duration: 0.3, delay: index/6 }}}
+            whileHover={{
+                borderColor: `#1e9dfc`,
+                boxShadow: '0 0 20px #1e9dfc, inset 0 0 20px #1e9dfc',
+                transition:{delay: 0, duration: 0.2}
+            }}
+        >
+                      <h3 className="wishItem__title">{title}</h3>
+                      <p className="wishItem__descr">{text}</p>
                         <div className="wishItem__image">
-                            <img src={honda} alt="Wish image" className="wishItem__image-item" />
+                            <img src={image} alt="Wish image" className="wishItem__image-item" />
                         </div>
   
                       <div className="wishItem__options">
@@ -74,17 +105,19 @@ export const WishItem = () => {
                               <div className="options__dropdown-menu">
                                   <button
                                       className='options__dropdown-menu-item'
-                                    //   onClick={() => setEditModalOpen(state => !state)}
+                                      onClick={modalHandler}
                                   >Edit</button>
                                   <button
                                       className="options__dropdown-menu-item"
                                       onClick={() => {
-                                        // dispatch(deleteTask(id))
+                                        dispatch(deleteWish(id))
                                       }}>
                                       Delete</button>
                               </div>
                           </div>
                       </div>
-                  </div>
+                  </motion.div>
+        </>
+        
     )
 }

@@ -4,6 +4,7 @@ import './Loader.scss'
 export const Loader = () => {
     return (
         <motion.div
+            className='loader__wrapper'
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
