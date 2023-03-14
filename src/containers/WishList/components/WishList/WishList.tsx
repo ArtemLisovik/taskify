@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { fetchWishFilters, fetchAllWishes } from '../../store/WishThunk'
 import { WishItem } from '../WishItem/WishItem'
 import { Loader } from 'ui'
-import {useWishesFilter} from 'hooks/useWishesFilter'
+import {useWishesFilter} from 'containers/WishList/hooks/useWishesFilter'
 
 import './WishList.scss'
 

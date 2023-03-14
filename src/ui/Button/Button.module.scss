@@ -37,6 +37,8 @@
     padding: 7px 9px;
     cursor: pointer;
     transition: 0.3s ease all;
-
+    &::first-letter{
+        text-transform: uppercase;
+    }
 }
 

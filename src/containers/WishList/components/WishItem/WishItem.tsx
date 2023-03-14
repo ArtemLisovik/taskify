@@ -1,21 +1,25 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
 import { IWish } from 'containers/WishList/types/IWish'
 import {deleteWish, updateWish} from '../../store/WishThunk'
 import { WishModal } from '../WishModal/WishModal'
 import { useAppDispatch } from 'hooks'
+import {getFiles} from 'services/getFiles'
 
 import './WishItem.scss'
+import { Button } from 'ui'
 
 
 type WishItemProps = {
     index: number
 } & IWish
 
-export const WishItem = ({title, text, image, id, index, mode, authorId}: WishItemProps) => {
+export const WishItem = ({title, text, image, id, index, mode, authorId, status}: WishItemProps) => {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [subMenuOpen, setSubMenuOpen] = useState(false)
+    const [authorAvatar, setAuthorAvatar] = useState('')
+
     const dispatch = useAppDispatch()
 
     const alterMode = mode === 'public' ? 'privat' : 'public'
@@ -24,7 +28,11 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
         setEditModalOpen(state => !state)
     }
 
-    const avatar = 
+    getFiles('avatars', authorId as string).then(link => setAuthorAvatar(link))
+
+    const onChangeWishStatus = () => {
+      dispatch(updateWish([{title, text, image, id, mode, authorId, status: 'achieved'}]))
+    }
 
     return(
         <>
@@ -45,17 +53,23 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
                       <h3 className="wishItem__title">{title} <span className='wishItem__mode'>{mode}</span></h3>
                       <p className="wishItem__descr">{text}</p>
                         <div className="wishItem__image">
-                            <img src={avatar} alt="Wish image" className="wishItem__image-item" />
+                            <img src={image as string} alt="Wish image" className="wishItem__image-item" />
                         </div>
+
+                       <div className='wishItem__button'>
+                        <Button 
+                            onClick={onChangeWishStatus}
+                            content='achieved'
+                            type='simple'
+                          />
+                       </div>
+                         
   
                       <div className="wishItem__options">
                           <div className="wishItem__users">
                               <a href="#" className="wishItem__users-link">
-                                  <img src='' alt="user avatar" className="wishItem__users-image" />
+                                  <img src={authorAvatar} alt="user avatar" className="wishItem__users-image" />
                               </a>
-                              {/* <a href="#" className="wishItem__users-link">
-                                  <img src={userAvatar} alt="user avatar" className="wishItem__users-image" />
-                              </a> */}
                           </div>
                           <div className="wishItem__pin">
                               <svg className="wishItem__pin-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -111,8 +125,7 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
                                   <span className="options__dropdown-button-dot options__button-dot"></span>
                                   <span className="options__dropdown-button-dot options__button-dot"></span>
                               </button>
-                              <div className={`options__dropdown-menu ${subMenuOpen ? 'active' : ''}`}
-                                // style={subMenuOpen ? {visibilty: 'visible', opacity: 1} : {opacity: 0}}  
+                              <div className={`options__dropdown-menu ${subMenuOpen ? 'active' : ''}`} 
                               >
                                   <button
                                       className='options__dropdown-menu-item'
@@ -124,7 +137,7 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
                                       className="options__dropdown-menu-item"
                                       onClick={() => {
                                         dispatch(updateWish([
-                                            {title, text, image, authorId, id, mode: alterMode}
+                                            {title, text, image, authorId, id, mode: alterMode, status}
                                         ]))
                                       }}
                                     >

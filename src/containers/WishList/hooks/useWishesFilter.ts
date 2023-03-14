@@ -1,8 +1,8 @@
-import { useAppSelector } from "./useRedux";
+import { useAppSelector } from "../../../hooks/useRedux";
 
 export const useWishesFilter = () => {
     const {userUid} = useAppSelector(state => state.auth.profile)
-    const {wishMode, wishList, wishSearch} = useAppSelector(state => state.wishReducer)
+    const {wishMode, wishList, wishSearch, wishFilterStatus} = useAppSelector(state => state.wishReducer)
 
     let filteredWishes;
     switch(wishMode){
@@ -16,8 +16,9 @@ export const useWishesFilter = () => {
         ))
         break;
     }
-
-    return filteredWishes?.filter(wish => {
-       return wish.title.toLowerCase().includes(wishSearch.toLowerCase()) || wish.text.toLowerCase().includes(wishSearch.toLowerCase())
+    return filteredWishes?.filter(wish => wish.status === wishFilterStatus)
+    .filter(wish => {
+       return wish.title.toLowerCase().includes(wishSearch.toLowerCase()) || 
+       wish.text.toLowerCase().includes(wishSearch.toLowerCase())
     })
 }

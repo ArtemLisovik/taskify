@@ -6,33 +6,33 @@ import {fetchWishFilters, createNewWish, fetchAllWishes, deleteWish, updateWish}
 export type initialStateType = {
     wishList: IWish[]
     wishFilters: string[]
-    wishActiveFilter: string
     wishSearch: string,
     wishStatus: string
     wishMode: string
+    wishFilterStatus: string
 }
 
 const initialState: initialStateType = {
     wishList: [],
     wishFilters: [],
-    wishActiveFilter: 'current',
     wishSearch: '',
     wishStatus: 'idle',
-    wishMode: ''
+    wishMode: '',
+    wishFilterStatus: 'current'
 }
 
 const wishSlice = createSlice({
     name: 'wishList',
     initialState,
     reducers: {
-        setWishFilter: (state, action) => {
-            state.wishActiveFilter = action.payload
-        },
         setWishSearch: (state, action) => {
             state.wishSearch = action.payload
         },
         setWishMode: (state, action) => {
             state.wishMode = action.payload
+        },
+        setWishFilterStatus: (state, action) => {
+            state.wishFilterStatus = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -79,5 +79,5 @@ const wishSlice = createSlice({
 
 const {reducer, actions} = wishSlice
 
-export const {setWishFilter, setWishSearch, setWishMode} = actions
+export const {setWishSearch, setWishMode, setWishFilterStatus} = actions
 export default reducer

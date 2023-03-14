@@ -5,4 +5,5 @@ export type IWish = {
     authorId: string | null
     id: string
     mode: string
+    status: string
 }

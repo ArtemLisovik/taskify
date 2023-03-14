@@ -4,6 +4,7 @@ import { ref, getDownloadURL } from 'firebase/storage'
 import { getDoc, doc } from 'firebase/firestore'
 import { database, auth, storage } from "config/firebase";
 import { Profile, getUser } from "./AuthSlice";
+import {getFiles} from 'services/getFiles'
 
 
 export const getAuth = createAsyncThunk('profile/', (_, {dispatch}) => {
@@ -37,7 +38,7 @@ export const getAuth = createAsyncThunk('profile/', (_, {dispatch}) => {
 
             //Get avatar
             try{
-                const avatarRef = await dispatch(getFile(['avatars', user.uid]))
+                const avatarRef = await getFiles('avatars', user.uid)
                 // const storageRef = ref(storage, `avatars/${user.uid}`)
                 // const avatarRef = await getDownloadURL(storageRef)
                 profile = {...profile, avatar: avatarRef}
@@ -58,12 +59,8 @@ export const getAuth = createAsyncThunk('profile/', (_, {dispatch}) => {
     })
 })
 
-type getFileProps = [
-    path: string,
-    name: string
-]
-export const getFile = createAsyncThunk('getFile', async ([path, name]: getFileProps) => {
-    const storageRef = ref(storage, `${path}/${name}`)
-    const fileURL = await getDownloadURL(storageRef)
-    return fileURL
-})
+// export const getFile = createAsyncThunk('getFile', async ([path, name]: getFileProps) => {
+//     const storageRef = ref(storage, `${path}/${name}`)
+//     const fileURL = await getDownloadURL(storageRef)
+//     return fileURL
+// })

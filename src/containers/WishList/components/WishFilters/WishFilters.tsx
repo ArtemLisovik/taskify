@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Input, Modal, Select } from 'ui'
+import { Button, Input, Select } from 'ui'
 import { AppDispatch, RootState } from 'store'
 import {fetchWishFilters} from '../../store/WishThunk'
-import {setWishFilter, setWishSearch, setWishMode, initialStateType} from '../../store/WishSlice'
+import {setWishFilterStatus, setWishSearch, setWishMode, initialStateType} from '../../store/WishSlice'
 import {WishModal} from '../WishModal/WishModal'
 
 import { AnimatePresence } from 'framer-motion'
 
 export const WishFilters = () => {
-    const { wishActiveFilter, wishFilters, wishList, wishSearch} = useSelector((state: RootState) => state.wishReducer)
+    const { wishFilterStatus, wishFilters, wishList, wishSearch} = useSelector((state: RootState) => state.wishReducer)
     const [ModalActive, setModalActive] = useState(false)
+
+    // useEffect(() => {console.log(wishFilterStatus)}, [wishFilterStatus])
 
     const dispatch: AppDispatch = useDispatch()
 
@@ -27,8 +29,8 @@ export const WishFilters = () => {
         setModalActive(state => !state)
     }
 
-    const onChangeFilter = (e: initialStateType['wishMode']) => {
-        dispatch(setWishFilter(e))
+    const onChangeFilter = (name: string) => {
+        dispatch(setWishFilterStatus(name))
     }
 
     const onModeChanger = (mode: string) => {
@@ -39,7 +41,7 @@ export const WishFilters = () => {
         return (
             <Button
                 type='neon'
-                isActive={filterBtn === wishActiveFilter ? true : false}
+                isActive={filterBtn === wishFilterStatus ? true : false}
                 content={filterBtn}
                 name={filterBtn}
                 key={filterBtn}

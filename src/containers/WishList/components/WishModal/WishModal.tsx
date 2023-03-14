@@ -44,7 +44,8 @@ export const WishModal = ({ modalHandler, wish, isOpen }: WishModalProps) => {
         image: wish.image as string, 
         id: wish.id as string, 
         authorId: wish.authorId as string,
-        mode: data.mode
+        mode: data.mode,
+        status: wish.status as string
       } 
       : 
       { 
@@ -53,7 +54,8 @@ export const WishModal = ({ modalHandler, wish, isOpen }: WishModalProps) => {
         image: '', 
         authorId, 
         id: wishId,
-        mode: data.mode
+        mode: data.mode,
+        status: 'current'
       }
 
     wish ?
