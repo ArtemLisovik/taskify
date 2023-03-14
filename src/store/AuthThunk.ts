@@ -37,8 +37,9 @@ export const getAuth = createAsyncThunk('profile/', (_, {dispatch}) => {
 
             //Get avatar
             try{
-                const storageRef = ref(storage, `avatars/${user.uid}`)
-                const avatarRef = await getDownloadURL(storageRef)
+                const avatarRef = await dispatch(getFile(['avatars', user.uid]))
+                // const storageRef = ref(storage, `avatars/${user.uid}`)
+                // const avatarRef = await getDownloadURL(storageRef)
                 profile = {...profile, avatar: avatarRef}
             }
             catch(error) {
@@ -55,4 +56,14 @@ export const getAuth = createAsyncThunk('profile/', (_, {dispatch}) => {
         }
         dispatch(getUser(profile))
     })
+})
+
+type getFileProps = [
+    path: string,
+    name: string
+]
+export const getFile = createAsyncThunk('getFile', async ([path, name]: getFileProps) => {
+    const storageRef = ref(storage, `${path}/${name}`)
+    const fileURL = await getDownloadURL(storageRef)
+    return fileURL
 })

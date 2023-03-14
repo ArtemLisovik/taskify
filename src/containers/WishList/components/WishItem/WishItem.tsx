@@ -24,6 +24,8 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
         setEditModalOpen(state => !state)
     }
 
+    const avatar = 
+
     return(
         <>
         <AnimatePresence>
@@ -43,7 +45,7 @@ export const WishItem = ({title, text, image, id, index, mode, authorId}: WishIt
                       <h3 className="wishItem__title">{title} <span className='wishItem__mode'>{mode}</span></h3>
                       <p className="wishItem__descr">{text}</p>
                         <div className="wishItem__image">
-                            <img src={image as string} alt="Wish image" className="wishItem__image-item" />
+                            <img src={avatar} alt="Wish image" className="wishItem__image-item" />
                         </div>
   
                       <div className="wishItem__options">

@@ -17,6 +17,7 @@ export const useWishesFilter = () => {
         break;
     }
 
-    filteredWishes?.filter(wish => wish.title.includes())
-    return filteredWishes
+    return filteredWishes?.filter(wish => {
+       return wish.title.toLowerCase().includes(wishSearch.toLowerCase()) || wish.text.toLowerCase().includes(wishSearch.toLowerCase())
+    })
 }

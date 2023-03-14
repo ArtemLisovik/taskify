@@ -12,8 +12,6 @@ import { AnimatePresence } from 'framer-motion'
 export const WishFilters = () => {
     const { wishActiveFilter, wishFilters, wishList, wishSearch} = useSelector((state: RootState) => state.wishReducer)
     const [ModalActive, setModalActive] = useState(false)
-    // const [wishMode, setWishMode] = useState('')
-
 
     const dispatch: AppDispatch = useDispatch()
 

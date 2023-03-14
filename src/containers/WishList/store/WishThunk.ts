@@ -69,7 +69,6 @@ export const updateWish = createAsyncThunk('wish/updateWish', async ([updatedWis
             await uploadBytes(wishesRef, image as File)
             const wishImageURL = await getDownloadURL(wishesRef)
 
-            console.log(updatedWish)
             const wish = {...updatedWish, image: wishImageURL}
             const selectedWishRef = doc(database, 'wishes', updatedWish.id)
             await updateDoc(selectedWishRef, wish)
