@@ -2,7 +2,7 @@ import { useAppSelector } from "./useRedux";
 
 export const useWishesFilter = () => {
     const {userUid} = useAppSelector(state => state.auth.profile)
-    const {wishMode, wishList} = useAppSelector(state => state.wishReducer)
+    const {wishMode, wishList, wishSearch} = useAppSelector(state => state.wishReducer)
 
     let filteredWishes;
     switch(wishMode){
@@ -16,5 +16,7 @@ export const useWishesFilter = () => {
         ))
         break;
     }
+
+    filteredWishes?.filter(wish => wish.title.includes())
     return filteredWishes
 }

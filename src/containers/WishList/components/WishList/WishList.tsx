@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 import { fetchWishFilters, fetchAllWishes } from '../../store/WishThunk'
 import { WishItem } from '../WishItem/WishItem'
@@ -24,11 +24,11 @@ export const WishList = () => {
     const filteredWishes = useWishesFilter()
 
     const viewWishes = filteredWishes?.map((wish, index) => {
-        console.log(wish.id)
         return (
             <WishItem key={wish.id} {...wish} index={index} />
         )
     })
+
 
     return (
         <div className="wishList">
