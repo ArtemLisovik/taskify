@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Input } from 'ui'
+import { Button, Input, Modal, Select } from 'ui'
 import { AppDispatch, RootState } from 'store'
 import {fetchWishFilters} from '../../store/WishThunk'
-import {setWishFilter, setWishSearch} from '../../store/WishSlice'
+import {setWishFilter, setWishSearch, setWishMode, initialStateType} from '../../store/WishSlice'
 import {WishModal} from '../WishModal/WishModal'
 
 import { AnimatePresence } from 'framer-motion'
@@ -12,6 +12,9 @@ import { AnimatePresence } from 'framer-motion'
 export const WishFilters = () => {
     const { wishActiveFilter, wishFilters, wishList, wishSearch} = useSelector((state: RootState) => state.wishReducer)
     const [ModalActive, setModalActive] = useState(false)
+    // const [wishMode, setWishMode] = useState('')
+
+
     const dispatch: AppDispatch = useDispatch()
 
     const setSearchValue = (value: string) => {
@@ -23,12 +26,15 @@ export const WishFilters = () => {
     }, [])
 
     const ModalHandler = () => {
-        setModalActive(state => state = !state)
+        setModalActive(state => !state)
     }
 
-    const onChangeFilter = (e: string) => {
-        console.log(e)
+    const onChangeFilter = (e: initialStateType['wishMode']) => {
         dispatch(setWishFilter(e))
+    }
+
+    const onModeChanger = (mode: string) => {
+        dispatch(setWishMode(mode))
     }
 
     const filterButtons = wishFilters.map(filterBtn => {
@@ -60,8 +66,7 @@ export const WishFilters = () => {
                 />
 
                 <AnimatePresence>
-                    {ModalActive &&
-                        <WishModal modalHandler={ModalHandler} />
+                    {ModalActive && <WishModal isOpen={ModalActive} modalHandler={ModalHandler} />
                     }
                 </AnimatePresence>
 
@@ -69,11 +74,14 @@ export const WishFilters = () => {
             <div className="filters__bottom">
                 <div className="filters__bottom-wrapper">
                     <svg className='filters__icon' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50"><path d="m1 10.399 19 20v18.405l10-6.25V30.399l19-20V1H1v9.399zM3 3h44v6.601l-19 20v11.845l-6 3.75V29.601l-19-20V3z" /></svg>
-                    <select className='filters__bottom-filters'>
-                        <option value="All" className="filters__bottom-option">All tasks</option>
-                        <option value="Short" className="filters__bottom-option">Short period tasks</option>
-                        <option value="Long" className="filters__bottom-option">Long period tasks</option>
-                    </select>
+                    <Select 
+                        getSelectedOption={onModeChanger}
+                        isContext={false}
+                        defaultOption={{content: 'All wishes', value: 'allWishes', hidden: false}}
+                        options={[
+                            {content: 'My wishes', value: 'myWishes'}
+                        ]}
+                    />
                 </div>
                 <span className="filters__decor2"></span>
                 <div className="filters__bottom-input">

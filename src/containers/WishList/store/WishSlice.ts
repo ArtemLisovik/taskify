@@ -1,14 +1,15 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 import { IWish } from '../types/IWish'
 import {fetchWishFilters, createNewWish, fetchAllWishes, deleteWish, updateWish} from './WishThunk'
 
-type initialStateType = {
+export type initialStateType = {
     wishList: IWish[]
     wishFilters: string[]
     wishActiveFilter: string
     wishSearch: string,
     wishStatus: string
+    wishMode: string
 }
 
 const initialState: initialStateType = {
@@ -16,7 +17,8 @@ const initialState: initialStateType = {
     wishFilters: [],
     wishActiveFilter: 'current',
     wishSearch: '',
-    wishStatus: 'idle'
+    wishStatus: 'idle',
+    wishMode: ''
 }
 
 const wishSlice = createSlice({
@@ -28,6 +30,9 @@ const wishSlice = createSlice({
         },
         setWishSearch: (state, action) => {
             state.wishSearch = action.payload
+        },
+        setWishMode: (state, action) => {
+            state.wishMode = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -64,8 +69,9 @@ const wishSlice = createSlice({
 
 
             .addCase(updateWish.pending, () => {})
-            .addCase(updateWish.fulfilled, (state, action) => {
-                console.log(action)
+            .addCase(updateWish.fulfilled, (state, action:any)  => {
+                state.wishList = state.wishList.map(wish => wish.id === (action.payload as IWish).id ? action.payload : wish
+                )
             })
             .addCase(updateWish.rejected, () => {})
     }
@@ -73,5 +79,5 @@ const wishSlice = createSlice({
 
 const {reducer, actions} = wishSlice
 
-export const {setWishFilter, setWishSearch} = actions
+export const {setWishFilter, setWishSearch, setWishMode} = actions
 export default reducer

@@ -1,4 +1,5 @@
 import {motion} from 'framer-motion'
+import { EventHandler } from 'react'
 
 import styles from './Button.module.scss'
 
@@ -17,8 +18,11 @@ const typeButton = {
 }
 
 export const Button = ({ isActive, content, name, onClick, type, id }: PropsButton) => {
-    const onClickInit = (e: any) => {
-        onClick ? onClick(e.target.name) : console.log('')
+    const onClickInit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if(onClick) {
+            onClick((e.target as HTMLButtonElement).name)
+        }
+        // onClick ? onClick((e.target as HTMLButtonElement).name)
     }
     const activeClass: string = isActive ? styles.active: ''
 

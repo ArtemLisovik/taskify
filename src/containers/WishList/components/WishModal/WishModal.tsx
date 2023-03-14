@@ -2,20 +2,21 @@ import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Button, Modal, Input, TextArea } from 'ui'
+import { Button, Modal, Input, TextArea, Select } from 'ui'
 import { schema } from '../../helpers/schema'
 import { useAppDispatch, useAppSelector } from "hooks";
 import { IWish } from "containers/WishList/types/IWish";
-import {createNewWish} from '../../store/WishThunk'
+import {createNewWish, updateWish} from '../../store/WishThunk'
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
 
 interface WishModalProps {
   modalHandler: any
-  wish?: IWish
+  wish?: Partial<IWish>
+  isOpen: boolean
 }
 
-export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
+export const WishModal = ({ modalHandler, wish, isOpen }: WishModalProps) => {
   const idUser = useAppSelector(state => state.auth.profile?.userUid)
 
   const dispatch = useDispatch<AppDispatch>()
@@ -26,24 +27,46 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
     defaultValues: {
       title: `${wish ? wish.title : ''}`,
       text: `${wish ? wish.text : ''}`,
-      // image: `${wish ? wish.image: ''}`
+      image: `${wish ? wish.image: ''}`,
+      mode: `${wish ? wish.mode: ''}`,
     }
   })
 
   const { handleSubmit, formState: { errors } } = methods
 
-  const onHandleChange: SubmitHandler<any> = async (data) => {
+  const onHandleChange: SubmitHandler<IWish> = async (data) => {
     const authorId = idUser ? idUser : null
     const wishId = uuidv4()
-    const newWish: IWish = { title: data.title, text: data.text, image: '', authorId, id: wishId}
+    const newWish: IWish = wish ? 
+      {
+        title: data.title, 
+        text: data.text,
+        image: wish.image as string, 
+        id: wish.id as string, 
+        authorId: wish.authorId as string,
+        mode: data.mode
+      } 
+      : 
+      { 
+        title: data.title, 
+        text: data.text, 
+        image: '', 
+        authorId, 
+        id: wishId,
+        mode: data.mode
+      }
+
     wish ?
-      // dispatch(updateTask([data, wish.id]))
-      console.log('edit')
-      :
-      dispatch(createNewWish([newWish, wishId, data.image[0]]))
+
+      data.image ? 
+        dispatch(updateWish([newWish, data.image[0]]))
+       : dispatch(updateWish([newWish]))
+
+      : dispatch(createNewWish([newWish, wishId, data.image[0]]))
     modalHandler()
   }
 
+  if (!isOpen) return null
   return (
     <>
       <Modal
@@ -73,6 +96,16 @@ export const WishModal = ({ modalHandler, wish }: WishModalProps) => {
               isContext={true}
             />
             <div className="error__module">{errors.image?.message}</div>
+
+            <Select 
+              isContext={true}
+              defaultOption={{value: '', content: 'Choose visibility mode...', hidden: true}}
+              options={[
+                {value: 'privat', content: 'Privat'},
+                {value: 'public', content: 'Public'}
+              ]}
+            />
+              <div className="error__module">{errors.mode?.message}</div>
 
             <Button type='neon' content="Done!" />
           </form>

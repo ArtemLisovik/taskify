@@ -1,7 +1,8 @@
 export type IWish = {
     title: string
     text: string
-    image: string
+    image: string | FileList
     authorId: string | null
     id: string
+    mode: string
 }

@@ -1,8 +1,8 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 import { IWish } from 'containers/WishList/types/IWish'
-import {deleteWish} from '../../store/WishThunk'
+import {deleteWish, updateWish} from '../../store/WishThunk'
 import { WishModal } from '../WishModal/WishModal'
 import { useAppDispatch } from 'hooks'
 
@@ -13,9 +13,12 @@ type WishItemProps = {
     index: number
 } & IWish
 
-export const WishItem = ({title, text, image, id, index}: WishItemProps) => {
+export const WishItem = ({title, text, image, id, index, mode, authorId}: WishItemProps) => {
     const [editModalOpen, setEditModalOpen] = useState(false)
+    const [subMenuOpen, setSubMenuOpen] = useState(false)
     const dispatch = useAppDispatch()
+
+    const alterMode = mode === 'public' ? 'privat' : 'public'
 
     const modalHandler = () => {
         setEditModalOpen(state => !state)
@@ -24,22 +27,23 @@ export const WishItem = ({title, text, image, id, index}: WishItemProps) => {
     return(
         <>
         <AnimatePresence>
-            <WishModal modalHandler={modalHandler}/>
+            {editModalOpen ? <WishModal wish={{title, text, image, id, mode, authorId}} isOpen={editModalOpen} modalHandler={modalHandler}/> : null}
         </AnimatePresence>
         <motion.div 
             className="wishItem"
-            initial={{ y: '50%', x: '50%', opacity: 0, scale: 0.5 }}
-            animate={{y: 0, x: 0, opacity: 1, scale: 1, transition: { duration: 0.3, delay: index/6 }}}
+            style={subMenuOpen ? {zIndex: 1} : {zIndex: 0}}
+            initial={{ y: '90%', x: '90%', opacity: 0, scale: 0 }}
+            animate={{y: 0, x: 0, opacity: 1, scale: 1, transition: { duration: 0.5, delay: index/6 }}}
             whileHover={{
                 borderColor: `#1e9dfc`,
                 boxShadow: '0 0 20px #1e9dfc, inset 0 0 20px #1e9dfc',
                 transition:{delay: 0, duration: 0.2}
             }}
         >
-                      <h3 className="wishItem__title">{title}</h3>
+                      <h3 className="wishItem__title">{title} <span className='wishItem__mode'>{mode}</span></h3>
                       <p className="wishItem__descr">{text}</p>
                         <div className="wishItem__image">
-                            <img src={image} alt="Wish image" className="wishItem__image-item" />
+                            <img src={image as string} alt="Wish image" className="wishItem__image-item" />
                         </div>
   
                       <div className="wishItem__options">
@@ -93,26 +97,46 @@ export const WishItem = ({title, text, image, id, index}: WishItemProps) => {
                                   <g>
                                   </g>
                               </svg>
-                              <p className="wishItem__pin-count">2</p>
+                              <p 
+                                className="wishItem__pin-count"></p>
                           </div>
   
                           <div className="wishItem__options-menu options__dropdown">
-                              <button className="options__dropdown-button">
+                              <button 
+                                onClick={() => setSubMenuOpen(state => !state)}
+                                className={`options__dropdown-button ${subMenuOpen ? 'active' : ''}`}>
                                   <span className="options__dropdown-button-dot options__button-dot"></span>
                                   <span className="options__dropdown-button-dot options__button-dot"></span>
                                   <span className="options__dropdown-button-dot options__button-dot"></span>
                               </button>
-                              <div className="options__dropdown-menu">
+                              <div className={`options__dropdown-menu ${subMenuOpen ? 'active' : ''}`}
+                                // style={subMenuOpen ? {visibilty: 'visible', opacity: 1} : {opacity: 0}}  
+                              >
                                   <button
                                       className='options__dropdown-menu-item'
                                       onClick={modalHandler}
-                                  >Edit</button>
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                      className="options__dropdown-menu-item"
+                                      onClick={() => {
+                                        dispatch(updateWish([
+                                            {title, text, image, authorId, id, mode: alterMode}
+                                        ]))
+                                      }}
+                                    >
+                                      Make it {alterMode}
+                                    </button>
                                   <button
                                       className="options__dropdown-menu-item"
                                       onClick={() => {
                                         dispatch(deleteWish(id))
-                                      }}>
-                                      Delete</button>
+                                      }}
+                                    >
+                                      Delete
+                                    </button>
+                                    
                               </div>
                           </div>
                       </div>

@@ -13,20 +13,20 @@ export const fetchWishFilters = createAsyncThunk('wish/filters', async (_, {disp
     for (let key in wishFilters) {
         wishFiltersToArray.push(wishFilters[key])
     }
-    return wishFiltersToArray.reverse()
+    return wishFiltersToArray.sort().reverse()
 })
 
 type createNewWishProps = [
     newWish: IWish,
     wishId: string,
-    image: File
+    image: File | string
 ]
 export const createNewWish = createAsyncThunk('wish/createWish', async ([newWish, wishId, image]: createNewWishProps, {dispatch}) => {
     try {
 
         //Uploading wish image into firebase storage
         const wishesRef = ref(storage, `wishes/${wishId}`);
-        await uploadBytes(wishesRef, image)
+        await uploadBytes(wishesRef, image as File)
         const wishImageURL = await getDownloadURL(wishesRef)
 
         // Creating wishes info object in firestore
@@ -43,11 +43,12 @@ export const createNewWish = createAsyncThunk('wish/createWish', async ([newWish
 
 export const fetchAllWishes = createAsyncThunk('wish/fetchAllWishes', async (_, {getState}) => {
     const {userUid} = (getState() as RootState).auth.profile
-    const filteredWishCollection = query(collection(database, 'wishes'), where("authorId", "==", userUid))
-    const wishList = await getDocs(filteredWishCollection);
+    const wishListRef = collection(database, 'wishes')
+    // const filteredWishCollection = getDocs(wishListRef)
+    // const filteredWishCollection = query(collection(database, 'wishes'), where("authorId", "==", userUid))
+    const wishList = await getDocs(wishListRef);
     let unpackedWishList: IWish[] = []
     wishList.forEach((wish: any) => unpackedWishList.push(wish.data()))
-    console.log(unpackedWishList)
     return unpackedWishList
 })
 
@@ -58,11 +59,29 @@ export const deleteWish = createAsyncThunk('wish/deleteWish', async (id: IWish['
 })
 
 type updatedWishProps = [
-    id: IWish['id'],
-    updatedWish: IWish
+    updatedWish: IWish,
+    image?: File | string
 ]
-export const updateWish = createAsyncThunk('wish/updateWish', async ([id, updatedWish]: updatedWishProps ) => {
-    const selectedWishRef = doc(database, 'wishes', id)
-    await updateDoc(selectedWishRef, updatedWish)
-    return [id, updatedWish]
+export const updateWish = createAsyncThunk('wish/updateWish', async ([updatedWish, image]: updatedWishProps ) => {
+    if (image) {
+        if (typeof image !== 'string') {
+            const wishesRef = ref(storage, `wishes/${updatedWish.id}`);
+            await uploadBytes(wishesRef, image as File)
+            const wishImageURL = await getDownloadURL(wishesRef)
+
+            console.log(updatedWish)
+            const wish = {...updatedWish, image: wishImageURL}
+            const selectedWishRef = doc(database, 'wishes', updatedWish.id)
+            await updateDoc(selectedWishRef, wish)
+            return wish
+        }
+        const selectedWishRef = doc(database, 'wishes', updatedWish.id)
+        await updateDoc(selectedWishRef, updatedWish)
+        return updatedWish
+    }
+    else {
+        const selectedWishRef = doc(database, 'wishes', updatedWish.id)
+        await updateDoc(selectedWishRef, updatedWish)
+        return updatedWish
+    }
 })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Backdrop } from '../Backdrop/Backdrop'
+import { Portal } from 'ui'
 
 import styles from './Modal.module.scss'
 
@@ -11,7 +12,8 @@ type ModalProps = {
 
 export const Modal = ({ children, modalSwitcher }: ModalProps) => {
     return (
-        <Backdrop>
+        <Portal>
+             <Backdrop>
             <motion.div
                 key='modal'
                 className={styles.modal}
@@ -31,5 +33,6 @@ export const Modal = ({ children, modalSwitcher }: ModalProps) => {
                 </div>
             </motion.div>
         </Backdrop>
+        </Portal>
     )
 }

@@ -5,15 +5,14 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { fetchWishFilters, fetchAllWishes } from '../../store/WishThunk'
 import { WishItem } from '../WishItem/WishItem'
 import { Loader } from 'ui'
+import {useWishesFilter} from 'hooks/useWishesFilter'
 
 import './WishList.scss'
 
 export const WishList = () => {
-    const { wishList, wishStatus } = useAppSelector(state => state.wishReducer)
-
-    useEffect(() => {
-        console.log(wishStatus)
-    }, [wishStatus])
+    const { wishList, wishStatus, wishMode } = useAppSelector(state => state.wishReducer)
+    const {userUid} = useAppSelector(state => state.auth.profile)
+    console.log(wishList)
 
     const dispatch = useAppDispatch()
 
@@ -22,7 +21,10 @@ export const WishList = () => {
         dispatch(fetchAllWishes())
     }, [])
 
-    const viewWishes = wishList.map((wish, index) => {
+    const filteredWishes = useWishesFilter()
+
+    const viewWishes = filteredWishes?.map((wish, index) => {
+        console.log(wish.id)
         return (
             <WishItem key={wish.id} {...wish} index={index} />
         )
@@ -31,8 +33,7 @@ export const WishList = () => {
     return (
         <div className="wishList">
             <AnimatePresence>
-                {wishStatus === 'loading' ? <Loader/> : viewWishes}
-                {/* {viewWishes} */}
+                {wishStatus === 'loading' ? <Loader /> : viewWishes}
             </AnimatePresence>
         </div>
     )
